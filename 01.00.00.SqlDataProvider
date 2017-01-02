@@ -39,7 +39,10 @@ GO
 USE [AJDNNDatabase]
 GO
 
-/****** Object:  Table [dbo].[tblmonsterList]    Script Date: 2017-01-02 09:05:20 ******/
+USE [AJDNNDatabase]
+GO
+
+/****** Object:  Table [dbo].[tblmonsterList]    Script Date: 2017-01-02 11:14:36 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -53,6 +56,7 @@ CREATE TABLE [dbo].[tblmonsterList](
 	[monsterinfo] [nvarchar](500) NULL,
 	[basepoint] [int] NULL,
 	[bonus] [int] NULL,
+	[maxpoint] [int] NULL,
  CONSTRAINT [PK_tblmonsterList] PRIMARY KEY CLUSTERED 
 (
 	[monId] ASC
@@ -61,13 +65,15 @@ CREATE TABLE [dbo].[tblmonsterList](
 
 GO
 
+
+
 /************************************************************/
 /************************************************************/
 
 USE [AJDNNDatabase]
 GO
 
-/****** Object:  Table [dbo].[tblmonsterToUser]    Script Date: 2017-01-02 09:05:48 ******/
+/****** Object:  Table [dbo].[tblmonsterToUser]    Script Date: 2017-01-02 11:15:09 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -80,6 +86,7 @@ CREATE TABLE [dbo].[tblmonsterToUser](
 	[userid] [int] NULL,
 	[MonsterScore] [int] NULL,
 	[monlevel] [int] NULL,
+	[MonsterXP] [int] NULL,
  CONSTRAINT [PK_tblmonsterToUser] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -87,6 +94,8 @@ CREATE TABLE [dbo].[tblmonsterToUser](
 ) ON [PRIMARY]
 
 GO
+
+
 
 
 /************************************************************/
