@@ -148,6 +148,7 @@ Partial Class DesktopModules_barnensbiblService_bokemonApi_bokemonService
                 sb.AppendFormat("""src"" : ""{0}"", ", itm.BokemonSrc)
                 sb.AppendFormat("""lev"" : ""{0}"", ", itm.BokemonLevel)
                 sb.AppendFormat("""score"" : ""{0}"", ", itm.BokemonScore)
+                sb.AppendFormat("""xp"" : ""{0}"", ", itm.BokemonXP)
                 sb.AppendFormat("""info"" : ""{0}"" ", itm.Bokemoninfo)
 
                 sb.Append("}") '{3-2}

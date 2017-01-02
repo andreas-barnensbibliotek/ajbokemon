@@ -34,8 +34,8 @@
             _userid = $('#barnensbiblCurrentUserid').html();
             _visituserid = $('#VISITED_USERID').html();
             // serverurler
-            var localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
-
+            //var localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
+            var localOrServerURL = "http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi";
             // START servercalls-------------------------------------
             var bokemonUserServerHandler = function (callTyp, usrid, callback) {
 
