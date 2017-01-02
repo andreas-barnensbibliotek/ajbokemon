@@ -28,7 +28,8 @@
         // START user logged in
         if (chkuser(_userid)) {
             // serverurler
-            var localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
+            //var localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
+            var localOrServerURL = "http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi";
 
             // object
             var monid = new Array;
@@ -126,8 +127,11 @@
             // functions
 
             var isbokemontime = function () {
-                var rnd1 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
-                var rnd2 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
+                //var rnd1 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
+                //var rnd2 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
+                //debug values
+                var rnd1 = Math.floor(Math.random() * 1) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
+                var rnd2 = Math.floor(Math.random() * 1) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
 
                 if (rnd1 == rnd2) {
                     return true;

@@ -1,0 +1,94 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+USE [AJDNNDatabase]
+GO
+
+/****** Object:  Table [dbo].[tblmonsterDrakelist]    Script Date: 2017-01-02 09:04:01 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblmonsterDrakelist](
+	[drakId] [int] IDENTITY(1,1) NOT NULL,
+	[draknamn] [nvarchar](50) NULL,
+	[draksrc] [nvarchar](250) NULL,
+	[drakinfo] [nvarchar](500) NULL,
+	[drakbasepoint] [int] NULL,
+	[drakbonus] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[drakId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/************************************************************/
+/************************************************************/
+
+USE [AJDNNDatabase]
+GO
+
+/****** Object:  Table [dbo].[tblmonsterList]    Script Date: 2017-01-02 09:05:20 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblmonsterList](
+	[monId] [int] IDENTITY(1,1) NOT NULL,
+	[monsternamn] [nvarchar](50) NULL,
+	[monstersrc] [nvarchar](250) NULL,
+	[monsterinfo] [nvarchar](500) NULL,
+	[basepoint] [int] NULL,
+	[bonus] [int] NULL,
+ CONSTRAINT [PK_tblmonsterList] PRIMARY KEY CLUSTERED 
+(
+	[monId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/************************************************************/
+/************************************************************/
+
+USE [AJDNNDatabase]
+GO
+
+/****** Object:  Table [dbo].[tblmonsterToUser]    Script Date: 2017-01-02 09:05:48 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblmonsterToUser](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[monid] [int] NULL,
+	[userid] [int] NULL,
+	[MonsterScore] [int] NULL,
+	[monlevel] [int] NULL,
+ CONSTRAINT [PK_tblmonsterToUser] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/
