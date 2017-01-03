@@ -44,7 +44,8 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var renderhtml = __webpack_require__(1);
+	var rndHandler = __webpack_require__(1);
+	var renderhtml = __webpack_require__(2);
 	var registerJqueryEvents = __webpack_require__(6);
 	var $ = __webpack_require__(5);
 
@@ -72,30 +73,98 @@
 	    };
 
 	    // START user logged in
-	    if (chkuser(_userid)) {
-	    
+	   
+	        if (_userid < 1) {
+	            _userid = 1;
+	        }
 	        // start eventhandler -----------------------------
 	        registerJqueryEvents.jqueryEVENTS(_userid);
 	        // end eventhandler
 	        
 	        var init = function () {
+	            if (_userid <= 1) {
+	                renderhtml.showbokdrakar(1);
+	            } else {
+	                // ska det visas bokemon eller bokdrakar och hur ofta skall dom visas
+	                if (chkuser(_userid)) {
+	                    if (rndHandler.isbokemontime(4)) {
+	                        renderhtml.showbokemon(_userid);
+	                    } else {
+	                        renderhtml.showbokdrakar(1);
+	                    };
+	                }
+	            }
+	            //renderhtml.showbokemon(_userid);
 	            
-	            renderhtml.showbokemon(_userid);
-
-	        }
+	      
 	        // END init 
-
+	}
 	        init();
-	    }
+	    
 	});
 
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	//-------------------------
+	// start function visa random pokemon viktat
+	// hämtar random bokemonid från results med sanorlikheten i weights dela sannorlkheten= 1 i antal delar results (8 värden) så får man procentuellt ut hur ofta id ska komma upp random
+	var weights = [0.25, 0.20, 0.15, 0.1, 0.1, 0.1, 0.05, 0.05]; // probabilities
+	var results = [1, 2, 3, 4, 5, 6, 7, 8]; // values to return
+
+	var drakweights = [0.20, 0.20, 0.25, 0.15, 1]; // probabilities
+	var drakresults = [1, 2, 3, 4, 5]; // values to return
+
+	module.exports = {
+	    getRandompockemon : function () {
+	        var num = Math.random(),
+	        s = 0,
+	        lastIndex = weights.length - 1;
+
+	        for (var i = 0; i < lastIndex; ++i) {
+	            s += weights[i];
+	            if (num < s) {
+	                return results[i];
+	            }
+	        }
+	    },
+	    getRandomBokdrake: function () {
+	        var num = Math.random(),
+	        s = 0,
+	        lastIndex = drakweights.length - 1;
+
+	        for (var i = 0; i < lastIndex; ++i) {
+	            s += drakweights[i];
+	            if (num < s) {
+	                return drakresults[i];
+	            }
+	        }
+	    },
+	    isbokemontime : function (int_sannolikhet) {
+	        //var rnd1 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
+	        //var rnd2 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
+	        //debug values
+	        var rnd1 = Math.floor(Math.random() * int_sannolikhet) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
+	        var rnd2 = Math.floor(Math.random() * int_sannolikhet) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
+
+	        if (rnd1 == rnd2) {
+	            return true;
+	        } else {
+	            return false;
+	        }
+	    }
+	}
+	// End function visa random pokemon viktat
+	//-------------------------
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var appsettings = __webpack_require__(2);
-	var rndHandler = __webpack_require__(3);
+	var appsettings = __webpack_require__(3);
+	var rndHandler = __webpack_require__(1);
 	var api = __webpack_require__(4);
 	var $ = __webpack_require__(5);
 	module.exports = {
@@ -103,53 +172,101 @@
 	        //var uid = parseInt(usrid);
 	        var uid = usrid;
 	        if (uid > 0) {
+	            if (rndHandler.isbokemontime(1)) { //isbokemontime(int_sannolikhet) = 1 visas varje gång, 4 = ca 20/100 osv..
+	                var x = "";
+	                api.bokemonServerHandler('allmon', uid, function () {
 
-	            if (rndHandler.isbokemontime()) {
-	            var x = "";
-	            api.bokemonServerHandler('allmon', uid, function () {
+	                    var valdbokemonID = rndHandler.getRandompockemon();
+	                    if (typeof (appsettings.monid[valdbokemonID]) != "undefined") {
+	                        var htmlblock = "<div id='bokemonitm' rel='" + appsettings.monid[valdbokemonID] + "'>";
+	                        htmlblock += "<span class='bokemonjailed'><a href='' class='takeBokemon' >";
+	                        htmlblock += "<img src='" + appsettings.src[valdbokemonID] + "_bar.gif' alt='" + appsettings.namn[valdbokemonID] + " Level: " + appsettings.lev[valdbokemonID] + "' />";
+	                        htmlblock += "</a>";
+	                        htmlblock += "<span class='bokemonscore' rel=" + appsettings.score[valdbokemonID] + "></span>";
+	                        htmlblock += "<a href='' class='Bokemonifo' style='display:none;' >";
+	                        htmlblock += "<h2>" + appsettings.namn[valdbokemonID] + "</h2>";
+	                        htmlblock += "</a>";
+	                        htmlblock += "<div class='bokemoninfoblock' style='display:none;'>";
+	                        htmlblock += "<p>" + appsettings.info[valdbokemonID] + "</p>";
+	                        htmlblock += "</div></span>";
+	                        htmlblock += "<div class='bokemonFreeblock' style='display:none;'>";
+	                        htmlblock += "<p class='speech'>Du r&auml;ddade mej! Tack!</p>";
+	                        htmlblock += "<img  src='" + appsettings.src[valdbokemonID] + "' alt='" + appsettings.namn[valdbokemonID] + " Level: " + appsettings.lev[valdbokemonID] + "' />";
+	                        htmlblock += "</div>";
+	                        htmlblock += "</div>";
 
-	                var valdbokemonID = rndHandler.getRandompockemon();
-
-	                var htmlblock = "<div id='bokemonitm' rel='" + appsettings.monid[valdbokemonID] + "'>";
-	                htmlblock += "<span class='bokemonjailed'><a href='' class='takeBokemon' >";
-	                htmlblock += "<img src='" + appsettings.src[valdbokemonID] + "_bar.gif' alt='" + appsettings.namn[valdbokemonID] + " Level: " + appsettings.lev[valdbokemonID] + "' />";
-	                htmlblock += "</a>";
-	                htmlblock += "<span class='bokemonscore' rel=" + appsettings.score[valdbokemonID] + "></span>";
-	                htmlblock += "<a href='' class='Bokemonifo' style='display:none;' >";
-	                htmlblock += "<h2>" + appsettings.namn[valdbokemonID] + "</h2>";
-	                htmlblock += "</a>";
-	                htmlblock += "<div class='bokemoninfoblock' style='display:none;'>";
-	                htmlblock += "<p>" + appsettings.info[valdbokemonID] + "</p>";
-	                htmlblock += "</div></span>";
-	                htmlblock += "<div class='bokemonFreeblock' style='display:none;'>";
-	                htmlblock += "<p class='speech'>Du r&auml;ddade mej! Tack!</p>";
-	                htmlblock += "<img  src='" + appsettings.src[valdbokemonID] + ".png' alt='" + appsettings.namn[valdbokemonID] + " Level: " + appsettings.lev[valdbokemonID] + "' />";
-	                htmlblock += "</div>";
-	                htmlblock += "</div>";
-
-	                $('body').append(htmlblock);
+	                        $('body').append(htmlblock);
 
 
-	                var docHeight = $(document).height(),
-	                docWidth = $(document).width(),
-	                divWidth = $('#bokemonitm').width(),
-	                divHeight = $('#bokemonitm').height(),
-	                heightMax = docHeight - divHeight,
-	                widthMax = docWidth - divWidth;
+	                        var docHeight = $(document).height(),
+	                        docWidth = $(document).width(),
+	                        divWidth = $('#bokemonitm').width(),
+	                        divHeight = $('#bokemonitm').height(),
+	                        heightMax = docHeight - divHeight,
+	                        widthMax = docWidth - divWidth;
 
-	                $('#bokemonitm').css({
-	                    left: Math.floor(Math.random() * widthMax),
-	                    top: Math.floor(Math.random() * heightMax)
-	                });
-	            })
+	                        $('#bokemonitm').css({
+	                            left: Math.floor(Math.random() * widthMax),
+	                            top: Math.floor(Math.random() * heightMax)
+	                        });
+	                    };
+	                })
+	            }
 	        }
+	    },
+	    showbokdrakar: function (usrid) {
+	        //var uid = parseInt(usrid);
+	        var uid = usrid;
+	        if (uid > 0) {
+	            if (rndHandler.isbokemontime(1)) { //isbokemontime(int_sannolikhet) = 1 visas varje gång, 4 = ca 20/100 osv..
+	                var x = "";
+	                api.bokemonServerHandler('alldrakar', uid, function () {
+
+	                    var valdbokemonID = rndHandler.getRandomBokdrake();
+	                    
+	                    if (typeof (appsettings.monid[valdbokemonID]) != "undefined") {
+	                        var htmlblock = "<div id='bokdrakeitm' class='bokdrake' rel='" + appsettings.monid[valdbokemonID] + "'>";
+	                        htmlblock += "<span class='bokemonjailed'><a href='' class='takeBokemon' >";
+	                        htmlblock += "<img src='" + appsettings.src[valdbokemonID] + "' alt='" + appsettings.namn[valdbokemonID] + " Level: " + appsettings.lev[valdbokemonID] + "' />";
+	                        htmlblock += "</a>";
+	                        htmlblock += "<span class='bokemonscore' rel=" + appsettings.score[valdbokemonID] + "></span>";
+	                        htmlblock += "<a href='' class='Bokemonifo' style='display:none;' >";
+	                        htmlblock += "<h2>" + appsettings.namn[valdbokemonID] + "</h2>";
+	                        htmlblock += "</a>";
+	                        htmlblock += "<div class='bokemoninfoblock' style='display:none;'>";
+	                        htmlblock += "<p>" + appsettings.info[valdbokemonID] + "</p>";
+	                        htmlblock += "</div></span>";
+	                        htmlblock += "<div class='bokemonFreeblock' style='display:none;'>";
+	                        htmlblock += "<p class='speech'><b>Hj&auml;lp oss f&aring;nga bokdrakarna!</b><br />"
+	                        htmlblock += "Logga in och hj&auml;lp oss att f&aring; bort dessa hemska bokdrakar!</p>";
+	                        htmlblock += "<img  src='http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/Nallemon.gif' alt='Barnensbibliotek säger' />";
+	                        htmlblock += "</div>";
+	                        htmlblock += "</div>";
+	                        
+	                        $('body').append(htmlblock);
+
+
+	                        var docHeight = $(document).height(),
+	                        docWidth = $(document).width(),
+	                        divWidth = $('#bokdrakeitm').width(),
+	                        divHeight = $('#bokdrakeitm').height(),
+	                        heightMax = docHeight - divHeight,
+	                        widthMax = docWidth - divWidth;
+
+	                        $('#bokdrakeitm').css({
+	                            left: Math.floor(Math.random() * widthMax),
+	                            top: Math.floor(Math.random() * heightMax)
+	                        });
+	                    };
+	                })
+	            }
 	        }
 	    }
 	}
 
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports) {
 
 	// object
@@ -175,51 +292,11 @@
 	}
 
 /***/ },
-/* 3 */
-/***/ function(module, exports) {
-
-	//-------------------------
-	// start function visa random pokemon viktat
-	// hämtar random bokemonid från results med sanorlikheten i weights dela sannorlkheten= 1 i antal delar results (8 värden) så får man procentuellt ut hur ofta id ska komma upp random
-	var weights = [0.25, 0.20, 0.15, 0.1, 0.1, 0.1, 0.05, 0.05]; // probabilities
-	var results = [1, 2, 3, 4, 5, 6, 7, 8]; // values to return
-
-	module.exports = {
-	    getRandompockemon : function () {
-	        var num = Math.random(),
-	        s = 0,
-	        lastIndex = weights.length - 1;
-
-	        for (var i = 0; i < lastIndex; ++i) {
-	            s += weights[i];
-	            if (num < s) {
-	                return results[i];
-	            }
-	        }
-	    },
-	    isbokemontime : function () {
-	        //var rnd1 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
-	        //var rnd2 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
-	        //debug values
-	        var rnd1 = Math.floor(Math.random() * 1) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
-	        var rnd2 = Math.floor(Math.random() * 1) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
-
-	        if (rnd1 == rnd2) {
-	            return true;
-	        } else {
-	            return false;
-	        }
-	    }
-	}
-	// End function visa random pokemon viktat
-	//-------------------------
-
-/***/ },
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(5);
-	var appsettings = __webpack_require__(2);
+	var appsettings = __webpack_require__(3);
 	module.exports = {
 	    testar: function (msg) {
 	        alert(msg);
@@ -10515,7 +10592,7 @@
 	        window.once = true;
 	        $('body').on('click', '#bokemonitm', function () {          
 	            console.log('1. ' + window.once);
-	            if (window.once) {
+	             if (window.once) {
 	                window.once = false;
 	                console.log('2. ' + window.once);
 	                
@@ -10524,16 +10601,14 @@
 	                    $('.bokemonjailed').hide();
 	                    $('.bokemonFreeblock').fadeIn(500, function () {
 	                        $('.speech').fadeIn(800);
-
+	                        
 	                        //alert("takeBokemon! " + monid);
 	                        $(this).delay(3000).fadeOut(500, function () {
-	                            console.log('3. ' + window.once);
+	                            console.log('3. ' + window.once);                          
 	                            window.once = true;
 	                        })
-
 	                        return false;
 	                    })
-
 	                });
 	            }
 	            console.log('4. ' + window.once);
@@ -10551,6 +10626,36 @@
 	        });
 	                
 	        $('body').on('click', '.Bokemonifo', function () {           
+	            return false;
+	        });
+
+	        $('body').on('click', '#bokdrakeitm', function () {
+	            console.log('1. ' + window.once);
+	            if (window.once) {
+	                window.once = false;
+	                console.log('2. ' + window.once);
+	                if (userid <= 1) {
+	                    $('.bokemonjailed').hide();
+	                    $('.bokemonFreeblock').fadeIn(500, function () {
+	                        $('.speech').fadeIn(800);
+
+	                        //alert("takeBokemon! " + monid);
+	                        $(this).delay(6000).fadeOut(200, function () {
+	                            console.log('3. ' + window.once);
+	                            $('.bokdrake').hide();
+	                            window.once = true;
+	                        })
+	                        return false;
+	                    })
+
+	                } else {
+
+	                    alert("Fight");
+
+	                }
+
+	            }
+	            console.log('4. ' + window.once);
 	            return false;
 	        });
 	    }

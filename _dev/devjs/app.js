@@ -1,3 +1,4 @@
+var rndHandler = require("./jsmoduler/randomBokemonHandler.js");
 var renderhtml = require("./jsmoduler/bokemonHTML.js");
 var registerJqueryEvents = require("./jsmoduler/eventhandler.js");
 var $ = require("jquery");
@@ -26,19 +27,32 @@ $(function () {
     };
 
     // START user logged in
-    if (chkuser(_userid)) {
-    
+   
+        if (_userid < 1) {
+            _userid = 1;
+        }
         // start eventhandler -----------------------------
         registerJqueryEvents.jqueryEVENTS(_userid);
         // end eventhandler
         
         var init = function () {
+            if (_userid <= 1) {
+                renderhtml.showbokdrakar(1);
+            } else {
+                // ska det visas bokemon eller bokdrakar och hur ofta skall dom visas
+                if (chkuser(_userid)) {
+                    if (rndHandler.isbokemontime(4)) {
+                        renderhtml.showbokemon(_userid);
+                    } else {
+                        renderhtml.showbokdrakar(1);
+                    };
+                }
+            }
+            //renderhtml.showbokemon(_userid);
             
-            renderhtml.showbokemon(_userid);
-
-        }
+      
         // END init 
-
+}
         init();
-    }
+    
 });
