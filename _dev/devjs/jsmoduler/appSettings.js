@@ -7,7 +7,7 @@ window.namn = [];
 window.src = [];
 window.lev = [];
 window.score = [];
-window.score = [];
+window.info = [];
 
 
 module.exports = {
@@ -16,6 +16,6 @@ module.exports = {
     src: window.src,
     lev: window.lev,
     score: window.score,
-    info: window.score,
+    info: window.info,
     localOrServerURL :_localOrServerURL 
 }

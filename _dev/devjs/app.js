@@ -41,11 +41,12 @@ $(function () {
             } else {
                 // ska det visas bokemon eller bokdrakar och hur ofta skall dom visas
                 if (chkuser(_userid)) {
-                    if (rndHandler.isbokemontime(4)) {
-                        renderhtml.showbokemon(_userid);
-                    } else {
-                        renderhtml.showbokdrakar(1);
-                    };
+                    //if (rndHandler.isbokemontime(4)) {
+                    //    renderhtml.showbokemon(_userid);
+                    //} else {
+                    //    renderhtml.showbokdrakar(1);
+                    //};
+                    renderhtml.showbokdrakar(1);
                 }
             }
             //renderhtml.showbokemon(_userid);

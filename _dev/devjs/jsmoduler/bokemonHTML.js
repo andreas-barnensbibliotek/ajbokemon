@@ -13,6 +13,7 @@ module.exports = {
 
                     var valdbokemonID = rndHandler.getRandompockemon();
                     if (typeof (appsettings.monid[valdbokemonID]) != "undefined") {
+                        
                         var htmlblock = "<div id='bokemonitm' rel='" + appsettings.monid[valdbokemonID] + "'>";
                         htmlblock += "<span class='bokemonjailed'><a href='' class='takeBokemon' >";
                         htmlblock += "<img src='" + appsettings.src[valdbokemonID] + "_bar.gif' alt='" + appsettings.namn[valdbokemonID] + " Level: " + appsettings.lev[valdbokemonID] + "' />";

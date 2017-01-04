@@ -5,3 +5,176 @@ body {
   height: 100px;
   width: 100px;
   background: #000; }
+
+.bokemoncontainerSize{
+    display:block;
+    max-width:400px;
+    background-color:#ccc;
+   font-family: 'Alegreya Sans SC', sans-serif;
+}
+#bokemonMessContainer{
+     background-color:#fff;
+     text-align:center;
+}
+#bokemonMessContainer button {
+    width:110px;
+    height:40px;
+    font-size:large;
+}
+#bokemonMessContainer button:hover {
+   color:#fff;
+   opacity:0.9;
+}
+#bokemonMessContainer .btnjagaJA {
+    background-color:#339933;
+}
+#bokemonMessContainer .btnjagaNEJ {
+    background-color:#cc3333;
+}
+.bokemoncontainerSize table {
+   width:100%;
+   text-align: center;
+}
+.bokemoncontainerSize img{
+    max-width:100%;
+}
+
+.bokdrakeinfobox{
+    text-align:center;
+}
+.bokdrakeinfobox h2{
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+.draknamn{
+    text-align:center;
+}
+.bokdrakeinfobox .btnjaga{
+   width:50%;
+    text-align:center;
+}
+.bokdrakeinfobox table{    
+    max-width:100%;
+     /*! margin:20px; */
+    text-align:left;
+    padding:20px;
+   
+}
+.bokdrakeinfobox p{
+    margin-top:0px;
+    margin-bottom:0px;
+}
+.bokdrakeinfobox img{
+    margin-bottom:0px;
+
+}
+.bokemonBoardMaincontainer{    
+    color:#000; 
+}
+
+.bokemonuserlist {
+    background-color:#fff;
+   
+}
+
+.bokemonuserlist .listitem:hover {
+    background-color:#eee; 
+    }
+.bokemonuserlist table{
+    border-collapse: collapse;
+    border-spacing: 0;
+
+}
+.bokemonuserlist .listheader {
+    background-color:#000;
+    color:#fff;
+    margin-bottom:4px;
+}
+.bokemonuserlist .listheader p{   
+    margin-top:0px!important;
+     margin-bottom:10px;
+}
+.bokemonuserlist .listheader h1{   
+    margin-bottom:0px;
+}
+.bokemonuserlist .col1{
+     width:80px;
+    text-align:center;
+    
+}
+.bokemonuserlist .col1 img{   
+    text-align:center;
+    vertical-align:middle;
+}
+.bokemonuserlist .col2{    
+    text-align:left;  
+    padding-left:10px;  
+}
+
+
+/*#bokemonfightContainer{} */
+
+#bokemonfightContainer{
+    background:#000;
+    
+}
+
+#bokemonfightContainer table{
+     border-collapse: collapse;
+    border-spacing: 0;
+    color:#fff;
+}
+#bokemonfightContainer .tblcol1{
+    width:80px;
+
+}
+#bokemonfightContainer .tblcol2{
+    width:auto;
+
+}
+#bokemonfightContainer .tblcol3{
+    width:80px;
+
+}
+    #bokemonfightContainer .fightStory {
+        vertical-align:top;
+        height:200px;
+    }
+#bokemonfightContainer .fightArena{
+    background-color: #fff;
+    background-image:url('http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/bokmonster/fightmoln_3.png');
+    background-repeat:no-repeat;
+    background-size:cover;
+    height:300px;
+    color:#000;    
+}
+
+#bokemonfightContainer .fightArena h1{
+    margin-top:0px;
+    font-size: 4em;
+}
+#bokemonfightContainer .fightArena h2{
+    margin-bottom:0px;
+ }
+
+
+
+#modal-content {
+    background-color: white;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    box-shadow: 0 0 20px 0 #222;
+    -webkit-box-shadow: 0 0 20px 0 #222;
+    -moz-box-shadow: 0 0 20px 0 #222;
+    display: none;
+    height: 240px;
+    left: 50%;
+    margin: -120px 0 0 -160px;
+    padding: 10px;
+    position: fixed;
+    top: 50%;
+    width: 320px;
+    z-index: 1000;
+}
