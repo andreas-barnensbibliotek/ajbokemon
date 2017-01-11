@@ -3,5 +3,5 @@ module.exports = {
     output: {
         path: __dirname,
         filename: "./bokemon_v1.js"
-    }    
+    }   
 };

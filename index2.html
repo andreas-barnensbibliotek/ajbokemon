@@ -2,154 +2,173 @@
     <head>
         <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
         <meta charset="utf-8">
-        <link rel="stylesheet" href="public/css/app.css" />   
+        <link rel="stylesheet" href="public/css/app.css" />           
         <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Raleway" rel="stylesheet"> 
+        
+        <link href="public/css/vex-theme-os.css" rel="stylesheet" />
+        <link href="public/css/vex.css" rel="stylesheet" />
     </head>
     <body>
-       
-        <div id="bokemonMessContainer" class="bokemoncontainerSize">
-            <div class="bokdrakeinfobox">                
-                <table>
-                    <tr>
-                        <td colspan="2" >
-                            <h3>Draken f&ouml;rst&ouml;r och &auml;ter b&ouml;cker h&auml;r s&aring; den m&aring;ste bort! 
-                            <b>Vill du anv&auml;nda en av dina Bibblemons f&ouml;r att jaga bort den &aring;t oss?</b></h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="btnjaga">
-                            <button class="btnjagaJA">Ja</button>
-                        </td>
-                        <td class="btnjaga">
-                            <button class="btnjagaNEJ">Nej</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="draknamn">
-                            <img src="http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/bokmonster/mainbokdrake.png">
+        <a class="startar">Modal</a>
+        <a href="#modalDialog">
+            Launch A Modal
+        </a>
+        <!-- Modal structure -->
+        <div id="openModal" class="modalDialog">
+            <!-- Page content -->
+            <div id="bokemonMessContainer" class="bokemoncontainerSize">
+                <div class="bokdrakeinfobox">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <h3>
+                                    Draken f&ouml;rst&ouml;r och &auml;ter b&ouml;cker h&auml;r s&aring; den m&aring;ste bort!
+                                    <b>Vill du anv&auml;nda en av dina Bibblemons f&ouml;r att jaga bort den &aring;t oss?</b>
+                                </h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="btnjaga">
+                                <button class="btnjagaJA">Ja</button>
+                            </td>
+                            <td class="btnjaga">
+                                <button class="btnjagaNEJ">Nej</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="draknamn">
+                                <img src="http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/bokmonster/mainbokdrake.png">
 
-                        </td>
-                    </tr>  
-                    <tr>
-                        <td colspan="2" class="draknamn">
-                            <h2>drakenkraken</h2>
-                        </td>
-                    </tr>  
-                    <tr>
-                        <th colspan="2">Beskrivning</th>
-                    </tr>                  
-                    <tr>
-                        <td colspan="2" class="drakinfo">
-                            <p>en elak bok&auml;tare</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="draknamn">
+                                <h2>drakenkraken</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Beskrivning</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="drakinfo">
+                                <p>en elak bok&auml;tare</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2">Egenskaper</th>
+                        </tr>
+                        <tr>
+                            <td>Point</td>
+                            <td>
+                                <span class="bokdrakecore">1000</span>p
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Eldbonus</td>
+                            <td>
+                                <span class="bokdrakecore">120</span>p
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <h1></h1>
+
+
+            <div class="bokemonuserlist bokemoncontainerSize">
+                <table>
+                    <tr class="listheader">
+                        <td colspan="3">
+                            <h1>V&auml;lj Bibblemon</h1>
+                            <p>V&auml;lj den bibblemon som du vill anv&auml;nda f&ouml;r att ska skr&auml;mma bort bokdraken</p>
                         </td>
                     </tr>
-                    
-                    <tr>
-                        <th colspan="2">Egenskaper</th>                        
-                    </tr>
-                    <tr>
-                        <td>Point</td>
-                        <td>
-                            <span class="bokdrakecore">1000</span>p
+                    <tr class="listitem">
+                        <td class="col1">
+                            <img src="http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/droppemon.png">
+                        </td>
+                        <td class="col2">
+                            <p>
+                                Drakemon<br />
+                                Level: 10<br />
+                                Score: 10200p
+                            </p>
+                        </td>
+                        <td class="col3">
+                            <a href="" class="valdfightbokemon" rel="1">V&auml;lj</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Eldbonus</td>
-                        <td>
-                            <span class="bokdrakecore">120</span>p
+                    <tr class="listitem">
+                        <td class="col1">
+                            <img src="http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/robot.gif">
+                        </td>
+                        <td class="col2">
+                            <p>
+                                Robbomon<br />
+                                Level: 4<br />
+                                Score: 4200p
+                            </p>
+                        </td>
+                        <td class="col3">
+                            <a href="" class="valdfightbokemon" rel="1">V&auml;lj</a>
                         </td>
                     </tr>
                 </table>
-            </div>            
+            </div>
+
+            <h1></h1>
+
+            <div id="bokemonfightContainer" class="bokemoncontainerSize">
+
+                <table>
+                    <tr>
+                        <td colspan="3" class="fightStory">
+                            <h1>Arenan</h1>
+                            <p>
+                                Din bibblemon m&ouml;ter en elak bokdrake som h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!<br />
+                                Draken m&aring;ste stoppas! <br />Din <span class="bokemonnamn">droppemon</span> griper in och b&ouml;rjar fighten med bokdraken!!!
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="fightArena">
+                            <h2>Bokdraken hinner plocka av bibbemonen</h2>
+                            <h1>199p</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tblcol1 bokemonavatar">
+                            <img src="http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/droppemon.png">
+                        </td>
+                        <td class="tblcol2"></td>
+                        <td class="tblcol3 bokdrakevatar">
+                            <img src="http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/bokmonster/mainbokdrake.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tblcol1">
+                            <span class="bokemonscore">1000</span>p
+                        </td>
+                        <td class="tblcol2"></td>
+                        <td class="tblcol3">
+                            <span class="bokdrakecore">1000</span>p
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- Trigger to open Modal -->
+
         </div>
+
+
         
 
 
-        <h1></h1>
-        
-      
-        <div class="bokemonuserlist bokemoncontainerSize">
-            <table>
-                <tr class="listheader">
-                    <td colspan="3">
-                        <h1>V&auml;lj Bibblemon</h1>
-                        <p>V&auml;lj den bibblemon som du vill anv&auml;nda f&ouml;r att ska skr&auml;mma bort bokdraken</p>
-                    </td>                    
-                </tr>
-                <tr class="listitem" >
-                    <td class="col1">
-                        <img src="http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/droppemon.png">
-                    </td>
-                    <td class="col2">
-                        <p>
-                            Drakemon<br />
-                            Level: 10<br />
-                            Score: 10200p
-                        </p>
-                    </td> 
-                    <td class="col3">
-                        <a href="" class="valdfightbokemon" rel="1">V&auml;lj</a>
-                    </td>                  
-                </tr>               
-                <tr class="listitem">
-                    <td class="col1">
-                        <img src="http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/robot.gif">
-                    </td>
-                    <td class="col2">
-                        <p>
-                            Robbomon<br />
-                            Level: 4<br />
-                            Score: 4200p
-                        </p>
-                    </td>
-                    <td class="col3">
-                        <a href="" class="valdfightbokemon" rel="1">V&auml;lj</a>
-                    </td>
-                </tr>                 
-            </table>
-          </div>
-
-        <h1></h1>
-
-        <div id="bokemonfightContainer" class="bokemoncontainerSize">
-            
-            <table>
-                <tr>
-                    <td colspan="3" class="fightStory">
-                        <h1>Arenan</h1>
-                        <p>
-                            Din bibblemon m&ouml;ter en elak bokdrake som h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!<br />
-                            Draken m&aring;ste stoppas! <br />Din <span class="bokemonnamn">droppemon</span> griper in och b&ouml;rjar fighten med bokdraken!!!
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="fightArena">
-                        <h2>Bokdraken hinner plocka av bibbemonen</h2>
-                        <h1>199p</h1>
-                    </td>                   
-                </tr>
-                <tr>
-                    <td class="tblcol1 bokemonavatar">
-                        <img src="http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/droppemon.png">
-                    </td>
-                    <td class="tblcol2"></td>
-                    <td class="tblcol3 bokdrakevatar">
-                        <img src="http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/bokmonster/mainbokdrake.png">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tblcol1">
-                        <span class="bokemonscore">1000</span>p
-                    </td>
-                    <td class="tblcol2"></td>
-                    <td class="tblcol3">
-                        <span class="bokdrakecore">1000</span>p
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <script type="text/javascript" src="js/bokemon_v1.js" charset="utf-8"></script>
+       
+         <script type="text/javascript" src="js/bokemon_v1.js" charset="utf-8"></script>
     </body>
 </html>

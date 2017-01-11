@@ -1,6 +1,9 @@
 ﻿var $ = require("jquery");
+var vex = require('./vex.combined.js');
+vex.defaultOptions.className = 'vex-theme-os'
 var api = require("./bokemonServicecalls.js");
 var fighthtmlhandler = require("./bokemonfightHTML.js");
+
 module.exports = {
     jqueryEVENTS : function (userid) {
 
@@ -64,21 +67,37 @@ module.exports = {
                     })
 
                 } else {
+                    alert("test");
                     var monsterid = $(this).attr('rel');
                     var fighthtml = fighthtmlhandler.drakfightYesNo(monsterid);
                     //$('#maincontainer').append("<div id='modal-BokemonFightbox'></div>");
                     //$("#dialog").dialog();
                     //$('#modal-BokemonFightbox').html(fighthtml);
-                    $('#maincontainer').append(fighthtml);
-                    $("#bokemonMessContainer").dialog({
-                        modal: true,
-                        buttons: {
-                            Ok: function () {
-                                $(this).dialog("close");
-                            }
-                        }
-                    });
+
+                    //$('#maincontainer').append(fighthtml);
                     
+                    var htmlblock = "<div id='bokemonfightContainer' class='bokemoncontainerSize'>";
+                    htmlblock += "<table><tr><td colspan='3' class='fightStory'>";
+                    htmlblock += "<h1>Arenan</h1>";
+                    htmlblock += "<p>Din bibblemon m&ouml;ter en elak bokdrake som h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!<br />";
+                    htmlblock += "Draken m&aring;ste stoppas! <br />Din <span class='bokemonnamn'>droppemon</span> griper in och b&ouml;rjar fighten med bokdraken!!!</p>";
+                    htmlblock += "</td></tr>";
+                    htmlblock += "<tr><td colspan='3' class='fightArena'>";
+                    htmlblock += "<h2>Bokdraken hinner plocka av bibbemonen</h2><h1>199p</h1>";
+                    htmlblock += "</td></tr>";
+                    htmlblock += "<tr><td class='tblcol1 bokemonavatar'><img src=''></td>";
+                    htmlblock += "<td class='tblcol2'></td><td class='tblcol3 bokdrakevatar'><img src=''></td></tr>";
+                    htmlblock += "<tr><td class='tblcol1'><span class='bokemonscore'>1111</span>p</td>";
+                    htmlblock += "<td class='tblcol2'></td><td class='tblcol3'><span class='bokdrakecore'>11111</span>p</td>";
+                    htmlblock += "</tr></table></div>";
+                    vex.dialog.open(
+                        {
+                            unsafeMessage: htmlblock,
+                            overlayClosesOnClick: false
+                        }
+                    )
+
+
 
                     return false;
                 }
