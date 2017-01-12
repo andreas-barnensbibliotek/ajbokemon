@@ -46,33 +46,49 @@ function showDamage(hp){
     if (fighter.currentfighter == "bokdrake") {
         fighttext = "<h2>Bibblemon tar snabbt vatten f&ouml;r att sl&auml;cka elden. Bokdraken f&ouml;rlorar po&auml;ng!</h2><h1>" + hp + "p</h1>"
         fighter.bokdrake = fighter.bokdrake - parseInt(hp);
+        $('.bokdrakecore').html(fighter.bokdrake);
         fighter.currentfighter= "bokemon"; //byt fighter nästa
     } else {
-        fighttext = "<h2>Bokdraken hinner l&auml;gga på fler b&ouml;cker. bibbemonen f&ouml;rlorar po&auml;ng!</h2><h1>" + hp + "p</h1>"
-        fighter.bokemon = fighter.bokemon - parseInt(hp);
+        fighttext = "<h2>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker. bibbemonen f&ouml;rlorar po&auml;ng!</h2><h1>" + hp + "p</h1>"
+        fighter.bokemon = fighter.bokemon - parseInt(hp);        
+        $('.bokemonscore').html(fighter.bokemon);
         fighter.currentfighter = "bokdrake";
     }
 
     $('.fightArena').html(fighttext);
     
     
-
-    if (vinnorloose(fighter.bokdrake, fighter.bokemon)) {
-        clearInterval(global.intervalID);
-        var endtext = "<h2>slut</h2>";
-
+    var wehaveawinner = vinnorloose(fighter.bokdrake, fighter.bokemon); 
+   
+    if (wehaveawinner < 3) {
+        var endtext = "<h2>Kampen slutade!</h2>";
+                
+        if (wehaveawinner == 1) {
+            //bokemon vann
+            endtext += "<h1>Vinnaren &auml;r Bokemon!</h1>";
+            endtext += "<p> Din bokemon har lyckats att skrämma iv&auml;g bokdraken!</p>";
+        }
+        if (wehaveawinner == 2) {
+            //bokemon vann
+            endtext += "<h1>Vinnaren &auml;r Bokdraken!</h1>";
+            endtext += "<p>Bokdraken &aring;t upp din bokemon! Var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
+        }
+        endtext += "<button>OK</button>";
         $('.fightArena').html(endtext);
+        clearInterval(global.intervalID);
     }
          
 }
 
 var vinnorloose = function(drakpoints, bokemonpoints){
-    var ret = false;
-    if(drakpoints <= 0){
-        ret = true;
+    var ret = 3;
+    if (drakpoints <= 0) {
+        fighter.bokdrake = 0;
+        ret = 1;
     };
-    if(bokemonpoints <= 0){
-        ret = true;
+    if (bokemonpoints <= 0) {
+        fighter.bokemon = 0;
+        ret = 2;
     };
     
     return ret;
