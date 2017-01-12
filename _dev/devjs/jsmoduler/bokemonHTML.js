@@ -12,22 +12,22 @@ module.exports = {
                 api.bokemonServerHandler('allmon', uid, function () {
 
                     var valdbokemonID = rndHandler.getRandompockemon();
-                    if (typeof (appsettings.monid[valdbokemonID]) != "undefined") {
+                    if (typeof (appsettings.bokemon.monid[valdbokemonID]) != "undefined") {
                         
-                        var htmlblock = "<div id='bokemonitm' rel='" + appsettings.monid[valdbokemonID] + "'>";
+                        var htmlblock = "<div id='bokemonitm' rel='" + appsettings.bokemon.monid[valdbokemonID] + "'>";
                         htmlblock += "<span class='bokemonjailed'><a href='' class='takeBokemon' >";
-                        htmlblock += "<img src='" + appsettings.src[valdbokemonID] + "_bar.gif' alt='" + appsettings.namn[valdbokemonID] + " Level: " + appsettings.lev[valdbokemonID] + "' />";
+                        htmlblock += "<img src='" + appsettings.bokemon.src[valdbokemonID] + "_bar.gif' alt='" + appsettings.bokemon.namn[valdbokemonID] + " Level: " + appsettings.bokemon.lev[valdbokemonID] + "' />";
                         htmlblock += "</a>";
-                        htmlblock += "<span class='bokemonscore' rel=" + appsettings.score[valdbokemonID] + "></span>";
+                        htmlblock += "<span class='bokemonscore' rel=" + appsettings.bokemon.score[valdbokemonID] + "></span>";
                         htmlblock += "<a href='' class='Bokemonifo' style='display:none;' >";
-                        htmlblock += "<h2>" + appsettings.namn[valdbokemonID] + "</h2>";
+                        htmlblock += "<h2>" + appsettings.bokemon.namn[valdbokemonID] + "</h2>";
                         htmlblock += "</a>";
                         htmlblock += "<div class='bokemoninfoblock' style='display:none;'>";
-                        htmlblock += "<p>" + appsettings.info[valdbokemonID] + "</p>";
+                        htmlblock += "<p>" + appsettings.bokemon.info[valdbokemonID] + "</p>";
                         htmlblock += "</div></span>";
                         htmlblock += "<div class='bokemonFreeblock' style='display:none;'>";
                         htmlblock += "<p class='speech'>Du r&auml;ddade mej! Tack!</p>";
-                        htmlblock += "<img  src='" + appsettings.src[valdbokemonID] + "' alt='" + appsettings.namn[valdbokemonID] + " Level: " + appsettings.lev[valdbokemonID] + "' />";
+                        htmlblock += "<img  src='" + appsettings.bokemon.src[valdbokemonID] + "' alt='" + appsettings.bokemon.namn[valdbokemonID] + " Level: " + appsettings.bokemon.lev[valdbokemonID] + "' />";
                         htmlblock += "</div>";
                         htmlblock += "</div>";
 
@@ -60,17 +60,17 @@ module.exports = {
 
                     var valdbokemonID = rndHandler.getRandomBokdrake();
                     
-                    if (typeof (appsettings.monid[valdbokemonID]) != "undefined") {
-                        var htmlblock = "<div id='bokdrakeitm' class='bokdrake' rel='" + appsettings.monid[valdbokemonID] + "'>";
+                    if (typeof (appsettings.drakemon.drakmonid[valdbokemonID]) != "undefined") {
+                        var htmlblock = "<div id='bokdrakeitm' class='bokdrake' rel='" + appsettings.drakemon.drakmonid[valdbokemonID] + "'>";
                         htmlblock += "<span class='bokemonjailed'><a href='' class='takeBokemon' >";
-                        htmlblock += "<img src='" + appsettings.src[valdbokemonID] + "' alt='" + appsettings.namn[valdbokemonID] + " Level: " + appsettings.lev[valdbokemonID] + "' />";
+                        htmlblock += "<img src='" + appsettings.drakemon.draksrc[valdbokemonID] + "' alt='" + appsettings.drakemon.draknamn[valdbokemonID] + " Level: " + appsettings.drakemon.draklev[valdbokemonID] + "' />";
                         htmlblock += "</a>";
-                        htmlblock += "<span class='bokemonscore' rel=" + appsettings.score[valdbokemonID] + "></span>";
+                        htmlblock += "<span class='bokemonscore' rel=" + appsettings.drakemon.drakscore[valdbokemonID] + "></span>";
                         htmlblock += "<a href='' class='Bokemonifo' style='display:none;' >";
-                        htmlblock += "<h2>" + appsettings.namn[valdbokemonID] + "</h2>";
+                        htmlblock += "<h2>" + appsettings.drakemon.draknamn[valdbokemonID] + "</h2>";
                         htmlblock += "</a>";
                         htmlblock += "<div class='bokemoninfoblock' style='display:none;'>";
-                        htmlblock += "<p>" + appsettings.info[valdbokemonID] + "</p>";
+                        htmlblock += "<p>" + appsettings.drakemon.drakinfo[valdbokemonID] + "</p>";
                         htmlblock += "</div></span>";
                         htmlblock += "<div class='bokemonFreeblock' style='display:none;'>";
                         htmlblock += "<p class='speech'><b>Hj&auml;lp oss f&aring;nga bokdrakarna!</b><br />"

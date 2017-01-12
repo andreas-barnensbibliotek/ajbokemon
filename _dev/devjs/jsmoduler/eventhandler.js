@@ -1,14 +1,22 @@
-﻿var $ = require("jquery");
+﻿// --------------------------------------------------------------------------------------------------------------------------
+// EVENT HANDLER BOKEMON
+// --------------------------------------------------------------------------------------------------------------------------
+
+var $ = require("jquery");
 var vex = require('./vex.combined.js');
 vex.defaultOptions.className = 'vex-theme-os'
 var api = require("./bokemonServicecalls.js");
 var fighthtmlhandler = require("./bokemonfightHTML.js");
+var registerJqueryfightEvents = require("./bokemonFightEventHandler.js");
 
 module.exports = {
     jqueryEVENTS : function (userid) {
 
+        registerJqueryfightEvents.jqueryFightEVENTS(userid);
+
         window.once = true;
         $('body').on('click', '#bokemonitm', function () {          
+           
             //console.log('1. ' + window.once);
              if (window.once) {
                 window.once = false;
@@ -49,6 +57,7 @@ module.exports = {
 
         $('body').on('click', '#bokdrakeitm', function () {
             //console.log('1. ' + window.once);
+
             if (window.once) {
                 window.once = false;
                 //console.log('2. ' + window.once);
@@ -67,7 +76,8 @@ module.exports = {
                     })
 
                 } else {
-                    alert("test");
+                   
+                    $('#bokdrakeitm').hide();
                     var monsterid = $(this).attr('rel');
                     var fighthtml = fighthtmlhandler.drakfightYesNo(monsterid);
                     //$('#maincontainer').append("<div id='modal-BokemonFightbox'></div>");
@@ -92,13 +102,12 @@ module.exports = {
                     htmlblock += "</tr></table></div>";
                     vex.dialog.open(
                         {
-                            unsafeMessage: htmlblock,
+                            unsafeMessage: fighthtml,
                             overlayClosesOnClick: false
                         }
                     )
-
-
-
+                    
+                    
                     return false;
                 }
 

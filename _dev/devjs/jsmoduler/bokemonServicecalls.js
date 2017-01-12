@@ -15,15 +15,26 @@ module.exports = {
 
                 var i = 1;
                 $.each(data.barnensbibliotek.bokmonsterlist, function (item, val) {
-                    appsettings.monid[i] = val.monid;
-                    appsettings.namn[i] = val.namn;
-                    appsettings.src[i] = val.src;
-                    appsettings.lev[i] = val.lev;
-                    appsettings.score[i] = val.score;
-                    appsettings.info[i] = val.info;
+                    if (callTyp == "alldrakar") {
+                        appsettings.drakemon.drakmonid[i] = val.monid;
+                        appsettings.drakemon.draknamn[i] = val.namn;
+                        appsettings.drakemon.draksrc[i] = val.src;
+                        appsettings.drakemon.draklev[i] = val.lev;
+                        appsettings.drakemon.drakscore[i] = val.score;
+                        appsettings.drakemon.drakinfo[i] = val.info;
 
+                    } else {
+                        appsettings.bokemon.monid[i] = val.monid;
+                        appsettings.bokemon.namn[i] = val.namn;
+                        appsettings.bokemon.src[i] = val.src;
+                        appsettings.bokemon.lev[i] = val.lev;
+                        appsettings.bokemon.score[i] = val.score;
+                        appsettings.bokemon.info[i] = val.info;
+                    }
+                    
                     i++;
                 });
+                console.log(appsettings.drakemon.draknamn);
                 callback();
                 return false;
             },
