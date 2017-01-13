@@ -71,7 +71,8 @@ module.exports = {
                         htmlblock += "</a>";
                         htmlblock += "<div class='bokemoninfoblock' style='display:none;'>";
                         htmlblock += "<p>" + appsettings.drakemon.drakinfo[valdbokemonID] + "</p>";
-                        htmlblock += "</div></span>";
+                        htmlblock += "</div>";
+                        htmlblock += "</span>";
                         htmlblock += "<div class='bokemonFreeblock' style='display:none;'>";
                         htmlblock += "<p class='speech'><b>Hj&auml;lp oss f&aring;nga bokdrakarna!</b><br />"
                         htmlblock += "Logga in och hj&auml;lp oss att f&aring; bort dessa hemska bokdrakar!</p>";

@@ -248,7 +248,8 @@
 	                        htmlblock += "</a>";
 	                        htmlblock += "<div class='bokemoninfoblock' style='display:none;'>";
 	                        htmlblock += "<p>" + appsettings.drakemon.drakinfo[valdbokemonID] + "</p>";
-	                        htmlblock += "</div></span>";
+	                        htmlblock += "</div>";
+	                        htmlblock += "</span>";
 	                        htmlblock += "<div class='bokemonFreeblock' style='display:none;'>";
 	                        htmlblock += "<p class='speech'><b>Hj&auml;lp oss f&aring;nga bokdrakarna!</b><br />"
 	                        htmlblock += "Logga in och hj&auml;lp oss att f&aring; bort dessa hemska bokdrakar!</p>";
@@ -10642,7 +10643,7 @@
 
 	        window.once = true;
 	        $('body').on('click', '#bokemonitm', function () {          
-	           
+	            alert("japp")
 	            //console.log('1. ' + window.once);
 	             if (window.once) {
 	                window.once = false;
@@ -10683,7 +10684,6 @@
 
 	        $('body').on('click', '#bokdrakeitm', function () {
 	            //console.log('1. ' + window.once);
-
 	            if (window.once) {
 	                window.once = false;
 	                //console.log('2. ' + window.once);
@@ -12444,7 +12444,7 @@
 	        htmlblock += "<p><span class='bokemonnamn'>" + appsettings.bokemon.namn[bokemonindex] + "</span>, din egen bibblemon m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + " som h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!<br />";
 	        htmlblock += "Draken m&aring;ste stoppas! <br /><span class='bokemonnamn'>" + appsettings.bokemon.namn[bokemonindex] + "</span> griper in och b&ouml;rjar fighten med bokdraken!!!</p>";
 	        htmlblock += "</td></tr>";
-	        htmlblock += "<tr><td colspan='3' class='fightArena'>";
+	        htmlblock += "<tr class='fightArenablock'><td colspan='3' class='fightArena'>";
 	       // htmlblock += "<h2>Bokdraken hinner plocka av bibbemonen</h2><h1>199p</h1>";
 	        htmlblock += "</td></tr>";
 	        htmlblock += "<tr><td class='tblcol1 bokemonavatar'><img src='" + appsettings.bokemon.src[bokemonindex] + ".gif'></td>";
@@ -12580,17 +12580,15 @@
 	    if (fighter.currentfighter == "bokdrake") {
 	        fighttext = "<h2>Bibblemon tar snabbt vatten f&ouml;r att sl&auml;cka elden. Bokdraken f&ouml;rlorar po&auml;ng!</h2><h1>" + hp + "p</h1>"
 	        fighter.bokdrake = fighter.bokdrake - parseInt(hp);
-	        $('.bokdrakecore').html(fighter.bokdrake);
+	        $('.bokdrakecore').hide().html(fighter.bokdrake).fadeIn(4000);
 	        fighter.currentfighter= "bokemon"; //byt fighter nästa
 	    } else {
 	        fighttext = "<h2>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker. bibbemonen f&ouml;rlorar po&auml;ng!</h2><h1>" + hp + "p</h1>"
 	        fighter.bokemon = fighter.bokemon - parseInt(hp);        
-	        $('.bokemonscore').html(fighter.bokemon);
+	        $('.bokemonscore').hide().html(fighter.bokemon).fadeIn(4000);
 	        fighter.currentfighter = "bokdrake";
 	    }
 
-	    $('.fightArena').html(fighttext);
-	    
 	    
 	    var wehaveawinner = vinnorloose(fighter.bokdrake, fighter.bokemon); 
 	   
@@ -12610,6 +12608,10 @@
 	        endtext += "<button>OK</button>";
 	        $('.fightArena').html(endtext);
 	        clearInterval(global.intervalID);
+	    } else {
+	        $('.fightArena').fadeOut('slow', function () {
+	            $(this).html(fighttext)
+	        }).fadeIn("slow");
 	    }
 	         
 	}

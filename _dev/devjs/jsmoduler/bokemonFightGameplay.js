@@ -46,17 +46,15 @@ function showDamage(hp){
     if (fighter.currentfighter == "bokdrake") {
         fighttext = "<h2>Bibblemon tar snabbt vatten f&ouml;r att sl&auml;cka elden. Bokdraken f&ouml;rlorar po&auml;ng!</h2><h1>" + hp + "p</h1>"
         fighter.bokdrake = fighter.bokdrake - parseInt(hp);
-        $('.bokdrakecore').html(fighter.bokdrake);
+        $('.bokdrakecore').hide().html(fighter.bokdrake).fadeIn(4000);
         fighter.currentfighter= "bokemon"; //byt fighter nästa
     } else {
         fighttext = "<h2>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker. bibbemonen f&ouml;rlorar po&auml;ng!</h2><h1>" + hp + "p</h1>"
         fighter.bokemon = fighter.bokemon - parseInt(hp);        
-        $('.bokemonscore').html(fighter.bokemon);
+        $('.bokemonscore').hide().html(fighter.bokemon).fadeIn(4000);
         fighter.currentfighter = "bokdrake";
     }
 
-    $('.fightArena').html(fighttext);
-    
     
     var wehaveawinner = vinnorloose(fighter.bokdrake, fighter.bokemon); 
    
@@ -76,6 +74,10 @@ function showDamage(hp){
         endtext += "<button>OK</button>";
         $('.fightArena').html(endtext);
         clearInterval(global.intervalID);
+    } else {
+        $('.fightArena').fadeOut('slow', function () {
+            $(this).html(fighttext)
+        }).fadeIn("slow");
     }
          
 }
