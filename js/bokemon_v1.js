@@ -10712,20 +10712,20 @@
 
 	                    //$('#maincontainer').append(fighthtml);
 	                    
-	                    var htmlblock = "<div id='bokemonfightContainer' class='bokemoncontainerSize'>";
-	                    htmlblock += "<table><tr><td colspan='3' class='fightStory'>";
-	                    htmlblock += "<h1>Arenan</h1>";
-	                    htmlblock += "<p>Din bibblemon m&ouml;ter en elak bokdrake som h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!<br />";
-	                    htmlblock += "Draken m&aring;ste stoppas! <br />Din <span class='bokemonnamn'>droppemon</span> griper in och b&ouml;rjar fighten med bokdraken!!!</p>";
-	                    htmlblock += "</td></tr>";
-	                    htmlblock += "<tr><td colspan='3' class='fightArena'>";
-	                    htmlblock += "<h2>Bokdraken hinner plocka av bibbemonen</h2><h1>199p</h1>";
-	                    htmlblock += "</td></tr>";
-	                    htmlblock += "<tr><td class='tblcol1 bokemonavatar'><img src=''></td>";
-	                    htmlblock += "<td class='tblcol2'></td><td class='tblcol3 bokdrakevatar'><img src=''></td></tr>";
-	                    htmlblock += "<tr><td class='tblcol1'><span class='bokemonscore'>1111</span>p</td>";
-	                    htmlblock += "<td class='tblcol2'></td><td class='tblcol3'><span class='bokdrakecore'>11111</span>p</td>";
-	                    htmlblock += "</tr></table></div>";
+	                    //var htmlblock = "<div id='bokemonfightContainer' class='bokemoncontainerSize'>";
+	                    //htmlblock += "<table><tr><td colspan='3' class='fightStory'>";
+	                    //htmlblock += "<h1>Arenan</h1>";
+	                    //htmlblock += "<p>Din bibblemon m&ouml;ter en elak bokdrake som h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!<br />";
+	                    //htmlblock += "Draken m&aring;ste stoppas! <br />Din <span class='bokemonnamn'>droppemon</span> b&ouml;rjar fighten med bokdraken!!!</p>";
+	                    //htmlblock += "</td></tr>";
+	                    //htmlblock += "<tr><td colspan='3' class='fightArena'>";
+	                    //htmlblock += "<h2>Bokdraken hinner plocka av bibbemonen</h2><h1>199p</h1>";
+	                    //htmlblock += "</td></tr>";
+	                    //htmlblock += "<tr><td class='tblcol1 bokemonavatar'><img src=''></td>";
+	                    //htmlblock += "<td class='tblcol2'></td><td class='tblcol3 bokdrakevatar'><img src=''></td></tr>";
+	                    //htmlblock += "<tr><td class='tblcol1'><span class='bokemonscore'>1111</span>p</td>";
+	                    //htmlblock += "<td class='tblcol2'></td><td class='tblcol3'><span class='bokdrakecore'>11111</span>p</td>";
+	                    //htmlblock += "</tr></table></div>";
 	                    vex.dialog.open(
 	                        {
 	                            unsafeMessage: fighthtml,
@@ -12441,15 +12441,15 @@
 	        var htmlblock = "<div id='bokemonfightContainer' class='bokemoncontainerSize'>";
 	        htmlblock += "<table><tr><td colspan='3' class='fightStory'>";
 	        htmlblock += "<h1>Arenan</h1>";
-	        htmlblock += "<p><span class='bokemonnamn'>" + appsettings.bokemon.namn[bokemonindex] + "</span>, din egen bibblemon m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + " som h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!<br />";
-	        htmlblock += "Draken m&aring;ste stoppas! <br /><span class='bokemonnamn'>" + appsettings.bokemon.namn[bokemonindex] + "</span> griper in och b&ouml;rjar fighten med bokdraken!!!</p>";
+	        htmlblock += "<span class='showStartmsg'>Din bibblemon med namn " + appsettings.bokemon.namn[bokemonindex] + "<br/> m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + "<br/>Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!";
+	        htmlblock += "<h3> Draken m&aring;ste stoppas! </h3>";
 	        htmlblock += "</td></tr>";
-	        htmlblock += "<tr class='fightArenablock'><td colspan='3' class='fightArena'>";
+	        htmlblock += "<tr class='fightArenablock arena1'><td colspan='3' class='fightArena'>";
 	       // htmlblock += "<h2>Bokdraken hinner plocka av bibbemonen</h2><h1>199p</h1>";
 	        htmlblock += "</td></tr>";
-	        htmlblock += "<tr><td class='tblcol1 bokemonavatar'><img src='" + appsettings.bokemon.src[bokemonindex] + ".gif'></td>";
+	        htmlblock += "<tr  class='fightArenablock arena2'><td class='tblcol1 bokemonavatar'><img src='" + appsettings.bokemon.src[bokemonindex] + ".gif'></td>";
 	        htmlblock += "<td class='tblcol2'></td><td class='tblcol3 bokdrakevatar'><img src='" + appsettings.drakemon.draksrc[drakindex]  + "'></td></tr>";
-	        htmlblock += "<tr><td class='tblcol1'><span class='bokemonscore'>" + appsettings.bokemon.score[bokemonindex] + "</span>p</td>";
+	        htmlblock += "<tr class='fightArenablock arena3'><td class='tblcol1'><span class='bokemonscore'>" + appsettings.bokemon.score[bokemonindex] + "</span>p</td>";
 	        htmlblock += "<td class='tblcol2'></td><td class='tblcol3'><span class='bokdrakecore'>" + appsettings.drakemon.drakscore[drakindex] + "</span>p</td>";
 	        htmlblock += "</tr></table></div>";
 
@@ -12511,7 +12511,18 @@
 	var bokemonfightstep3_drakfight = function (drakindex, bokemonindex) {
 	    var valdlistaHtml = fighthandler.drakfightArena(drakindex, bokemonindex, function (htmlblock) {
 	        $('.vex-dialog-message').html(htmlblock);
-	        fightgameplay.jqueryFightGameplay(drakindex,bokemonindex);
+	        $('.fightArenablock').hide();
+
+	        inserttextwordbyword('.fightStory .showStartmsg', function(x){
+	            $('.fightArenablock').hide().fadeIn(4000);
+	            $('.fightStory .showStartmsg').fadeOut(4000, function () {
+	                $(this).slideUp(3000); //.animate({ height: 0, opacity: 0 }, 6000);
+	            });
+	           
+	            $('.fightArena').html("<h1>Fighten kan b&ouml;rja!!!</h1>");
+	            fightgameplay.jqueryFightGameplay(drakindex,bokemonindex);
+	        });
+
 	        return false;
 	    });
 
@@ -12528,12 +12539,38 @@
 	    return indexes[0];
 	}
 
+
+	var inserttextwordbyword = function (divtoconnect, callback) {
+	    var $el = $(divtoconnect),
+	            text = $el.html(),
+	            speed = 500; //ms
+
+	    $el.empty();
+	    $el.show();
+	    var wordArray = text.split(' '),
+	        i = 0;
+
+	    INV = setInterval(function () {
+	        if (i >= wordArray.length - 1) {
+	            clearInterval(INV);
+	        }
+	        $el.append(wordArray[i] + ' ')
+	        i++;
+	        if (i >= wordArray.length) {
+	            callback();
+	        }
+	    }, speed);
+	};
+
+
+
 /***/ },
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(5);
 	var appsettings = __webpack_require__(3);
+	var objfighttext = __webpack_require__(11)
 
 	/* Settings */
 	var user_input = { 
@@ -12578,12 +12615,17 @@
 	    var fighttext = "";
 
 	    if (fighter.currentfighter == "bokdrake") {
-	        fighttext = "<h2>Bibblemon tar snabbt vatten f&ouml;r att sl&auml;cka elden. Bokdraken f&ouml;rlorar po&auml;ng!</h2><h1>" + hp + "p</h1>"
+	        fighttext = "<h1>" + objfighttext.getrandommsg("eld", "bibblemon") + "</h1>";
+	        //fighttext += "<h1>Bibblemon tar snabbt vatten f&ouml;r att sl&auml;cka elden.</h1><h2>Bokdraken f&ouml;rlorar<br> " + hp + "p</h2>"
+	        fighttext += "<h2>Bokdraken f&ouml;rlorar<br> " + hp + "p</h2>"
+
 	        fighter.bokdrake = fighter.bokdrake - parseInt(hp);
 	        $('.bokdrakecore').hide().html(fighter.bokdrake).fadeIn(4000);
 	        fighter.currentfighter= "bokemon"; //byt fighter nästa
 	    } else {
-	        fighttext = "<h2>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker. bibbemonen f&ouml;rlorar po&auml;ng!</h2><h1>" + hp + "p</h1>"
+	        fighttext = "<h1>" + objfighttext.getrandommsg("eld", "bokdrake") + "</h1>";
+	        fighttext += "<h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
+	        //fighttext = "<h1>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker.</h1><h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
 	        fighter.bokemon = fighter.bokemon - parseInt(hp);        
 	        $('.bokemonscore').hide().html(fighter.bokemon).fadeIn(4000);
 	        fighter.currentfighter = "bokdrake";
@@ -12593,17 +12635,18 @@
 	    var wehaveawinner = vinnorloose(fighter.bokdrake, fighter.bokemon); 
 	   
 	    if (wehaveawinner < 3) {
-	        var endtext = "<h2>Kampen slutade!</h2>";
+	        var endtext = "";
 	                
 	        if (wehaveawinner == 1) {
 	            //bokemon vann
+	            endtext += "<h2>Din bokemon har lyckats att skr&auml;mma iv&auml;g bokdraken!</h2>";
 	            endtext += "<h1>Vinnaren &auml;r Bokemon!</h1>";
-	            endtext += "<p> Din bokemon har lyckats att skrämma iv&auml;g bokdraken!</p>";
+	            
 	        }
 	        if (wehaveawinner == 2) {
-	            //bokemon vann
+	            //bokemon vann            
+	            endtext += "<h1>NEEEEJ!!</h1><p>Bokdraken &aring;t upp din bokemon!<br></p><p style='font-size:0.9em;'>...men var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
 	            endtext += "<h1>Vinnaren &auml;r Bokdraken!</h1>";
-	            endtext += "<p>Bokdraken &aring;t upp din bokemon! Var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
 	        }
 	        endtext += "<button>OK</button>";
 	        $('.fightArena').html(endtext);
@@ -12628,6 +12671,89 @@
 	    };
 	    
 	    return ret;
+	}
+
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	
+	module.exports = {
+	    getrandommsg: function (fight, typ) {
+	        var rettext = "";
+
+	        if (fight == "eld") {
+	            if (typ == "bokdrake") {
+	                rettext = textlista.eld.fightbokdraken[pickRandomProperty(textlista.eld.fightbokdraken)];
+	            }
+	            if (typ == "bibblemon") {
+	                rettext = textlista.eld.fightbibblemon[pickRandomProperty(textlista.eld.fightbibblemon)];
+	            }
+	        }
+	        if (fight == "forstor") {
+	            if (typ == "bokdrake") {
+	                rettext = textlista.forstor.fightbokdraken[pickRandomProperty(textlista.forstor.fightbokdraken)];
+	            }
+	            if (typ == "bibblemon") {
+	                rettext = textlista.forstor.fightbibblemon[pickRandomProperty(textlista.forstor.fightbibblemon)];
+	            }       
+	        }
+	        return rettext;
+	    }
+	};
+
+
+	var pickRandomProperty = function(obj) {
+	    var result;
+	    var count = 0;
+	    for (var prop in obj)
+	        if (Math.random() < 1 / ++count)
+	            result = prop;
+	    return result;
+	}
+
+	var textlista = {
+	    eld: {
+	        start: "Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!",
+	        fightbibblemon: {
+	            0: "Bibblemon tar en hink med vatten och h&auml;ller p&aring; elden",
+	            1: "Bibblemom sprutar vatten med en brandslang",
+	            2: "Bibblemon tar en brandfilt och sl&auml;cker elden",
+	            3: "Bibblemon spottar p&aring; elden",
+	            4: "Bibblemon anv&auml;nder en brandspruta p&aring; elden"
+	        },
+	        fightbokdraken: {
+	            0: "Bokdraken torkar vattnet med en h&aring;rtork!",
+	            1: "bokdraken sprutar eld och vattnet f&ouml;rsvinner!",
+	            2: "Bokdraken g&ouml;r en knut p&aring; vattenslangen som din bibblemon anv&auml;nder,vattnet f&ouml;rsvinner",
+	            3: "bokdraken h&auml;ller bensin p&aring; elden! Elden flammar upp!",
+	            4: "bokdraken biter h&aring;l i vattenhinken som din bibblemon anv&auml;nder. Vattnet rinner ut."
+	        },
+	        end: ""
+	    },
+	    forstor: {
+	        start: "Bokdraken h&aring;ller p&aring; att f&ouml;rst&ouml;ra b&ouml;cker och skr&auml;mma bes&ouml;karna p&aring; biblioteket!",
+	        fightbibblemon: {
+	            0: "Biblemon skr&auml;mmer bokdraken",
+	            1: "Bibblemon tar b&ouml;cker fr&aring;n bokdraken",
+	            2: "Bibblemon fryser bokdraken",
+	            3: "Bibblemon lurar bokdraken",
+	            4: "Bibblemon g&ouml;r en f&auml;lla f&ouml;r bokdraken",
+	            5: "Bibblemon st&auml;nger in bokdraken i en bur",
+	            6: "Bibblemon g&ouml;r bokdraken yr"
+	        },
+	        fightbokdraken: {
+	            0: "Bokdraken tuggar s&ouml;nder b&ouml;ckerna!",
+	            1: "Bokdrake l&auml;gger tuggummi i b&ouml;ckerna. dom g&aring;r inte att &ouml;ppna!",
+	            2: "Bokdraken blandar och r&ouml;r till alla b&ouml;cker!",
+	            3: "Bokdraken river ut sidor fr&aring;n b&ouml;ckerna!",
+	            4: "Bokdraken g&ouml;mmer b&ouml;cker",
+	            5: "Bokdraken suddar ut text i b&ouml;ckerna!",
+	            6: "Bokdraken ritar gubbar i b&ouml;ckerna!"
+	        },
+	        end: ""
+	    }
 	}
 
 

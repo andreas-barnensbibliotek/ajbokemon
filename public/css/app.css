@@ -816,7 +816,11 @@ body.vex-open {
 }
     #bokemonfightContainer .fightStory {
         vertical-align:top;
-        height:200px;
+        
+    }
+    .showStartmsg{
+        display:block;
+        height:170px;
     }
 #bokemonfightContainer .fightArena{
     background-color: #fff;
@@ -824,15 +828,23 @@ body.vex-open {
     background-repeat:no-repeat;
     background-size:cover;
     height:300px;
-    color:#000;    
+    color:#000;        
 }
 
 #bokemonfightContainer .fightArena h1{
-    margin-top:1.5em;
-    font-size: 4em;
+    margin-top:.2rem;
+    font-size: 3rem;
+    line-height:.8em;
+    font-family: 'Alegreya Sans SC', sans-serif;
 }
 #bokemonfightContainer .fightArena h2{
-    margin-bottom:0px;
+    margin-top:1em;
+    margin-bottom:1em;
+    font-family: 'Alegreya Sans SC', sans-serif;
+ }
+#bokemonfightContainer .fightArena p{
+    font-size: 1.4rem;
+    margin-top:.5rem;
  }
 
 

@@ -45,7 +45,18 @@ var bokemonfightstep2_valjlist = function (userid) {
 var bokemonfightstep3_drakfight = function (drakindex, bokemonindex) {
     var valdlistaHtml = fighthandler.drakfightArena(drakindex, bokemonindex, function (htmlblock) {
         $('.vex-dialog-message').html(htmlblock);
-        fightgameplay.jqueryFightGameplay(drakindex,bokemonindex);
+        $('.fightArenablock').hide();
+
+        inserttextwordbyword('.fightStory .showStartmsg', function(x){
+            $('.fightArenablock').hide().fadeIn(4000);
+            $('.fightStory .showStartmsg').fadeOut(4000, function () {
+                $(this).slideUp(3000); //.animate({ height: 0, opacity: 0 }, 6000);
+            });
+           
+            $('.fightArena').html("<h1>Fighten kan b&ouml;rja!!!</h1>");
+            fightgameplay.jqueryFightGameplay(drakindex,bokemonindex);
+        });
+
         return false;
     });
 
@@ -61,3 +72,27 @@ var getbokemonindexfromid = function (monid) {
 
     return indexes[0];
 }
+
+
+var inserttextwordbyword = function (divtoconnect, callback) {
+    var $el = $(divtoconnect),
+            text = $el.html(),
+            speed = 500; //ms
+
+    $el.empty();
+    $el.show();
+    var wordArray = text.split(' '),
+        i = 0;
+
+    INV = setInterval(function () {
+        if (i >= wordArray.length - 1) {
+            clearInterval(INV);
+        }
+        $el.append(wordArray[i] + ' ')
+        i++;
+        if (i >= wordArray.length) {
+            callback();
+        }
+    }, speed);
+};
+

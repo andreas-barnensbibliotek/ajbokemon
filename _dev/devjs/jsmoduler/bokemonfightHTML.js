@@ -73,15 +73,15 @@ module.exports = {
         var htmlblock = "<div id='bokemonfightContainer' class='bokemoncontainerSize'>";
         htmlblock += "<table><tr><td colspan='3' class='fightStory'>";
         htmlblock += "<h1>Arenan</h1>";
-        htmlblock += "<p><span class='bokemonnamn'>" + appsettings.bokemon.namn[bokemonindex] + "</span>, din egen bibblemon m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + " som h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!<br />";
-        htmlblock += "Draken m&aring;ste stoppas! <br /><span class='bokemonnamn'>" + appsettings.bokemon.namn[bokemonindex] + "</span> griper in och b&ouml;rjar fighten med bokdraken!!!</p>";
+        htmlblock += "<span class='showStartmsg'>Din bibblemon med namn " + appsettings.bokemon.namn[bokemonindex] + "<br/> m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + "<br/>Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!";
+        htmlblock += "<h3> Draken m&aring;ste stoppas! </h3>";
         htmlblock += "</td></tr>";
-        htmlblock += "<tr class='fightArenablock'><td colspan='3' class='fightArena'>";
+        htmlblock += "<tr class='fightArenablock arena1'><td colspan='3' class='fightArena'>";
        // htmlblock += "<h2>Bokdraken hinner plocka av bibbemonen</h2><h1>199p</h1>";
         htmlblock += "</td></tr>";
-        htmlblock += "<tr><td class='tblcol1 bokemonavatar'><img src='" + appsettings.bokemon.src[bokemonindex] + ".gif'></td>";
+        htmlblock += "<tr  class='fightArenablock arena2'><td class='tblcol1 bokemonavatar'><img src='" + appsettings.bokemon.src[bokemonindex] + ".gif'></td>";
         htmlblock += "<td class='tblcol2'></td><td class='tblcol3 bokdrakevatar'><img src='" + appsettings.drakemon.draksrc[drakindex]  + "'></td></tr>";
-        htmlblock += "<tr><td class='tblcol1'><span class='bokemonscore'>" + appsettings.bokemon.score[bokemonindex] + "</span>p</td>";
+        htmlblock += "<tr class='fightArenablock arena3'><td class='tblcol1'><span class='bokemonscore'>" + appsettings.bokemon.score[bokemonindex] + "</span>p</td>";
         htmlblock += "<td class='tblcol2'></td><td class='tblcol3'><span class='bokdrakecore'>" + appsettings.drakemon.drakscore[drakindex] + "</span>p</td>";
         htmlblock += "</tr></table></div>";
 

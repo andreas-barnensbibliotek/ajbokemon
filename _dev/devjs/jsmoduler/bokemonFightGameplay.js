@@ -1,5 +1,6 @@
 ﻿var $ = require("jquery");
 var appsettings = require("./appSettings.js");
+var objfighttext = require("./bokemonMsg.js")
 
 /* Settings */
 var user_input = { 
@@ -44,12 +45,17 @@ function showDamage(hp){
     var fighttext = "";
 
     if (fighter.currentfighter == "bokdrake") {
-        fighttext = "<h2>Bibblemon tar snabbt vatten f&ouml;r att sl&auml;cka elden. Bokdraken f&ouml;rlorar po&auml;ng!</h2><h1>" + hp + "p</h1>"
+        fighttext = "<h1>" + objfighttext.getrandommsg("eld", "bibblemon") + "</h1>";
+        //fighttext += "<h1>Bibblemon tar snabbt vatten f&ouml;r att sl&auml;cka elden.</h1><h2>Bokdraken f&ouml;rlorar<br> " + hp + "p</h2>"
+        fighttext += "<h2>Bokdraken f&ouml;rlorar<br> " + hp + "p</h2>"
+
         fighter.bokdrake = fighter.bokdrake - parseInt(hp);
         $('.bokdrakecore').hide().html(fighter.bokdrake).fadeIn(4000);
         fighter.currentfighter= "bokemon"; //byt fighter nästa
     } else {
-        fighttext = "<h2>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker. bibbemonen f&ouml;rlorar po&auml;ng!</h2><h1>" + hp + "p</h1>"
+        fighttext = "<h1>" + objfighttext.getrandommsg("eld", "bokdrake") + "</h1>";
+        fighttext += "<h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
+        //fighttext = "<h1>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker.</h1><h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
         fighter.bokemon = fighter.bokemon - parseInt(hp);        
         $('.bokemonscore').hide().html(fighter.bokemon).fadeIn(4000);
         fighter.currentfighter = "bokdrake";
@@ -59,17 +65,18 @@ function showDamage(hp){
     var wehaveawinner = vinnorloose(fighter.bokdrake, fighter.bokemon); 
    
     if (wehaveawinner < 3) {
-        var endtext = "<h2>Kampen slutade!</h2>";
+        var endtext = "";
                 
         if (wehaveawinner == 1) {
             //bokemon vann
+            endtext += "<h2>Din bokemon har lyckats att skr&auml;mma iv&auml;g bokdraken!</h2>";
             endtext += "<h1>Vinnaren &auml;r Bokemon!</h1>";
-            endtext += "<p> Din bokemon har lyckats att skrämma iv&auml;g bokdraken!</p>";
+            
         }
         if (wehaveawinner == 2) {
-            //bokemon vann
+            //bokemon vann            
+            endtext += "<h1>NEEEEJ!!</h1><p>Bokdraken &aring;t upp din bokemon!<br></p><p style='font-size:0.9em;'>...men var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
             endtext += "<h1>Vinnaren &auml;r Bokdraken!</h1>";
-            endtext += "<p>Bokdraken &aring;t upp din bokemon! Var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
         }
         endtext += "<button>OK</button>";
         $('.fightArena').html(endtext);
