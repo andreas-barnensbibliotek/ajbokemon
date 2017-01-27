@@ -11,7 +11,7 @@ module.exports = {
         htmlblock += "</td></tr>";
         htmlblock += "<tr><td class='btnjaga'><button class='btnjagaJA'>Ja</button></td><td class='btnjaga'>";
         htmlblock += "<button class='btnjagaNEJ'>Nej</button></td></tr>";
-        htmlblock += "<tr><td colspan='2' class='drakimg'><img src='" + appsettings.drakemon.draksrc[valdbokdrakeID] + "'>";
+        htmlblock += "<tr><td colspan='2' class='drakimg'><img src='" + appsettings.drakemon.draksrc[valdbokdrakeID] + ".png'>";
         htmlblock += "</td></tr>";
         htmlblock += "<tr><td colspan='2' class='draknamn'><h2>" + appsettings.drakemon.draknamn[valdbokdrakeID] + "</h2>";
         htmlblock += "</td></tr>";
@@ -50,7 +50,7 @@ module.exports = {
                         appsettings.bokemon.info[i] = val.info;
                     
                     htmlblock += "<tr class='listitem' ><td class='col1'>";
-                    htmlblock += "<img src='" + val.src + ".gif'></td><td class='col2'>";
+                    htmlblock += "<img src='" + val.src + "_bg.png'></td><td class='col2'>";
                     htmlblock += "<p>" + val.namn + "<br />Level: " + val.lev + "<br />Score:  " + val.score + "p</p></td>";
                     htmlblock += "<td class='col3'><a href='' class='valdfightbokemon' rel='" + val.monid + "'>V&auml;lj</a>";
                     htmlblock += "</td></tr>";
@@ -79,10 +79,10 @@ module.exports = {
         htmlblock += "<tr class='fightArenablock arena1'><td colspan='3' class='fightArena'>";
        // htmlblock += "<h2>Bokdraken hinner plocka av bibbemonen</h2><h1>199p</h1>";
         htmlblock += "</td></tr>";
-        htmlblock += "<tr  class='fightArenablock arena2'><td class='tblcol1 bokemonavatar'><img src='" + appsettings.bokemon.src[bokemonindex] + ".gif'></td>";
-        htmlblock += "<td class='tblcol2'></td><td class='tblcol3 bokdrakevatar'><img src='" + appsettings.drakemon.draksrc[drakindex]  + "'></td></tr>";
-        htmlblock += "<tr class='fightArenablock arena3'><td class='tblcol1'><span class='bokemonscore'>" + appsettings.bokemon.score[bokemonindex] + "</span>p</td>";
-        htmlblock += "<td class='tblcol2'></td><td class='tblcol3'><span class='bokdrakecore'>" + appsettings.drakemon.drakscore[drakindex] + "</span>p</td>";
+        htmlblock += "<tr  class='fightArenablock arena2'><td class='tblcol1 bokemonavatar'><img src='" + appsettings.bokemon.src[bokemonindex] + "_bg.png'></td>";
+        htmlblock += "<td class='tblcol2'></td><td class='tblcol3 bokdrakevatar'><img src='" + appsettings.drakemon.draksrc[drakindex] + ".png'></td></tr>";
+        htmlblock += "<tr class='fightArenablock arena3'><td class='tblcol1'><span class='bokemonscore'>" + appsettings.bokemon.score[bokemonindex] + "p</span></td>";
+        htmlblock += "<td class='tblcol2'></td><td class='tblcol3'><span class='bokdrakecore'>" + appsettings.drakemon.drakscore[drakindex] + "p</span></td>";
         htmlblock += "</tr></table></div>";
 
         callback(htmlblock);

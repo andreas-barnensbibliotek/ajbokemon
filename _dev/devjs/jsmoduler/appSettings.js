@@ -33,5 +33,6 @@ module.exports = {
         drakscore: window.drakscore,
         drakinfo: window.drakinfo
     },
-    localOrServerURL: _localOrServerURL
+    localOrServerURL: _localOrServerURL,
+    currentUserid: window.currentuserid
 }

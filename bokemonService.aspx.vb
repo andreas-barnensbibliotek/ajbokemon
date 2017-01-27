@@ -18,6 +18,7 @@ Partial Class DesktopModules_barnensbiblService_bokemonApi_bokemonService
     'Lägg till bokemonster till användaren
     'kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemonService.aspx?devkey=monster&cmdtyp=addmon&userid=105&monid=3
 
+    'localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemonService.aspx?devkey=monster&cmdtyp=gameplaywin&userid=105&monid=3&callback=test
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
 
         Dim devkey As Object = Request.QueryString("devkey")
@@ -70,6 +71,13 @@ Partial Class DesktopModules_barnensbiblService_bokemonApi_bokemonService
 
                 Case "alldrakar"
                     retstr = createBokemonJson(obj.getbaseAllDrakarList(_userid))
+
+                Case "gameplaywin"
+                    retstr = createBokemonJson(obj.MonsterGameplay(_userid, _monsterid, "win"))
+
+                Case "gameplaylose"
+                    retstr = createBokemonJson(obj.MonsterGameplay(_userid, _monsterid, "lose"))
+
             End Select
         Else
             retstr = "" ' return empty objeckt

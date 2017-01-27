@@ -7,7 +7,7 @@ module.exports = {
         //var uid = parseInt(usrid);
         var uid = usrid;
         if (uid > 0) {
-            if (rndHandler.isbokemontime(1)) { //isbokemontime(int_sannolikhet) = 1 visas varje gång, 4 = ca 20/100 osv..
+            if (rndHandler.isbokemontime(4)) { //isbokemontime(int_sannolikhet) = 4 visas varje gång, 4 = ca 25/100 osv..
                 var x = "";
                 api.bokemonServerHandler('allmon', uid, function () {
 
@@ -16,7 +16,7 @@ module.exports = {
                         
                         var htmlblock = "<div id='bokemonitm' rel='" + appsettings.bokemon.monid[valdbokemonID] + "'>";
                         htmlblock += "<span class='bokemonjailed'><a href='' class='takeBokemon' >";
-                        htmlblock += "<img src='" + appsettings.bokemon.src[valdbokemonID] + "_bar.gif' alt='" + appsettings.bokemon.namn[valdbokemonID] + " Level: " + appsettings.bokemon.lev[valdbokemonID] + "' />";
+                        htmlblock += "<img src='" + appsettings.bokemon.src[valdbokemonID] + "_bur.png' alt='" + appsettings.bokemon.namn[valdbokemonID] + " Level: " + appsettings.bokemon.lev[valdbokemonID] + "' />";
                         htmlblock += "</a>";
                         htmlblock += "<span class='bokemonscore' rel=" + appsettings.bokemon.score[valdbokemonID] + "></span>";
                         htmlblock += "<a href='' class='Bokemonifo' style='display:none;' >";
@@ -27,7 +27,7 @@ module.exports = {
                         htmlblock += "</div></span>";
                         htmlblock += "<div class='bokemonFreeblock' style='display:none;'>";
                         htmlblock += "<p class='speech'>Du r&auml;ddade mej! Tack!</p>";
-                        htmlblock += "<img  src='" + appsettings.bokemon.src[valdbokemonID] + "' alt='" + appsettings.bokemon.namn[valdbokemonID] + " Level: " + appsettings.bokemon.lev[valdbokemonID] + "' />";
+                        htmlblock += "<img  src='" + appsettings.bokemon.src[valdbokemonID] + ".png' alt='" + appsettings.bokemon.namn[valdbokemonID] + " Level: " + appsettings.bokemon.lev[valdbokemonID] + "' />";
                         htmlblock += "</div>";
                         htmlblock += "</div>";
 
@@ -54,7 +54,7 @@ module.exports = {
         //var uid = parseInt(usrid);
         var uid = usrid;
         if (uid > 0) {
-            if (rndHandler.isbokemontime(1)) { //isbokemontime(int_sannolikhet) = 1 visas varje gång, 4 = ca 20/100 osv..
+            if (rndHandler.isbokemontime(4)) { //isbokemontime(int_sannolikhet) = 4 visas varje gång, 4 = ca 25/100 osv..
                 var x = "";
                 api.bokemonServerHandler('alldrakar', uid, function () {
 
@@ -63,7 +63,7 @@ module.exports = {
                     if (typeof (appsettings.drakemon.drakmonid[valdbokemonID]) != "undefined") {
                         var htmlblock = "<div id='bokdrakeitm' class='bokdrake' rel='" + appsettings.drakemon.drakmonid[valdbokemonID] + "'>";
                         htmlblock += "<span class='bokemonjailed'><a href='' class='takeBokemon' >";
-                        htmlblock += "<img src='" + appsettings.drakemon.draksrc[valdbokemonID] + "' alt='" + appsettings.drakemon.draknamn[valdbokemonID] + " Level: " + appsettings.drakemon.draklev[valdbokemonID] + "' />";
+                        htmlblock += "<img src='" + appsettings.drakemon.draksrc[valdbokemonID] + ".png' alt='" + appsettings.drakemon.draknamn[valdbokemonID] + " Level: " + appsettings.drakemon.draklev[valdbokemonID] + "' />";
                         htmlblock += "</a>";
                         htmlblock += "<span class='bokemonscore' rel=" + appsettings.drakemon.drakscore[valdbokemonID] + "></span>";
                         htmlblock += "<a href='' class='Bokemonifo' style='display:none;' >";

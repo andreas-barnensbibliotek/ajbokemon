@@ -59,7 +59,7 @@
                             htmlblock += "<li>";
                             htmlblock += "<a href='' title='Mer info om din " + val.namn + "' rel=" + val.monid + ">";
                             htmlblock += "<div class='bm_itm_imgcont'>";
-                            htmlblock += "<img src='" + val.src + ".gif' /></div>";
+                            htmlblock += "<img src='" + val.src + ".png' /></div>";
                             htmlblock += "<div class='bm_itm_infocont'><h1>" + val.namn + "</h1>";
                             htmlblock += "<h2>Level: " + val.lev + "</h2><h2>Score: " + val.score + "p</h2></div></a>";
                             htmlblock += "</li>";
