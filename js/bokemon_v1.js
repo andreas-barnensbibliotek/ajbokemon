@@ -91,13 +91,17 @@
 	        } else {
 	            // ska det visas bokemon eller bokdrakar och hur ofta skall dom visas
 	            if (chkuser(_userid)) {
-	                if (rndHandler.isbokemontime(2)) { //kolla om drake eller monster ska visas ca var annan sida.
-	                    if (rndHandler.isbokemontime(3)) { //bibblomons visas ca 33% av g�ngerna
-	                        renderhtml.showbokemon(_userid); //ca 20/100 exempel 33/4 =ca 8/100
-	                    } else {
-	                        renderhtml.showbokdrakar(_userid); // drakar visas ca 66% av g�ngerna
-	                    };
+	                //if (rndHandler.isbokemontime(2)) { //kolla om drake eller monster ska visas ca var annan sida.
+	                var montyp = rndHandler.BokemonOrBokdrake();
+	                console.log("typ: "+montyp);
+	                if (true) { //bibblomons visas ca 33% av g�ngerna
+	                    console.log("visa bokemon");
+	                    renderhtml.showbokemon(_userid); //ca 20/100 exempel 33/4 =ca 8/100
+	                } else {
+	                    renderhtml.showbokdrakar(_userid); // drakar visas ca 66% av g�ngerna
+	                    console.log("visa bokdrake");
 	                };
+	                //};
 	            }
 	        }
 	        //renderhtml.showbokemon(_userid);
@@ -173,33 +177,21 @@
 	var weights = [0.17, 0.17, 0.17, 0.11, 0.11, 0.08, 0.05, 0.05, 0.03, 0.03, 0.02, 0.01]; // probabilities
 	var results = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // values to return
 
-	var drakweights = [0.21, 0.21, 0.20, 0.16, 0.10, 0.7, 0.3, 0.2 ]; // probabilities
+	var drakweights = [0.21, 0.21, 0.20, 0.16, 0.10, 0.07, 0.03, 0.02 ]; // probabilities
 	var drakresults = [1, 2, 3, 4, 5, 6, 7, 8]; // values to return
+
+	var monordrakweights = [0.66, 0.34]; // probabilities
+	var monordrakresults = [1, 2]; // values to return
 
 	module.exports = {
 	    getRandompockemon : function () {
-	        var num = Math.random(),
-	        s = 0,
-	        lastIndex = weights.length - 1;
-
-	        for (var i = 0; i < lastIndex; ++i) {
-	            s += weights[i];
-	            if (num < s) {
-	                return results[i];
-	            }
-	        }
+	        return sanoliktrandom(weights, results);
 	    },
 	    getRandomBokdrake: function () {
-	        var num = Math.random(),
-	        s = 0,
-	        lastIndex = drakweights.length - 1;
-
-	        for (var i = 0; i < lastIndex; ++i) {
-	            s += drakweights[i];
-	            if (num < s) {
-	                return drakresults[i];
-	            }
-	        }
+	        return sanoliktrandom(drakweights, drakresults);
+	    },    
+	    BokemonOrBokdrake: function () {
+	        return sanoliktrandom(monordrakweights, monordrakresults);
 	    },
 	    isbokemontime : function (int_sannolikhet) {
 	        //var rnd1 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
@@ -216,6 +208,20 @@
 	        }
 	    }
 	}
+
+	var sanoliktrandom = function (arrweight, arrresult) {
+	    var num = Math.random(),
+	            s = 0,
+	            lastIndex = arrweight.length;
+
+	    for (var i = 0; i < lastIndex; ++i) {
+	        s += arrweight[i];
+	        if (num < s) {
+	            return arrresult[i];
+	        }
+	    };
+	};
+
 	// End function visa random pokemon viktat
 	//-------------------------
 
@@ -298,7 +304,8 @@
 	                        });
 	                    };
 	                })
-	            }
+	            } else { console.log("visa bokemon:inte nu!"); }
+
 	        }
 	    },
 	    showbokdrakar: function (usrid) {
@@ -347,7 +354,7 @@
 	                        });
 	                    };
 	                })
-	            }
+	            } else { console.log("visa bokdrake:inte nu!"); }
 	        }
 	    }
 	}
@@ -10675,8 +10682,7 @@
 
 	        window.once = true;
 	        $('body').on('click', '#bokemonitm', function () {          
-	            alert("japp")
-	            //console.log('1. ' + window.once);
+	                        //console.log('1. ' + window.once);
 	             if (window.once) {
 	                window.once = false;
 	                //console.log('2. ' + window.once);
@@ -12456,7 +12462,12 @@
 	                    htmlblock += "</td></tr>";
 	                    i++;
 	                });
-
+	                if (i <= 1) {
+	                    htmlblock += "<tr class='listitem' ><td colspan='2'>";
+	                    htmlblock += "<p>Du har ingen bibblomon! Du f&aring;r leta vidare tills du hittat en</p></td>";
+	                    htmlblock += "<td class='col3'><a href='#' class='nobibblomon'>Leta vidare</a>";
+	                    htmlblock += "</td></tr>";
+	                };
 	                htmlblock += "</table></div>";
 
 	                //$('.bokemonBoardMaincontainer').html(htmlblock);
@@ -12497,6 +12508,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(5);
+	var vex = __webpack_require__(7);
 	var appsettings = __webpack_require__(1);
 	var api = __webpack_require__(4);
 	var fighthandler = __webpack_require__(8);
@@ -12511,8 +12523,7 @@
 	            return false;
 	        });
 	        $('body').on('click', '.btnjagaNEJ', function () {
-	            alert("NEJ!");
-	            return false;
+	            return true;
 	        });
 	        //välj bokemon till fighten
 	        $('body').on('click', '.valdfightbokemon', function () {
@@ -12528,7 +12539,10 @@
 	            //alert(valdbokemon);
 	            return false;
 	        });
-	        
+	        $('body').on('click', '.nobibblomon', function () {
+	            vex.closeAll();
+	        });
+	       
 	    }
 	}
 

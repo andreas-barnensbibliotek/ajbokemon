@@ -850,3 +850,42 @@ body.vex-open {
 .drakimg {
     text-align:center;  
 }
+
+#bokemonitm{
+    position:absolute;
+    z-index:9999;
+    height:100px;
+    width:100px;
+    opacity: 0.9;
+    filter: alpha(opacity=90); /* For IE8 and earlier */
+    text-align:center;
+}
+#bokemonitm p.speech {   
+    display:none; 
+    background: #f3961c none repeat scroll 0 0;
+    border-radius: 10px;
+    color: #000;
+    margin: 1em 0 0;
+    opacity: 1;
+    padding: 8px;
+    position: relative;
+}
+#bokemonitm p.speech::after {
+    border-color: #f3961c transparent;
+    border-style: solid;
+    border-width: 15px 15px 0;
+    bottom: -15px;
+    content: "";
+    display: block;
+    left: 35px;
+    position: absolute;
+    width: 0;
+}
+.bokemonBoardMaincontainer{
+    font-family: 'Lato', sans-serif;
+    color:#000; 
+}
+.Bokemonifo h2{
+    background-color:#fff;
+    font-size: 100%;
+}

@@ -56,7 +56,12 @@ module.exports = {
                     htmlblock += "</td></tr>";
                     i++;
                 });
-
+                if (i <= 1) {
+                    htmlblock += "<tr class='listitem' ><td colspan='2'>";
+                    htmlblock += "<p>Du har ingen bibblomon! Du f&aring;r leta vidare tills du hittat en</p></td>";
+                    htmlblock += "<td class='col3'><a href='#' class='nobibblomon'>Leta vidare</a>";
+                    htmlblock += "</td></tr>";
+                };
                 htmlblock += "</table></div>";
 
                 //$('.bokemonBoardMaincontainer').html(htmlblock);

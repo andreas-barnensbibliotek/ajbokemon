@@ -16,8 +16,7 @@ module.exports = {
 
         window.once = true;
         $('body').on('click', '#bokemonitm', function () {          
-            alert("japp")
-            //console.log('1. ' + window.once);
+                        //console.log('1. ' + window.once);
              if (window.once) {
                 window.once = false;
                 //console.log('2. ' + window.once);

@@ -1,4 +1,5 @@
 ﻿var $ = require("jquery");
+var vex = require('./vex.combined.js');
 var appsettings = require("./appSettings.js");
 var api = require("./bokemonServicecalls.js");
 var fighthandler = require("./bokemonfightHTML.js");
@@ -13,8 +14,7 @@ module.exports = {
             return false;
         });
         $('body').on('click', '.btnjagaNEJ', function () {
-            alert("NEJ!");
-            return false;
+            return true;
         });
         //välj bokemon till fighten
         $('body').on('click', '.valdfightbokemon', function () {
@@ -30,7 +30,10 @@ module.exports = {
             //alert(valdbokemon);
             return false;
         });
-        
+        $('body').on('click', '.nobibblomon', function () {
+            vex.closeAll();
+        });
+       
     }
 }
 

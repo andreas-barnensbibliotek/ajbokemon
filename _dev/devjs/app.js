@@ -45,13 +45,17 @@ $(function () {
         } else {
             // ska det visas bokemon eller bokdrakar och hur ofta skall dom visas
             if (chkuser(_userid)) {
-                if (rndHandler.isbokemontime(2)) { //kolla om drake eller monster ska visas ca var annan sida.
-                    if (rndHandler.isbokemontime(3)) { //bibblomons visas ca 33% av gångerna
-                        renderhtml.showbokemon(_userid); //ca 20/100 exempel 33/4 =ca 8/100
-                    } else {
-                        renderhtml.showbokdrakar(_userid); // drakar visas ca 66% av gångerna
-                    };
+                //if (rndHandler.isbokemontime(2)) { //kolla om drake eller monster ska visas ca var annan sida.
+                var montyp = rndHandler.BokemonOrBokdrake();
+                console.log("typ: "+montyp);
+                if (2 == 2) { //bibblomons visas ca 33% av gångerna
+                    console.log("visa bokemon");
+                    renderhtml.showbokemon(_userid); //ca 20/100 exempel 33/4 =ca 8/100
+                } else {
+                    renderhtml.showbokdrakar(_userid); // drakar visas ca 66% av gångerna
+                    console.log("visa bokdrake");
                 };
+                //};
             }
         }
         //renderhtml.showbokemon(_userid);

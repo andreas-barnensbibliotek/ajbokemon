@@ -4,33 +4,21 @@
 var weights = [0.17, 0.17, 0.17, 0.11, 0.11, 0.08, 0.05, 0.05, 0.03, 0.03, 0.02, 0.01]; // probabilities
 var results = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // values to return
 
-var drakweights = [0.21, 0.21, 0.20, 0.16, 0.10, 0.7, 0.3, 0.2 ]; // probabilities
+var drakweights = [0.21, 0.21, 0.20, 0.16, 0.10, 0.07, 0.03, 0.02 ]; // probabilities
 var drakresults = [1, 2, 3, 4, 5, 6, 7, 8]; // values to return
+
+var monordrakweights = [0.66, 0.34]; // probabilities
+var monordrakresults = [1, 2]; // values to return
 
 module.exports = {
     getRandompockemon : function () {
-        var num = Math.random(),
-        s = 0,
-        lastIndex = weights.length - 1;
-
-        for (var i = 0; i < lastIndex; ++i) {
-            s += weights[i];
-            if (num < s) {
-                return results[i];
-            }
-        }
+        return sanoliktrandom(weights, results);
     },
     getRandomBokdrake: function () {
-        var num = Math.random(),
-        s = 0,
-        lastIndex = drakweights.length - 1;
-
-        for (var i = 0; i < lastIndex; ++i) {
-            s += drakweights[i];
-            if (num < s) {
-                return drakresults[i];
-            }
-        }
+        return sanoliktrandom(drakweights, drakresults);
+    },    
+    BokemonOrBokdrake: function () {
+        return sanoliktrandom(monordrakweights, monordrakresults);
     },
     isbokemontime : function (int_sannolikhet) {
         //var rnd1 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
@@ -47,6 +35,20 @@ module.exports = {
         }
     }
 }
+
+var sanoliktrandom = function (arrweight, arrresult) {
+    var num = Math.random(),
+            s = 0,
+            lastIndex = arrweight.length;
+
+    for (var i = 0; i < lastIndex; ++i) {
+        s += arrweight[i];
+        if (num < s) {
+            return arrresult[i];
+        }
+    };
+};
+
 // End function visa random pokemon viktat
 //-------------------------
 

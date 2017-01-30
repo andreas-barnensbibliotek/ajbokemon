@@ -47,7 +47,8 @@ module.exports = {
                         });
                     };
                 })
-            }
+            } else { console.log("visa bokemon:inte nu!"); }
+
         }
     },
     showbokdrakar: function (usrid) {
@@ -96,7 +97,7 @@ module.exports = {
                         });
                     };
                 })
-            }
+            } else { console.log("visa bokdrake:inte nu!"); }
         }
     }
 }
