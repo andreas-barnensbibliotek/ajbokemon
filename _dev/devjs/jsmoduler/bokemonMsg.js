@@ -37,25 +37,25 @@ var textlista = {
     eld: {
         start: "Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!",
         fightbibblemon: {
-            0: "Bibblemon tar en hink med vatten och h&auml;ller p&aring; elden",
-            1: "Bibblemom sprutar vatten med en brandslang",
-            2: "Bibblemon tar en brandfilt och sl&auml;cker elden",
-            3: "Bibblemon spottar p&aring; elden",
-            4: "Bibblemon anv&auml;nder en brandspruta p&aring; elden"
+            0: "Bibblomon tar en hink med vatten och h&auml;ller p&aring; elden",
+            1: "Bibblomom sprutar vatten med en brandslang",
+            2: "Bibblomon tar en brandfilt och sl&auml;cker elden",
+            3: "Bibblomon spottar p&aring; elden",
+            4: "Bibblomon anv&auml;nder en brandspruta p&aring; elden"
         },
         fightbokdraken: {
             0: "Bokdraken torkar vattnet med en h&aring;rtork!",
-            1: "bokdraken sprutar eld och vattnet f&ouml;rsvinner!",
-            2: "Bokdraken g&ouml;r en knut p&aring; vattenslangen som din bibblemon anv&auml;nder,vattnet f&ouml;rsvinner",
-            3: "bokdraken h&auml;ller bensin p&aring; elden! Elden flammar upp!",
-            4: "bokdraken biter h&aring;l i vattenhinken som din bibblemon anv&auml;nder. Vattnet rinner ut."
+            1: "Bokdraken sprutar eld och vattnet f&ouml;rsvinner!",
+            2: "Bokdraken g&ouml;r en knut p&aring; vattenslangen som din bibblomon anv&auml;nder,vattnet f&ouml;rsvinner",
+            3: "Bokdraken h&auml;ller bensin p&aring; elden! Elden flammar upp!",
+            4: "Bokdraken biter h&aring;l i vattenhinken som din bibblomon anv&auml;nder. Vattnet rinner ut."
         },
         end: ""
     },
     forstor: {
         start: "Bokdraken h&aring;ller p&aring; att f&ouml;rst&ouml;ra b&ouml;cker och skr&auml;mma bes&ouml;karna p&aring; biblioteket!",
         fightbibblemon: {
-            0: "Biblemon skr&auml;mmer bokdraken",
+            0: "Bibblomon skr&auml;mmer bokdraken",
             1: "Bibblemon tar b&ouml;cker fr&aring;n bokdraken",
             2: "Bibblemon fryser bokdraken",
             3: "Bibblemon lurar bokdraken",

@@ -56,10 +56,10 @@ function showDamage(hp){
 
         fighter.bokdrake = fighter.bokdrake - parseInt(hp);
         $('.bokdrakecore').hide().html(fighter.bokdrake + "p").fadeIn(4000);
-        fighter.currentfighter= "bokemon"; //byt fighter nästa
+        fighter.currentfighter= "bibblomon"; //byt fighter nästa
     } else {
         fighttext = "<h1>" + objfighttext.getrandommsg("eld", "bokdrake") + "</h1>";
-        fighttext += "<h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
+        fighttext += "<h2> bibblomonen f&ouml;rlorar<br> " + hp + "p</h2>"
         //fighttext = "<h1>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker.</h1><h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
         fighter.bokemon = fighter.bokemon - parseInt(hp);        
         $('.bokemonscore').hide().html(fighter.bokemon +"p").fadeIn(4000);
@@ -74,8 +74,8 @@ function showDamage(hp){
                 
         if (wehaveawinner == 1) {
             //bokemon vann
-            endtext += "<h2>Din bokemon har lyckats att skr&auml;mma iv&auml;g bokdraken!</h2>";
-            endtext += "<h1>Vinnaren &auml;r Bokemon!</h1>";
+            endtext += "<h2>Din bibblomon har lyckats att skr&auml;mma iv&auml;g bokdraken!</h2>";
+            endtext += "<h1>Vinnaren &auml;r din Bibblomon!</h1>";
             updatefighttoserver('gameplaywin');
             
             $('.bokdrakevatar img').fadeOut(4000);
@@ -83,7 +83,7 @@ function showDamage(hp){
         }
         if (wehaveawinner == 2) {
             //Bokdraken vann            
-            endtext += "<h1>NEEEEJ!!</h1><p>Bokdraken &aring;t upp din bokemon!<br></p><p style='font-size:0.9em;'>...men var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
+            endtext += "<h1>NEEEEJ!!</h1><p>Bokdraken &aring;t upp din bibblomon!<br></p><p style='font-size:0.9em;'>...men var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
             endtext += "<h1>Vinnaren &auml;r Bokdraken!</h1>";
             updatefighttoserver('gameplaylose');
             $('.bokemonavatar img').fadeOut(4000);

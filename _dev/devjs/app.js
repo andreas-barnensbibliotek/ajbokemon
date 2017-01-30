@@ -38,18 +38,22 @@ $(function () {
     // end eventhandler
         
     var init = function () {
-        if (_userid <= 1) {
-            if (rndHandler.isbokemontime(3)) {
-                renderhtml.showbokdrakar(_userid);
-            };
-        } else {
+        // kör på denna kod när vi är klara med beta och går live!!!-------------------------------
+        // visas för dom som inte är inloggade!!!!
+        //if (_userid <= 1) {
+        //    if (rndHandler.isbokemontime(3)) {
+        //        renderhtml.showbokdrakar(_userid);
+        //    };
+        //} else {
+        // kör på denna kod (ovan) när vi är klara med beta och går live!!!-------------------------------
+
             // ska det visas bokemon eller bokdrakar och hur ofta skall dom visas
             if (chkuser(_userid)) {
                 //if (rndHandler.isbokemontime(2)) { //kolla om drake eller monster ska visas ca var annan sida.
                 var montyp = rndHandler.BokemonOrBokdrake();
                 console.log("typ: "+montyp);
-                if (2 == 2) { //bibblomons visas ca 33% av gångerna
-                    console.log("visa bokemon");
+                if (montyp == 2) { //bibblomons visas ca 33% av gångerna
+                    console.log("visa bibblomon");
                     renderhtml.showbokemon(_userid); //ca 20/100 exempel 33/4 =ca 8/100
                 } else {
                     renderhtml.showbokdrakar(_userid); // drakar visas ca 66% av gångerna
@@ -57,7 +61,7 @@ $(function () {
                 };
                 //};
             }
-        }
+        //} // kör på denna kod när vi är klara med beta och går live!!!-------------------------------
         //renderhtml.showbokemon(_userid);
             
         

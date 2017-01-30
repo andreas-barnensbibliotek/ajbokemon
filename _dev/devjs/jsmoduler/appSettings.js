@@ -1,6 +1,6 @@
 ﻿// object
-//var _localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
-var _localOrServerURL = "http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi";
+var _localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
+//var _localOrServerURL = "http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi";
 
 window.monid = [];
 window.namn = [];

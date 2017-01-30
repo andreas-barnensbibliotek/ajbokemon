@@ -84,18 +84,22 @@
 	    // end eventhandler
 	        
 	    var init = function () {
-	        if (_userid <= 1) {
-	            if (rndHandler.isbokemontime(3)) {
-	                renderhtml.showbokdrakar(_userid);
-	            };
-	        } else {
+	        // k�r p� denna kod n�r vi �r klara med beta och g�r live!!!-------------------------------
+	        // visas f�r dom som inte �r inloggade!!!!
+	        //if (_userid <= 1) {
+	        //    if (rndHandler.isbokemontime(3)) {
+	        //        renderhtml.showbokdrakar(_userid);
+	        //    };
+	        //} else {
+	        // k�r p� denna kod (ovan) n�r vi �r klara med beta och g�r live!!!-------------------------------
+
 	            // ska det visas bokemon eller bokdrakar och hur ofta skall dom visas
 	            if (chkuser(_userid)) {
 	                //if (rndHandler.isbokemontime(2)) { //kolla om drake eller monster ska visas ca var annan sida.
 	                var montyp = rndHandler.BokemonOrBokdrake();
 	                console.log("typ: "+montyp);
-	                if (true) { //bibblomons visas ca 33% av g�ngerna
-	                    console.log("visa bokemon");
+	                if (montyp == 2) { //bibblomons visas ca 33% av g�ngerna
+	                    console.log("visa bibblomon");
 	                    renderhtml.showbokemon(_userid); //ca 20/100 exempel 33/4 =ca 8/100
 	                } else {
 	                    renderhtml.showbokdrakar(_userid); // drakar visas ca 66% av g�ngerna
@@ -103,7 +107,7 @@
 	                };
 	                //};
 	            }
-	        }
+	        //} // k�r p� denna kod n�r vi �r klara med beta och g�r live!!!-------------------------------
 	        //renderhtml.showbokemon(_userid);
 	            
 	        
@@ -129,8 +133,8 @@
 /***/ function(module, exports) {
 
 	// object
-	//var _localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
-	var _localOrServerURL = "http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi";
+	var _localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
+	//var _localOrServerURL = "http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi";
 
 	window.monid = [];
 	window.namn = [];
@@ -304,7 +308,7 @@
 	                        });
 	                    };
 	                })
-	            } else { console.log("visa bokemon:inte nu!"); }
+	            } else { console.log("visa bibblomon:inte nu!"); }
 
 	        }
 	    },
@@ -12413,7 +12417,7 @@
 	        htmlblock += "<div class='bokdrakeinfobox'>";
 	        htmlblock += "<table><tr><td colspan='2' >";
 	        htmlblock += "<h3>Draken f&ouml;rst&ouml;r och &auml;ter b&ouml;cker h&auml;r s&aring; den m&aring;ste bort! ";
-	        htmlblock += "<b>Vill du anv&auml;nda en av dina Bibblemons f&ouml;r att jaga bort den &aring;t oss?</b></h3>";
+	        htmlblock += "<b>Vill du anv&auml;nda en av dina bibblomons f&ouml;r att jaga bort den &aring;t oss?</b></h3>";
 	        htmlblock += "</td></tr>";
 	        htmlblock += "<tr><td class='btnjaga'><button class='btnjagaJA'>Ja</button></td><td class='btnjaga'>";
 	        htmlblock += "<button class='btnjagaNEJ'>Nej</button></td></tr>";
@@ -12441,8 +12445,8 @@
 
 	                var htmlblock = "<div class='bokemonuserlist bokemoncontainerSize'>";
 	                htmlblock += "<table><tr class='listheader'><td colspan='3'>";
-	                htmlblock += "<h1>V&auml;lj Bibblemon</h1>";
-	                htmlblock += "<p>V&auml;lj den bibblemon som du vill anv&auml;nda f&ouml;r att ska skr&auml;mma bort bokdraken</p>";
+	                htmlblock += "<h1>V&auml;lj Bibblomon</h1>";
+	                htmlblock += "<p>V&auml;lj den bibblomon som du vill anv&auml;nda f&ouml;r att ska skr&auml;mma bort bokdraken</p>";
 	                htmlblock += "</td></tr>";
 
 	                var i = 1;
@@ -12463,9 +12467,9 @@
 	                    i++;
 	                });
 	                if (i <= 1) {
-	                    htmlblock += "<tr class='listitem' ><td colspan='2'>";
-	                    htmlblock += "<p>Du har ingen bibblomon! Du f&aring;r leta vidare tills du hittat en</p></td>";
-	                    htmlblock += "<td class='col3'><a href='#' class='nobibblomon'>Leta vidare</a>";
+	                    htmlblock += "<tr class='listitem' ><td colspan='3'>";
+	                    htmlblock += "<p>Du har ingen bibblomon! Du f&aring;r leta vidare tills du hittat en</p></td></tr>";
+	                    htmlblock += "<tr class='listitem'><td colspan='3'><a href='#' class='nobibblomon'>Leta vidare</a>";
 	                    htmlblock += "</td></tr>";
 	                };
 	                htmlblock += "</table></div>";
@@ -12484,7 +12488,7 @@
 	        var htmlblock = "<div id='bokemonfightContainer' class='bokemoncontainerSize'>";
 	        htmlblock += "<table><tr><td colspan='3' class='fightStory'>";
 	        htmlblock += "<h1>Arenan</h1>";
-	        htmlblock += "<span class='showStartmsg'>Din bibblemon med namn " + appsettings.bokemon.namn[bokemonindex] + "<br/> m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + "<br/>Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!";
+	        htmlblock += "<span class='showStartmsg'>Din bibblomon med namn " + appsettings.bokemon.namn[bokemonindex] + "<br/> m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + "<br/>Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!";
 	        htmlblock += "<h3> Draken m&aring;ste stoppas! </h3>";
 	        htmlblock += "</td></tr>";
 	        htmlblock += "<tr class='fightArenablock arena1'><td colspan='3' class='fightArena'>";
@@ -12672,10 +12676,10 @@
 
 	        fighter.bokdrake = fighter.bokdrake - parseInt(hp);
 	        $('.bokdrakecore').hide().html(fighter.bokdrake + "p").fadeIn(4000);
-	        fighter.currentfighter= "bokemon"; //byt fighter nästa
+	        fighter.currentfighter= "bibblomon"; //byt fighter nästa
 	    } else {
 	        fighttext = "<h1>" + objfighttext.getrandommsg("eld", "bokdrake") + "</h1>";
-	        fighttext += "<h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
+	        fighttext += "<h2> bibblomonen f&ouml;rlorar<br> " + hp + "p</h2>"
 	        //fighttext = "<h1>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker.</h1><h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
 	        fighter.bokemon = fighter.bokemon - parseInt(hp);        
 	        $('.bokemonscore').hide().html(fighter.bokemon +"p").fadeIn(4000);
@@ -12690,8 +12694,8 @@
 	                
 	        if (wehaveawinner == 1) {
 	            //bokemon vann
-	            endtext += "<h2>Din bokemon har lyckats att skr&auml;mma iv&auml;g bokdraken!</h2>";
-	            endtext += "<h1>Vinnaren &auml;r Bokemon!</h1>";
+	            endtext += "<h2>Din bibblomon har lyckats att skr&auml;mma iv&auml;g bokdraken!</h2>";
+	            endtext += "<h1>Vinnaren &auml;r din Bibblomon!</h1>";
 	            updatefighttoserver('gameplaywin');
 	            
 	            $('.bokdrakevatar img').fadeOut(4000);
@@ -12699,7 +12703,7 @@
 	        }
 	        if (wehaveawinner == 2) {
 	            //Bokdraken vann            
-	            endtext += "<h1>NEEEEJ!!</h1><p>Bokdraken &aring;t upp din bokemon!<br></p><p style='font-size:0.9em;'>...men var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
+	            endtext += "<h1>NEEEEJ!!</h1><p>Bokdraken &aring;t upp din bibblomon!<br></p><p style='font-size:0.9em;'>...men var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
 	            endtext += "<h1>Vinnaren &auml;r Bokdraken!</h1>";
 	            updatefighttoserver('gameplaylose');
 	            $('.bokemonavatar img').fadeOut(4000);
@@ -12783,25 +12787,25 @@
 	    eld: {
 	        start: "Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!",
 	        fightbibblemon: {
-	            0: "Bibblemon tar en hink med vatten och h&auml;ller p&aring; elden",
-	            1: "Bibblemom sprutar vatten med en brandslang",
-	            2: "Bibblemon tar en brandfilt och sl&auml;cker elden",
-	            3: "Bibblemon spottar p&aring; elden",
-	            4: "Bibblemon anv&auml;nder en brandspruta p&aring; elden"
+	            0: "Bibblomon tar en hink med vatten och h&auml;ller p&aring; elden",
+	            1: "Bibblomom sprutar vatten med en brandslang",
+	            2: "Bibblomon tar en brandfilt och sl&auml;cker elden",
+	            3: "Bibblomon spottar p&aring; elden",
+	            4: "Bibblomon anv&auml;nder en brandspruta p&aring; elden"
 	        },
 	        fightbokdraken: {
 	            0: "Bokdraken torkar vattnet med en h&aring;rtork!",
-	            1: "bokdraken sprutar eld och vattnet f&ouml;rsvinner!",
-	            2: "Bokdraken g&ouml;r en knut p&aring; vattenslangen som din bibblemon anv&auml;nder,vattnet f&ouml;rsvinner",
-	            3: "bokdraken h&auml;ller bensin p&aring; elden! Elden flammar upp!",
-	            4: "bokdraken biter h&aring;l i vattenhinken som din bibblemon anv&auml;nder. Vattnet rinner ut."
+	            1: "Bokdraken sprutar eld och vattnet f&ouml;rsvinner!",
+	            2: "Bokdraken g&ouml;r en knut p&aring; vattenslangen som din bibblomon anv&auml;nder,vattnet f&ouml;rsvinner",
+	            3: "Bokdraken h&auml;ller bensin p&aring; elden! Elden flammar upp!",
+	            4: "Bokdraken biter h&aring;l i vattenhinken som din bibblomon anv&auml;nder. Vattnet rinner ut."
 	        },
 	        end: ""
 	    },
 	    forstor: {
 	        start: "Bokdraken h&aring;ller p&aring; att f&ouml;rst&ouml;ra b&ouml;cker och skr&auml;mma bes&ouml;karna p&aring; biblioteket!",
 	        fightbibblemon: {
-	            0: "Biblemon skr&auml;mmer bokdraken",
+	            0: "Bibblomon skr&auml;mmer bokdraken",
 	            1: "Bibblemon tar b&ouml;cker fr&aring;n bokdraken",
 	            2: "Bibblemon fryser bokdraken",
 	            3: "Bibblemon lurar bokdraken",

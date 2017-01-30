@@ -47,7 +47,7 @@ module.exports = {
                         });
                     };
                 })
-            } else { console.log("visa bokemon:inte nu!"); }
+            } else { console.log("visa bibblomon:inte nu!"); }
 
         }
     },

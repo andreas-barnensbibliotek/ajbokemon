@@ -7,7 +7,7 @@ module.exports = {
         htmlblock += "<div class='bokdrakeinfobox'>";
         htmlblock += "<table><tr><td colspan='2' >";
         htmlblock += "<h3>Draken f&ouml;rst&ouml;r och &auml;ter b&ouml;cker h&auml;r s&aring; den m&aring;ste bort! ";
-        htmlblock += "<b>Vill du anv&auml;nda en av dina Bibblemons f&ouml;r att jaga bort den &aring;t oss?</b></h3>";
+        htmlblock += "<b>Vill du anv&auml;nda en av dina bibblomons f&ouml;r att jaga bort den &aring;t oss?</b></h3>";
         htmlblock += "</td></tr>";
         htmlblock += "<tr><td class='btnjaga'><button class='btnjagaJA'>Ja</button></td><td class='btnjaga'>";
         htmlblock += "<button class='btnjagaNEJ'>Nej</button></td></tr>";
@@ -35,8 +35,8 @@ module.exports = {
 
                 var htmlblock = "<div class='bokemonuserlist bokemoncontainerSize'>";
                 htmlblock += "<table><tr class='listheader'><td colspan='3'>";
-                htmlblock += "<h1>V&auml;lj Bibblemon</h1>";
-                htmlblock += "<p>V&auml;lj den bibblemon som du vill anv&auml;nda f&ouml;r att ska skr&auml;mma bort bokdraken</p>";
+                htmlblock += "<h1>V&auml;lj Bibblomon</h1>";
+                htmlblock += "<p>V&auml;lj den bibblomon som du vill anv&auml;nda f&ouml;r att ska skr&auml;mma bort bokdraken</p>";
                 htmlblock += "</td></tr>";
 
                 var i = 1;
@@ -57,9 +57,9 @@ module.exports = {
                     i++;
                 });
                 if (i <= 1) {
-                    htmlblock += "<tr class='listitem' ><td colspan='2'>";
-                    htmlblock += "<p>Du har ingen bibblomon! Du f&aring;r leta vidare tills du hittat en</p></td>";
-                    htmlblock += "<td class='col3'><a href='#' class='nobibblomon'>Leta vidare</a>";
+                    htmlblock += "<tr class='listitem' ><td colspan='3'>";
+                    htmlblock += "<p>Du har ingen bibblomon! Du f&aring;r leta vidare tills du hittat en</p></td></tr>";
+                    htmlblock += "<tr class='listitem'><td colspan='3'><a href='#' class='nobibblomon'>Leta vidare</a>";
                     htmlblock += "</td></tr>";
                 };
                 htmlblock += "</table></div>";
@@ -78,7 +78,7 @@ module.exports = {
         var htmlblock = "<div id='bokemonfightContainer' class='bokemoncontainerSize'>";
         htmlblock += "<table><tr><td colspan='3' class='fightStory'>";
         htmlblock += "<h1>Arenan</h1>";
-        htmlblock += "<span class='showStartmsg'>Din bibblemon med namn " + appsettings.bokemon.namn[bokemonindex] + "<br/> m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + "<br/>Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!";
+        htmlblock += "<span class='showStartmsg'>Din bibblomon med namn " + appsettings.bokemon.namn[bokemonindex] + "<br/> m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + "<br/>Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!";
         htmlblock += "<h3> Draken m&aring;ste stoppas! </h3>";
         htmlblock += "</td></tr>";
         htmlblock += "<tr class='fightArenablock arena1'><td colspan='3' class='fightArena'>";
