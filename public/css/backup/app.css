@@ -824,7 +824,7 @@ body.vex-open {
     }
 #bokemonfightContainer .fightArena{
     background-color: #fff;
-    background-image:url('http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/bokmonster/fightmoln_3.png');
+    background-image:url('http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/bokmonster/fightmoln_3.png');
     background-repeat:no-repeat;
     background-size:cover;
     height:300px;
@@ -833,8 +833,8 @@ body.vex-open {
 
 #bokemonfightContainer .fightArena h1{
     margin-top:.2rem;
-    font-size: 2.4rem;
-    line-height:1.1em;
+    font-size: 3rem;
+    line-height:.8em;
     font-family: 'Alegreya Sans SC', sans-serif;
 }
 #bokemonfightContainer .fightArena h2{

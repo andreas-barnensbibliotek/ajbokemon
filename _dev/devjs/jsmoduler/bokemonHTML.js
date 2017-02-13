@@ -7,7 +7,7 @@ module.exports = {
         //var uid = parseInt(usrid);
         var uid = usrid;
         if (uid > 0) {
-            if (rndHandler.isbokemontime(4)) { //isbokemontime(int_sannolikhet) = 4 visas varje gång, 4 = ca 25/100 osv..
+            if (rndHandler.isbokemontime(2)) { //isbokemontime(int_sannolikhet) = 4 visas varje gång, 4 = ca 25/100 osv..
                 var x = "";
                 api.bokemonServerHandler('allmon', uid, function () {
 
@@ -55,7 +55,7 @@ module.exports = {
         //var uid = parseInt(usrid);
         var uid = usrid;
         if (uid > 0) {
-            if (rndHandler.isbokemontime(4)) { //isbokemontime(int_sannolikhet) = 4 visas varje gång, 4 = ca 25/100 osv..
+            if (rndHandler.isbokemontime(2)) { //isbokemontime(int_sannolikhet) = 4 visas varje gång, 4 = ca 25/100 osv..
                 var x = "";
                 api.bokemonServerHandler('alldrakar', uid, function () {
 
