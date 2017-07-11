@@ -4,6 +4,7 @@ var appsettings = require("./appSettings.js");
 var api = require("./bokemonServicecalls.js");
 var fighthandler = require("./bokemonfightHTML.js");
 var fightgameplay = require("./bokemonFightGameplay.js");
+var rndFightStory = require("./randomBokemonHandler.js");
 
 module.exports = {
     jqueryFightEVENTS: function (userid) {
@@ -46,7 +47,9 @@ var bokemonfightstep2_valjlist = function (userid) {
 }
 
 var bokemonfightstep3_drakfight = function (drakindex, bokemonindex) {
-    var valdlistaHtml = fighthandler.drakfightArena(drakindex, bokemonindex, function (htmlblock) {
+    var shoosefightstory = rndFightStory.getFightStory();
+
+    var valdlistaHtml = fighthandler.drakfightArena(drakindex, bokemonindex, shoosefightstory, function (htmlblock) {
         $('.vex-dialog-message').html(htmlblock);
         $('.fightArenablock').hide();
 
@@ -56,8 +59,8 @@ var bokemonfightstep3_drakfight = function (drakindex, bokemonindex) {
                 $(this).slideUp(3000); //.animate({ height: 0, opacity: 0 }, 6000);
             });
            
-            $('.fightArena').html("<h1>Fighten kan b&ouml;rja!!!</h1>");
-            fightgameplay.jqueryFightGameplay(drakindex,bokemonindex);
+            $('.fightArena').html("<h1>Fighten har b&ouml;rjat!!!</h1>");
+            fightgameplay.jqueryFightGameplay(drakindex, bokemonindex, shoosefightstory);
         });
 
         return false;

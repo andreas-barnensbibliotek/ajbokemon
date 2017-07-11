@@ -1,6 +1,7 @@
 ﻿// object
 var _localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
 //var _localOrServerURL = "http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi";
+var _baseimgUrl = "http://www.barnensbibliotek.se";
 
 window.monid = [];
 window.namn = [];
@@ -21,6 +22,7 @@ module.exports = {
         monid: window.monid,
         namn: window.namn,
         src: window.src,
+        animationsrc: window.animationsrc,
         lev: window.lev,
         score: window.score,
         info: window.info        
@@ -29,10 +31,12 @@ module.exports = {
         drakmonid: window.drakmonid,
         draknamn: window.draknamn,
         draksrc: window.draksrc,
+        drakanimationsrc: window.drakanimationsrc,
         draklev: window.draklev,
         drakscore: window.drakscore,
         drakinfo: window.drakinfo
     },
     localOrServerURL: _localOrServerURL,
-    currentUserid: window.currentuserid
+    currentUserid: window.currentuserid,
+    baseimgUrl : _baseimgUrl
 }

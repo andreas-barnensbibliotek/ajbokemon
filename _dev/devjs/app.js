@@ -10,7 +10,7 @@ $(function () {
     
     //Jquery div
     var _userid = $('#barnensbiblCurrentUserid').html();
-    
+   
     //_userid = 7017;
     var chkuser = function (uid) {
         var ret = false;
@@ -22,6 +22,27 @@ $(function () {
             ret = true;
         }
         if (uid == "7017") {
+            ret = true;
+        }
+        if (uid == "9794") { //yvonne
+            ret = true;
+        }
+        if (uid == "12282") { //katarina Larson
+            ret = true;
+        }
+        if (uid == "34606") { //storasötasupermannen
+            ret = true;
+        }
+        if (uid == "34864") { //(Mia marika) bibblomontestare
+            ret = true;
+        }
+        if (uid == "9657") { // nils-magnus
+            ret = true;
+        }
+        if (uid == "33492") { // elsan04
+            ret = true;
+        }
+        if (uid == "35042") { // hannalilja
             ret = true;
         }
         appsettings.currentUserid = uid;
@@ -40,11 +61,11 @@ $(function () {
     var init = function () {
         // kör på denna kod när vi är klara med beta och går live!!!-------------------------------
         // visas för dom som inte är inloggade!!!!
-        //if (_userid <= 1) {
-        //    if (rndHandler.isbokemontime(3)) {
-        //        renderhtml.showbokdrakar(_userid);
-        //    };
-        //} else {
+        if (_userid <= 1) {
+            if (rndHandler.isbokemontime(3)) {
+                renderhtml.showbokdrakar(_userid);
+            };
+        } else {
         // kör på denna kod (ovan) när vi är klara med beta och går live!!!-------------------------------
 
             // ska det visas bokemon eller bokdrakar och hur ofta skall dom visas
@@ -61,7 +82,7 @@ $(function () {
                 };
                 //};
             }
-        //} // kör på denna kod när vi är klara med beta och går live!!!-------------------------------
+        } // kör på denna kod när vi är klara med beta och går live!!!-------------------------------
         //renderhtml.showbokemon(_userid);
             
         

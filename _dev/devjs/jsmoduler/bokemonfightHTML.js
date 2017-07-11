@@ -1,4 +1,6 @@
 ﻿var appsettings = require("./appSettings.js");
+var storyHandler = require("./bokemonMsg.js");
+
 var $ = require("jquery");
 module.exports = {
     drakfightYesNo: function (valdbokdrakeID) {
@@ -11,14 +13,14 @@ module.exports = {
         htmlblock += "</td></tr>";
         htmlblock += "<tr><td class='btnjaga'><button class='btnjagaJA'>Ja</button></td><td class='btnjaga'>";
         htmlblock += "<button class='btnjagaNEJ'>Nej</button></td></tr>";
-        htmlblock += "<tr><td colspan='2' class='drakimg'><img src='" + appsettings.drakemon.draksrc[valdbokdrakeID] + ".png'>";
+        htmlblock += "<tr><td colspan='2' class='drakimg'><img src='" + appsettings.drakemon.draksrc[valdbokdrakeID] + "_animation_300.gif'>";
         htmlblock += "</td></tr>";
         htmlblock += "<tr><td colspan='2' class='draknamn'><h2>" + appsettings.drakemon.draknamn[valdbokdrakeID] + "</h2>";
         htmlblock += "</td></tr>";
         htmlblock += "<tr><th colspan='2'>Beskrivning</th></tr>";
         htmlblock += "<tr><td colspan='2' class='drakinfo'><p>" + appsettings.drakemon.drakinfo[valdbokdrakeID] + "</p></td></tr>";
         htmlblock += "<tr><th colspan='2'>Egenskaper</th></tr>";
-        htmlblock += "<tr><td>Point</td><td><span class='bokdrakecore'>" + appsettings.drakemon.drakscore[valdbokdrakeID] + "</span>p</td></tr>";
+        htmlblock += "<tr><td>Point</td><td><span class='bokdrakecore'>" + Math.round(appsettings.drakemon.drakscore[valdbokdrakeID]) + "</span>p</td></tr>";
         htmlblock += "<tr><td>Eldbonus</td><td><span class='bokdrakecore'>120</span>p</td></tr>";
         htmlblock += "</table></div></div>";
 
@@ -44,13 +46,13 @@ module.exports = {
                    
                         appsettings.bokemon.monid[i] = val.monid;
                         appsettings.bokemon.namn[i] = val.namn;
-                        appsettings.bokemon.src[i] = val.src;
+                        appsettings.bokemon.src[i] = val.src;                       
                         appsettings.bokemon.lev[i] = val.lev;
                         appsettings.bokemon.score[i] = val.score;
                         appsettings.bokemon.info[i] = val.info;
                     
-                    htmlblock += "<tr class='listitem' ><td class='col1'>";
-                    htmlblock += "<img src='" + val.src + "_bg.png'></td><td class='col2'>";
+                        htmlblock += "<tr class='listitem valdfightbokemon' rel='" + val.monid + "'><td class='col1'>";
+                    htmlblock += "<img src='" + val.src + "_animation_80.gif'></td><td class='col2'>";
                     htmlblock += "<p>" + val.namn + "<br />Level: " + val.lev + "<br />Score:  " + val.score + "p</p></td>";
                     htmlblock += "<td class='col3'><a href='' class='valdfightbokemon' rel='" + val.monid + "'>V&auml;lj</a>";
                     htmlblock += "</td></tr>";
@@ -73,13 +75,15 @@ module.exports = {
             }
         });
     },
-    drakfightArena: function (drakindex, bokemonindex, callback) {
+    drakfightArena: function (drakindex, bokemonindex, fightstory, callback) {
 
         var htmlblock = "<div id='bokemonfightContainer' class='bokemoncontainerSize'>";
         htmlblock += "<table><tr><td colspan='3' class='fightStory'>";
         htmlblock += "<h1>Arenan</h1>";
-        htmlblock += "<span class='showStartmsg'>Din bibblomon med namn " + appsettings.bokemon.namn[bokemonindex] + "<br/> m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + "<br/>Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!";
+        htmlblock += "<span class='showStartmsg'>" + appsettings.bokemon.namn[bokemonindex] + " m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + "<br/>" + storyHandler.getMainstory(fightstory);
         htmlblock += "<h3> Draken m&aring;ste stoppas! </h3>";
+        htmlblock += "</td></tr>";
+        htmlblock += "<tr class='fightArenablock arena1'><td colspan='3' class='fightArenaMesseage'>";
         htmlblock += "</td></tr>";
         htmlblock += "<tr class='fightArenablock arena1'><td colspan='3' class='fightArena'>";
        // htmlblock += "<h2>Bokdraken hinner plocka av bibbemonen</h2><h1>199p</h1>";

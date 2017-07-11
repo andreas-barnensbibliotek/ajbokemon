@@ -10,6 +10,9 @@ var drakresults = [1, 2, 3, 4, 5, 6, 7, 8]; // values to return
 var monordrakweights = [0.66, 0.34]; // probabilities
 var monordrakresults = [1, 2]; // values to return
 
+var FightStoryweights = [0.5, 0.5]; // probabilities
+var FightStoryresults = ["eld", "forstor"]; // values to return
+
 module.exports = {
     getRandompockemon : function () {
         return sanoliktrandom(weights, results);
@@ -19,6 +22,9 @@ module.exports = {
     },    
     BokemonOrBokdrake: function () {
         return sanoliktrandom(monordrakweights, monordrakresults);
+    },
+    getFightStory: function () {
+        return sanoliktrandom(FightStoryweights, FightStoryresults);
     },
     isbokemontime : function (int_sannolikhet) {
         //var rnd1 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100

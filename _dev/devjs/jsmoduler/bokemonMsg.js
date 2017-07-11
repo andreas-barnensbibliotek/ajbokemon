@@ -1,4 +1,4 @@
-﻿
+﻿// för att lägga till historier läggs nya objekt till och dom måste läggas till i randomBokemonHandler.js också (FightStoryresults)
 module.exports = {
     getrandommsg: function (fight, typ) {
         var rettext = "";
@@ -20,6 +20,21 @@ module.exports = {
             }       
         }
         return rettext;
+    },
+    getMainstory: function (val) {
+        var retval=""
+        switch (val) {
+            case "eld":
+                retval = textlista.eld.start;
+                break;
+            case "forstor":
+                retval = textlista.forstor.start;
+                break;
+            default:
+                    retval = textlista.eld.start;            
+        };
+
+        return retval;
     }
 };
 

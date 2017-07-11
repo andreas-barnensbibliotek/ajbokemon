@@ -24,6 +24,21 @@
             if (uid == "7017") {
                 ret = true;
             }
+            if (uid == "9794") { //yvonne
+                ret = true;
+            }
+            if (uid == "12282") { //katarina Larson
+                ret = true;
+            }
+            if (uid == "34606") { //storasötasupermannen
+                ret = true;
+            }
+            if (uid == "34864") { //(Mia marika) bibblomontestare
+                ret = true;
+            }
+            if (uid == "9657") { // nils-magnus
+                ret = true;
+            }
             return ret;
         };
 
@@ -34,8 +49,8 @@
             _userid = $('#barnensbiblCurrentUserid').html();
             _visituserid = $('#VISITED_USERID').html();
             // serverurler
-            //var localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
-            var localOrServerURL = "http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi";
+            var localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
+            //var localOrServerURL = "http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi";
             // START servercalls-------------------------------------
             var bokemonUserServerHandler = function (callTyp, usrid, callback) {
 
@@ -50,14 +65,14 @@
                         var htmlblock = "<div class='BM_header'>";
                         htmlblock += "<h1>Bokemon</h1><h3>MainScore</h3>";
                         htmlblock += "<h1>" + data.barnensbibliotek.mainscore + "p</h1>";
-                        htmlblock += "<a href='' class='bm_wikilink'>BokemonWiki</a></div>";
+                        htmlblock += "<a href='/bibblomons/tabid/734/Default.aspx' class='bm_wikilink'>BokemonWiki</a></div>";
                         htmlblock += "<div class='BM_list'><ul>";
 
                         var i = 1;
                         $.each(data.barnensbibliotek.bokmonsterlist, function (item, val) {
 
                             htmlblock += "<li>";
-                            htmlblock += "<a href='' title='Mer info om din " + val.namn + "' rel=" + val.monid + ">";
+                            htmlblock += "<a href='/bibblomons/tabid/734/Default.aspx' title='Mer info om din " + val.namn + "' rel=" + val.monid + ">";
                             htmlblock += "<div class='bm_itm_imgcont'>";
                             htmlblock += "<img src='" + val.src + ".png' /></div>";
                             htmlblock += "<div class='bm_itm_infocont'><h1>" + val.namn + "</h1>";

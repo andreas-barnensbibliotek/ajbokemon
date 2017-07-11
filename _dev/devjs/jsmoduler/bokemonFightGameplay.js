@@ -12,25 +12,31 @@ var user_input = {
 var global = { 
     intervalID:0,
     count:0,
-    totalRuns:0 
+    totalRuns: 0,
+    fightStory:0
 };
 var fighter = {
     bokemon: 0,
     bokdrake: 0,
+    bokdrakenamn:"",
     bokemonID: 0,
+    bokemonnamn:"",
     currentUserid:0,
     currentfighter:""
 }
 
 
 module.exports = {
-    jqueryFightGameplay: function (drakindex, bokemonindex) {
+    jqueryFightGameplay: function (drakindex, bokemonindex,fightStory) {
         //init
         fighter.bokdrake = appsettings.drakemon.drakscore[drakindex];
+        fighter.bokdrakenamn = appsettings.drakemon.draknamn[drakindex];
         fighter.bokemon = appsettings.bokemon.score[bokemonindex];
+        fighter.bokemonnamn = appsettings.bokemon.namn[bokemonindex];
         fighter.bokemonID = appsettings.bokemon.monid[bokemonindex];
         fighter.currentUserid = appsettings.currentUserid;
         fighter.currentfighter = "bokdrake";
+        global.fightStory = fightStory;
 
         global.intervalID = window.setInterval(function(){showDamage(getHP())},6000);
      }
@@ -48,18 +54,19 @@ function getHP(){
 
 function showDamage(hp){
     var fighttext = "";
+    var fightScore = "";
 
     if (fighter.currentfighter == "bokdrake") {
-        fighttext = "<h1>" + objfighttext.getrandommsg("eld", "bibblemon") + "</h1>";
+        fighttext = "<h1>" + objfighttext.getrandommsg(global.fightStory, "bibblemon") + "</h1>";
         //fighttext += "<h1>Bibblemon tar snabbt vatten f&ouml;r att sl&auml;cka elden.</h1><h2>Bokdraken f&ouml;rlorar<br> " + hp + "p</h2>"
-        fighttext += "<h2>Bokdraken f&ouml;rlorar<br> " + hp + "p</h2>"
+        fightScore = "<h2>"+fighter.bokdrakenamn+" f&ouml;rlorar<br> " + hp + "p</h2>"
 
         fighter.bokdrake = fighter.bokdrake - parseInt(hp);
         $('.bokdrakecore').hide().html(fighter.bokdrake + "p").fadeIn(4000);
         fighter.currentfighter= "bibblomon"; //byt fighter nästa
     } else {
-        fighttext = "<h1>" + objfighttext.getrandommsg("eld", "bokdrake") + "</h1>";
-        fighttext += "<h2> bibblomonen f&ouml;rlorar<br> " + hp + "p</h2>"
+        fighttext = "<h1>" + objfighttext.getrandommsg(global.fightStory, "bokdrake") + "</h1>";
+        fightScore = "<h2>"+fighter.bokemonnamn+" f&ouml;rlorar<br> " + hp + "p</h2>"
         //fighttext = "<h1>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker.</h1><h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
         fighter.bokemon = fighter.bokemon - parseInt(hp);        
         $('.bokemonscore').hide().html(fighter.bokemon +"p").fadeIn(4000);
@@ -75,7 +82,7 @@ function showDamage(hp){
         if (wehaveawinner == 1) {
             //bokemon vann
             endtext += "<h2>Din bibblomon har lyckats att skr&auml;mma iv&auml;g bokdraken!</h2>";
-            endtext += "<h1>Vinnaren &auml;r din Bibblomon!</h1>";
+            endtext += "<h1>Vinnaren &auml;r " + fighter.bokemonnamn + "!</h1>";
             updatefighttoserver('gameplaywin');
             
             $('.bokdrakevatar img').fadeOut(4000);
@@ -83,19 +90,22 @@ function showDamage(hp){
         }
         if (wehaveawinner == 2) {
             //Bokdraken vann            
-            endtext += "<h1>NEEEEJ!!</h1><p>Bokdraken &aring;t upp din bibblomon!<br></p><p style='font-size:0.9em;'>...men var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
-            endtext += "<h1>Vinnaren &auml;r Bokdraken!</h1>";
+            endtext += "<h1>NEEEEJ!!</h1><p>Bokdraken &aring;t upp din bibblomon!<br></p><p>...men var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
+            endtext += "<h1 style='padding-top:1rem; padding-bottom:1rem;'>Vinnaren &auml;r " + fighter.bokdrakenamn + "!</h1>";
             updatefighttoserver('gameplaylose');
             $('.bokemonavatar img').fadeOut(4000);
             $('.bokemonscore').hide();
             
         }
         endtext += "<button>OK</button>";
-        $('.fightArena').html(endtext);
+        
+        $('.fightArenaMesseage').html(endtext);
+        $('.fightArena').hide();
         clearInterval(global.intervalID);
     } else {
         $('.fightArena').fadeOut('slow', function () {
-            $(this).html(fighttext)
+            $('.fightArenaMesseage').html(fighttext);
+            $(this).html(fightScore)
         }).fadeIn("slow");
     }
          

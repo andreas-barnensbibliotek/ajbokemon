@@ -7,13 +7,6 @@ module.exports = {
     }
 }
 
-
-
-
-
-
-
-
 /* Settings */
 var user_input = {
     ubound: 1000,

@@ -56,7 +56,7 @@
 	    
 	    //Jquery div
 	    var _userid = $('#barnensbiblCurrentUserid').html();
-	    
+	   
 	    //_userid = 7017;
 	    var chkuser = function (uid) {
 	        var ret = false;
@@ -68,6 +68,27 @@
 	            ret = true;
 	        }
 	        if (uid == "7017") {
+	            ret = true;
+	        }
+	        if (uid == "9794") { //yvonne
+	            ret = true;
+	        }
+	        if (uid == "12282") { //katarina Larson
+	            ret = true;
+	        }
+	        if (uid == "34606") { //storas�tasupermannen
+	            ret = true;
+	        }
+	        if (uid == "34864") { //(Mia marika) bibblomontestare
+	            ret = true;
+	        }
+	        if (uid == "9657") { // nils-magnus
+	            ret = true;
+	        }
+	        if (uid == "33492") { // elsan04
+	            ret = true;
+	        }
+	        if (uid == "35042") { // hannalilja
 	            ret = true;
 	        }
 	        appsettings.currentUserid = uid;
@@ -86,11 +107,11 @@
 	    var init = function () {
 	        // k�r p� denna kod n�r vi �r klara med beta och g�r live!!!-------------------------------
 	        // visas f�r dom som inte �r inloggade!!!!
-	        //if (_userid <= 1) {
-	        //    if (rndHandler.isbokemontime(3)) {
-	        //        renderhtml.showbokdrakar(_userid);
-	        //    };
-	        //} else {
+	        if (_userid <= 1) {
+	            if (rndHandler.isbokemontime(3)) {
+	                renderhtml.showbokdrakar(_userid);
+	            };
+	        } else {
 	        // k�r p� denna kod (ovan) n�r vi �r klara med beta och g�r live!!!-------------------------------
 
 	            // ska det visas bokemon eller bokdrakar och hur ofta skall dom visas
@@ -107,7 +128,7 @@
 	                };
 	                //};
 	            }
-	        //} // k�r p� denna kod n�r vi �r klara med beta och g�r live!!!-------------------------------
+	        } // k�r p� denna kod n�r vi �r klara med beta och g�r live!!!-------------------------------
 	        //renderhtml.showbokemon(_userid);
 	            
 	        
@@ -135,6 +156,7 @@
 	// object
 	var _localOrServerURL = "http://www.barnensbibliotek.se/DesktopModules/barnensbiblService/bokemonApi";
 	//var _localOrServerURL = "http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi";
+	var _baseimgUrl = "http://www.barnensbibliotek.se";
 
 	window.monid = [];
 	window.namn = [];
@@ -155,6 +177,7 @@
 	        monid: window.monid,
 	        namn: window.namn,
 	        src: window.src,
+	        animationsrc: window.animationsrc,
 	        lev: window.lev,
 	        score: window.score,
 	        info: window.info        
@@ -163,12 +186,14 @@
 	        drakmonid: window.drakmonid,
 	        draknamn: window.draknamn,
 	        draksrc: window.draksrc,
+	        drakanimationsrc: window.drakanimationsrc,
 	        draklev: window.draklev,
 	        drakscore: window.drakscore,
 	        drakinfo: window.drakinfo
 	    },
 	    localOrServerURL: _localOrServerURL,
-	    currentUserid: window.currentuserid
+	    currentUserid: window.currentuserid,
+	    baseimgUrl : _baseimgUrl
 	}
 
 /***/ },
@@ -187,6 +212,9 @@
 	var monordrakweights = [0.66, 0.34]; // probabilities
 	var monordrakresults = [1, 2]; // values to return
 
+	var FightStoryweights = [0.5, 0.5]; // probabilities
+	var FightStoryresults = ["eld", "forstor"]; // values to return
+
 	module.exports = {
 	    getRandompockemon : function () {
 	        return sanoliktrandom(weights, results);
@@ -196,6 +224,9 @@
 	    },    
 	    BokemonOrBokdrake: function () {
 	        return sanoliktrandom(monordrakweights, monordrakresults);
+	    },
+	    getFightStory: function () {
+	        return sanoliktrandom(FightStoryweights, FightStoryresults);
 	    },
 	    isbokemontime : function (int_sannolikhet) {
 	        //var rnd1 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
@@ -288,7 +319,7 @@
 	                        htmlblock += "</div></span>";
 	                        htmlblock += "<div class='bokemonFreeblock' style='display:none;'>";
 	                        htmlblock += "<p class='speech'>Du r&auml;ddade mej! Tack!</p>";
-	                        htmlblock += "<img  src='" + appsettings.bokemon.src[valdbokemonID] + ".png' alt='" + appsettings.bokemon.namn[valdbokemonID] + " Level: " + appsettings.bokemon.lev[valdbokemonID] + "' />";
+	                        htmlblock += "<img  src='" + appsettings.bokemon.src[valdbokemonID] + "_bg.png' alt='" + appsettings.bokemon.namn[valdbokemonID] + " Level: " + appsettings.bokemon.lev[valdbokemonID] + "' />";
 	                        htmlblock += "</div>";
 	                        htmlblock += "</div>";
 
@@ -321,11 +352,20 @@
 	                api.bokemonServerHandler('alldrakar', uid, function () {
 
 	                    var valdbokemonID = rndHandler.getRandomBokdrake();
-	                    
+
+	                    // använd denna för att öka bokdrakens poäng med x % för att göra striden mer oförutsägbar
+	                    if (rndHandler.BokemonOrBokdrake()) {
+	                        var proc = Math.floor(Math.random() * 10);
+	                        var procstartval = "1.";
+	                        var increasebpoint = procstartval + proc.toString();
+
+	                        appsettings.drakemon.drakscore[valdbokemonID] *= parseFloat(increasebpoint).toFixed(1);
+	                    };
+
 	                    if (typeof (appsettings.drakemon.drakmonid[valdbokemonID]) != "undefined") {
 	                        var htmlblock = "<div id='bokdrakeitm' class='bokdrake' rel='" + appsettings.drakemon.drakmonid[valdbokemonID] + "'>";
 	                        htmlblock += "<span class='bokemonjailed'><a href='' class='takeBokemon' >";
-	                        htmlblock += "<img src='" + appsettings.drakemon.draksrc[valdbokemonID] + ".png' alt='" + appsettings.drakemon.draknamn[valdbokemonID] + " Level: " + appsettings.drakemon.draklev[valdbokemonID] + "' />";
+	                        htmlblock += "<img src='" + appsettings.drakemon.draksrc[valdbokemonID] + "_bg.png' alt='" + appsettings.drakemon.draknamn[valdbokemonID] + " Level: " + appsettings.drakemon.draklev[valdbokemonID] + "' />";
 	                        htmlblock += "</a>";
 	                        htmlblock += "<span class='bokemonscore' rel=" + appsettings.drakemon.drakscore[valdbokemonID] + "></span>";
 	                        htmlblock += "<a href='' class='Bokemonifo' style='display:none;' >";
@@ -338,7 +378,7 @@
 	                        htmlblock += "<div class='bokemonFreeblock' style='display:none;'>";
 	                        htmlblock += "<p class='speech'><b>Hj&auml;lp oss f&aring;nga bokdrakarna!</b><br />"
 	                        htmlblock += "Logga in och hj&auml;lp oss att f&aring; bort dessa hemska bokdrakar!</p>";
-	                        htmlblock += "<img  src='http://localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemon/Nallemon.gif' alt='Barnensbibliotek säger' />";
+	                        htmlblock += "<img  src='" + appsettings.localOrServerURL + "/bokemon/Nallemon.gif' alt='Barnensbibliotek säger' />";
 	                        htmlblock += "</div>";
 	                        htmlblock += "</div>";
 	                        
@@ -10677,7 +10717,7 @@
 	vex.defaultOptions.className = 'vex-theme-os'
 	var api = __webpack_require__(4);
 	var fighthtmlhandler = __webpack_require__(8);
-	var registerJqueryfightEvents = __webpack_require__(9);
+	var registerJqueryfightEvents = __webpack_require__(10);
 
 	module.exports = {
 	    jqueryEVENTS : function (userid) {
@@ -12409,6 +12449,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var appsettings = __webpack_require__(1);
+	var storyHandler = __webpack_require__(9);
+
 	var $ = __webpack_require__(5);
 	module.exports = {
 	    drakfightYesNo: function (valdbokdrakeID) {
@@ -12421,14 +12463,14 @@
 	        htmlblock += "</td></tr>";
 	        htmlblock += "<tr><td class='btnjaga'><button class='btnjagaJA'>Ja</button></td><td class='btnjaga'>";
 	        htmlblock += "<button class='btnjagaNEJ'>Nej</button></td></tr>";
-	        htmlblock += "<tr><td colspan='2' class='drakimg'><img src='" + appsettings.drakemon.draksrc[valdbokdrakeID] + ".png'>";
+	        htmlblock += "<tr><td colspan='2' class='drakimg'><img src='" + appsettings.drakemon.draksrc[valdbokdrakeID] + "_animation_300.gif'>";
 	        htmlblock += "</td></tr>";
 	        htmlblock += "<tr><td colspan='2' class='draknamn'><h2>" + appsettings.drakemon.draknamn[valdbokdrakeID] + "</h2>";
 	        htmlblock += "</td></tr>";
 	        htmlblock += "<tr><th colspan='2'>Beskrivning</th></tr>";
 	        htmlblock += "<tr><td colspan='2' class='drakinfo'><p>" + appsettings.drakemon.drakinfo[valdbokdrakeID] + "</p></td></tr>";
 	        htmlblock += "<tr><th colspan='2'>Egenskaper</th></tr>";
-	        htmlblock += "<tr><td>Point</td><td><span class='bokdrakecore'>" + appsettings.drakemon.drakscore[valdbokdrakeID] + "</span>p</td></tr>";
+	        htmlblock += "<tr><td>Point</td><td><span class='bokdrakecore'>" + Math.round(appsettings.drakemon.drakscore[valdbokdrakeID]) + "</span>p</td></tr>";
 	        htmlblock += "<tr><td>Eldbonus</td><td><span class='bokdrakecore'>120</span>p</td></tr>";
 	        htmlblock += "</table></div></div>";
 
@@ -12454,13 +12496,13 @@
 	                   
 	                        appsettings.bokemon.monid[i] = val.monid;
 	                        appsettings.bokemon.namn[i] = val.namn;
-	                        appsettings.bokemon.src[i] = val.src;
+	                        appsettings.bokemon.src[i] = val.src;                       
 	                        appsettings.bokemon.lev[i] = val.lev;
 	                        appsettings.bokemon.score[i] = val.score;
 	                        appsettings.bokemon.info[i] = val.info;
 	                    
-	                    htmlblock += "<tr class='listitem' ><td class='col1'>";
-	                    htmlblock += "<img src='" + val.src + "_bg.png'></td><td class='col2'>";
+	                        htmlblock += "<tr class='listitem valdfightbokemon' rel='" + val.monid + "'><td class='col1'>";
+	                    htmlblock += "<img src='" + val.src + "_animation_80.gif'></td><td class='col2'>";
 	                    htmlblock += "<p>" + val.namn + "<br />Level: " + val.lev + "<br />Score:  " + val.score + "p</p></td>";
 	                    htmlblock += "<td class='col3'><a href='' class='valdfightbokemon' rel='" + val.monid + "'>V&auml;lj</a>";
 	                    htmlblock += "</td></tr>";
@@ -12483,13 +12525,15 @@
 	            }
 	        });
 	    },
-	    drakfightArena: function (drakindex, bokemonindex, callback) {
+	    drakfightArena: function (drakindex, bokemonindex, fightstory, callback) {
 
 	        var htmlblock = "<div id='bokemonfightContainer' class='bokemoncontainerSize'>";
 	        htmlblock += "<table><tr><td colspan='3' class='fightStory'>";
 	        htmlblock += "<h1>Arenan</h1>";
-	        htmlblock += "<span class='showStartmsg'>Din bibblomon med namn " + appsettings.bokemon.namn[bokemonindex] + "<br/> m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + "<br/>Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket!";
+	        htmlblock += "<span class='showStartmsg'>" + appsettings.bokemon.namn[bokemonindex] + " m&ouml;ter den elaka bokdraken " + appsettings.drakemon.draknamn[drakindex] + "<br/>" + storyHandler.getMainstory(fightstory);
 	        htmlblock += "<h3> Draken m&aring;ste stoppas! </h3>";
+	        htmlblock += "</td></tr>";
+	        htmlblock += "<tr class='fightArenablock arena1'><td colspan='3' class='fightArenaMesseage'>";
 	        htmlblock += "</td></tr>";
 	        htmlblock += "<tr class='fightArenablock arena1'><td colspan='3' class='fightArena'>";
 	       // htmlblock += "<h2>Bokdraken hinner plocka av bibbemonen</h2><h1>199p</h1>";
@@ -12509,246 +12553,9 @@
 
 /***/ },
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $ = __webpack_require__(5);
-	var vex = __webpack_require__(7);
-	var appsettings = __webpack_require__(1);
-	var api = __webpack_require__(4);
-	var fighthandler = __webpack_require__(8);
-	var fightgameplay = __webpack_require__(10);
-
-	module.exports = {
-	    jqueryFightEVENTS: function (userid) {
-	        
-	        $('body').on('click', '.btnjagaJA', function () {
-	            
-	            bokemonfightstep2_valjlist(userid);
-	            return false;
-	        });
-	        $('body').on('click', '.btnjagaNEJ', function () {
-	            return true;
-	        });
-	        //välj bokemon till fighten
-	        $('body').on('click', '.valdfightbokemon', function () {
-	            valtnr = $(this).attr('rel');
-	            console.log("drakar: " + appsettings.drakemon.draknamn);
-	            console.log("bokemon: " + appsettings.bokemon.namn);
-
-	            var bokemonid = getbokemonindexfromid(valtnr);
-	            //var valdbokemon = appsettings.bokemon.namn[bokemonid];
-	            var valdbokdrake = $('#bokdrakeitm').attr('rel');
-
-	            bokemonfightstep3_drakfight(valdbokdrake, bokemonid);
-	            //alert(valdbokemon);
-	            return false;
-	        });
-	        $('body').on('click', '.nobibblomon', function () {
-	            vex.closeAll();
-	        });
-	       
-	    }
-	}
-
-	var bokemonfightstep2_valjlist = function (userid) {
-	    var valdlistaHtml = fighthandler.drakfightBokemonVal("usrmon", userid, function (htmlblock) {
-	        $('.vex-dialog-message').html(htmlblock);       
-	        return false;
-	    });
-	    
-	}
-
-	var bokemonfightstep3_drakfight = function (drakindex, bokemonindex) {
-	    var valdlistaHtml = fighthandler.drakfightArena(drakindex, bokemonindex, function (htmlblock) {
-	        $('.vex-dialog-message').html(htmlblock);
-	        $('.fightArenablock').hide();
-
-	        inserttextwordbyword('.fightStory .showStartmsg', function(x){
-	            $('.fightArenablock').hide().fadeIn(4000);
-	            $('.fightStory .showStartmsg').fadeOut(4000, function () {
-	                $(this).slideUp(3000); //.animate({ height: 0, opacity: 0 }, 6000);
-	            });
-	           
-	            $('.fightArena').html("<h1>Fighten kan b&ouml;rja!!!</h1>");
-	            fightgameplay.jqueryFightGameplay(drakindex,bokemonindex);
-	        });
-
-	        return false;
-	    });
-
-	}
-
-	//hämta rätt bokemon i arrayen via index
-	var getbokemonindexfromid = function (monid) {
-	    var indexes = $.map(appsettings.bokemon.monid, function (obj, index) {
-	        if (obj == monid) {
-	            return index;
-	        }
-	    });
-
-	    return indexes[0];
-	}
-
-
-	var inserttextwordbyword = function (divtoconnect, callback) {
-	    var $el = $(divtoconnect),
-	            text = $el.html(),
-	            speed = 500; //ms
-
-	    $el.empty();
-	    $el.show();
-	    var wordArray = text.split(' '),
-	        i = 0;
-
-	    INV = setInterval(function () {
-	        if (i >= wordArray.length - 1) {
-	            clearInterval(INV);
-	        }
-	        $el.append(wordArray[i] + ' ')
-	        i++;
-	        if (i >= wordArray.length) {
-	            callback();
-	        }
-	    }, speed);
-	};
-
-
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $ = __webpack_require__(5);
-	var appsettings = __webpack_require__(1);
-	var api = __webpack_require__(4);
-	var objfighttext = __webpack_require__(11);
-
-	/* Settings */
-	var user_input = { 
-	    ubound:1000,
-	    lbound:250
-	};
-
-	var global = { 
-	    intervalID:0,
-	    count:0,
-	    totalRuns:0 
-	};
-	var fighter = {
-	    bokemon: 0,
-	    bokdrake: 0,
-	    bokemonID: 0,
-	    currentUserid:0,
-	    currentfighter:""
-	}
-
-
-	module.exports = {
-	    jqueryFightGameplay: function (drakindex, bokemonindex) {
-	        //init
-	        fighter.bokdrake = appsettings.drakemon.drakscore[drakindex];
-	        fighter.bokemon = appsettings.bokemon.score[bokemonindex];
-	        fighter.bokemonID = appsettings.bokemon.monid[bokemonindex];
-	        fighter.currentUserid = appsettings.currentUserid;
-	        fighter.currentfighter = "bokdrake";
-
-	        global.intervalID = window.setInterval(function(){showDamage(getHP())},6000);
-	     }
-	    
-	};
-
-	 
-
-	/* Subfunctions */
-	var difference = user_input.ubound+1 - user_input.lbound;
-	function getHP(){
-	    return (Math.floor(Math.random()*difference)+user_input.lbound);
-	}
-
-
-	function showDamage(hp){
-	    var fighttext = "";
-
-	    if (fighter.currentfighter == "bokdrake") {
-	        fighttext = "<h1>" + objfighttext.getrandommsg("eld", "bibblemon") + "</h1>";
-	        //fighttext += "<h1>Bibblemon tar snabbt vatten f&ouml;r att sl&auml;cka elden.</h1><h2>Bokdraken f&ouml;rlorar<br> " + hp + "p</h2>"
-	        fighttext += "<h2>Bokdraken f&ouml;rlorar<br> " + hp + "p</h2>"
-
-	        fighter.bokdrake = fighter.bokdrake - parseInt(hp);
-	        $('.bokdrakecore').hide().html(fighter.bokdrake + "p").fadeIn(4000);
-	        fighter.currentfighter= "bibblomon"; //byt fighter nästa
-	    } else {
-	        fighttext = "<h1>" + objfighttext.getrandommsg("eld", "bokdrake") + "</h1>";
-	        fighttext += "<h2> bibblomonen f&ouml;rlorar<br> " + hp + "p</h2>"
-	        //fighttext = "<h1>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker.</h1><h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
-	        fighter.bokemon = fighter.bokemon - parseInt(hp);        
-	        $('.bokemonscore').hide().html(fighter.bokemon +"p").fadeIn(4000);
-	        fighter.currentfighter = "bokdrake";
-	    }
-
-	    
-	    var wehaveawinner = vinnorloose(fighter.bokdrake, fighter.bokemon); 
-	   
-	    if (wehaveawinner < 3) {
-	        var endtext = "";
-	                
-	        if (wehaveawinner == 1) {
-	            //bokemon vann
-	            endtext += "<h2>Din bibblomon har lyckats att skr&auml;mma iv&auml;g bokdraken!</h2>";
-	            endtext += "<h1>Vinnaren &auml;r din Bibblomon!</h1>";
-	            updatefighttoserver('gameplaywin');
-	            
-	            $('.bokdrakevatar img').fadeOut(4000);
-	            $('.bokdrakecore').hide()
-	        }
-	        if (wehaveawinner == 2) {
-	            //Bokdraken vann            
-	            endtext += "<h1>NEEEEJ!!</h1><p>Bokdraken &aring;t upp din bibblomon!<br></p><p style='font-size:0.9em;'>...men var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
-	            endtext += "<h1>Vinnaren &auml;r Bokdraken!</h1>";
-	            updatefighttoserver('gameplaylose');
-	            $('.bokemonavatar img').fadeOut(4000);
-	            $('.bokemonscore').hide();
-	            
-	        }
-	        endtext += "<button>OK</button>";
-	        $('.fightArena').html(endtext);
-	        clearInterval(global.intervalID);
-	    } else {
-	        $('.fightArena').fadeOut('slow', function () {
-	            $(this).html(fighttext)
-	        }).fadeIn("slow");
-	    }
-	         
-	}
-
-	var vinnorloose = function (drakpoints, bokemonpoints) {
-	    var ret = 3;
-	    if (drakpoints <= 0) {
-	        fighter.bokdrake = 0;
-	        ret = 1;
-	    };
-	    if (bokemonpoints <= 0) {
-	        fighter.bokemon = 0;
-	        ret = 2;
-	    };
-
-	    return ret;
-	};
-
-	var updatefighttoserver = function (winorlose) {
-
-	    var x = fighter.currentUserid;
-	    var y = fighter.bokemonID;
-
-	    api.bokemonServerCRUDHandler(winorlose, fighter.currentUserid, fighter.bokemonID, function () { return true; });
-	    return true;
-	}
-
-/***/ },
-/* 11 */
 /***/ function(module, exports) {
 
-	
+	// för att lägga till historier läggs nya objekt till och dom måste läggas till i randomBokemonHandler.js också (FightStoryresults)
 	module.exports = {
 	    getrandommsg: function (fight, typ) {
 	        var rettext = "";
@@ -12770,6 +12577,21 @@
 	            }       
 	        }
 	        return rettext;
+	    },
+	    getMainstory: function (val) {
+	        var retval=""
+	        switch (val) {
+	            case "eld":
+	                retval = textlista.eld.start;
+	                break;
+	            case "forstor":
+	                retval = textlista.forstor.start;
+	                break;
+	            default:
+	                    retval = textlista.eld.start;            
+	        };
+
+	        return retval;
 	    }
 	};
 
@@ -12826,6 +12648,256 @@
 	    }
 	}
 
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(5);
+	var vex = __webpack_require__(7);
+	var appsettings = __webpack_require__(1);
+	var api = __webpack_require__(4);
+	var fighthandler = __webpack_require__(8);
+	var fightgameplay = __webpack_require__(11);
+	var rndFightStory = __webpack_require__(2);
+
+	module.exports = {
+	    jqueryFightEVENTS: function (userid) {
+	        
+	        $('body').on('click', '.btnjagaJA', function () {
+	            
+	            bokemonfightstep2_valjlist(userid);
+	            return false;
+	        });
+	        $('body').on('click', '.btnjagaNEJ', function () {
+	            return true;
+	        });
+	        //välj bokemon till fighten
+	        $('body').on('click', '.valdfightbokemon', function () {
+	            valtnr = $(this).attr('rel');
+	            console.log("drakar: " + appsettings.drakemon.draknamn);
+	            console.log("bokemon: " + appsettings.bokemon.namn);
+
+	            var bokemonid = getbokemonindexfromid(valtnr);
+	            //var valdbokemon = appsettings.bokemon.namn[bokemonid];
+	            var valdbokdrake = $('#bokdrakeitm').attr('rel');
+
+	            bokemonfightstep3_drakfight(valdbokdrake, bokemonid);
+	            //alert(valdbokemon);
+	            return false;
+	        });
+	        $('body').on('click', '.nobibblomon', function () {
+	            vex.closeAll();
+	        });
+	       
+	    }
+	}
+
+	var bokemonfightstep2_valjlist = function (userid) {
+	    var valdlistaHtml = fighthandler.drakfightBokemonVal("usrmon", userid, function (htmlblock) {
+	        $('.vex-dialog-message').html(htmlblock);       
+	        return false;
+	    });
+	    
+	}
+
+	var bokemonfightstep3_drakfight = function (drakindex, bokemonindex) {
+	    var shoosefightstory = rndFightStory.getFightStory();
+
+	    var valdlistaHtml = fighthandler.drakfightArena(drakindex, bokemonindex, shoosefightstory, function (htmlblock) {
+	        $('.vex-dialog-message').html(htmlblock);
+	        $('.fightArenablock').hide();
+
+	        inserttextwordbyword('.fightStory .showStartmsg', function(x){
+	            $('.fightArenablock').hide().fadeIn(4000);
+	            $('.fightStory .showStartmsg').fadeOut(4000, function () {
+	                $(this).slideUp(3000); //.animate({ height: 0, opacity: 0 }, 6000);
+	            });
+	           
+	            $('.fightArena').html("<h1>Fighten har b&ouml;rjat!!!</h1>");
+	            fightgameplay.jqueryFightGameplay(drakindex, bokemonindex, shoosefightstory);
+	        });
+
+	        return false;
+	    });
+
+	}
+
+	//hämta rätt bokemon i arrayen via index
+	var getbokemonindexfromid = function (monid) {
+	    var indexes = $.map(appsettings.bokemon.monid, function (obj, index) {
+	        if (obj == monid) {
+	            return index;
+	        }
+	    });
+
+	    return indexes[0];
+	}
+
+
+	var inserttextwordbyword = function (divtoconnect, callback) {
+	    var $el = $(divtoconnect),
+	            text = $el.html(),
+	            speed = 500; //ms
+
+	    $el.empty();
+	    $el.show();
+	    var wordArray = text.split(' '),
+	        i = 0;
+
+	    INV = setInterval(function () {
+	        if (i >= wordArray.length - 1) {
+	            clearInterval(INV);
+	        }
+	        $el.append(wordArray[i] + ' ')
+	        i++;
+	        if (i >= wordArray.length) {
+	            callback();
+	        }
+	    }, speed);
+	};
+
+
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(5);
+	var appsettings = __webpack_require__(1);
+	var api = __webpack_require__(4);
+	var objfighttext = __webpack_require__(9);
+
+	/* Settings */
+	var user_input = { 
+	    ubound:1000,
+	    lbound:250
+	};
+
+	var global = { 
+	    intervalID:0,
+	    count:0,
+	    totalRuns: 0,
+	    fightStory:0
+	};
+	var fighter = {
+	    bokemon: 0,
+	    bokdrake: 0,
+	    bokdrakenamn:"",
+	    bokemonID: 0,
+	    bokemonnamn:"",
+	    currentUserid:0,
+	    currentfighter:""
+	}
+
+
+	module.exports = {
+	    jqueryFightGameplay: function (drakindex, bokemonindex,fightStory) {
+	        //init
+	        fighter.bokdrake = appsettings.drakemon.drakscore[drakindex];
+	        fighter.bokdrakenamn = appsettings.drakemon.draknamn[drakindex];
+	        fighter.bokemon = appsettings.bokemon.score[bokemonindex];
+	        fighter.bokemonnamn = appsettings.bokemon.namn[bokemonindex];
+	        fighter.bokemonID = appsettings.bokemon.monid[bokemonindex];
+	        fighter.currentUserid = appsettings.currentUserid;
+	        fighter.currentfighter = "bokdrake";
+	        global.fightStory = fightStory;
+
+	        global.intervalID = window.setInterval(function(){showDamage(getHP())},6000);
+	     }
+	    
+	};
+
+	 
+
+	/* Subfunctions */
+	var difference = user_input.ubound+1 - user_input.lbound;
+	function getHP(){
+	    return (Math.floor(Math.random()*difference)+user_input.lbound);
+	}
+
+
+	function showDamage(hp){
+	    var fighttext = "";
+	    var fightScore = "";
+
+	    if (fighter.currentfighter == "bokdrake") {
+	        fighttext = "<h1>" + objfighttext.getrandommsg(global.fightStory, "bibblemon") + "</h1>";
+	        //fighttext += "<h1>Bibblemon tar snabbt vatten f&ouml;r att sl&auml;cka elden.</h1><h2>Bokdraken f&ouml;rlorar<br> " + hp + "p</h2>"
+	        fightScore = "<h2>"+fighter.bokdrakenamn+" f&ouml;rlorar<br> " + hp + "p</h2>"
+
+	        fighter.bokdrake = fighter.bokdrake - parseInt(hp);
+	        $('.bokdrakecore').hide().html(fighter.bokdrake + "p").fadeIn(4000);
+	        fighter.currentfighter= "bibblomon"; //byt fighter nästa
+	    } else {
+	        fighttext = "<h1>" + objfighttext.getrandommsg(global.fightStory, "bokdrake") + "</h1>";
+	        fightScore = "<h2>"+fighter.bokemonnamn+" f&ouml;rlorar<br> " + hp + "p</h2>"
+	        //fighttext = "<h1>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker.</h1><h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
+	        fighter.bokemon = fighter.bokemon - parseInt(hp);        
+	        $('.bokemonscore').hide().html(fighter.bokemon +"p").fadeIn(4000);
+	        fighter.currentfighter = "bokdrake";
+	    }
+
+	    
+	    var wehaveawinner = vinnorloose(fighter.bokdrake, fighter.bokemon); 
+	   
+	    if (wehaveawinner < 3) {
+	        var endtext = "";
+	                
+	        if (wehaveawinner == 1) {
+	            //bokemon vann
+	            endtext += "<h2>Din bibblomon har lyckats att skr&auml;mma iv&auml;g bokdraken!</h2>";
+	            endtext += "<h1>Vinnaren &auml;r " + fighter.bokemonnamn + "!</h1>";
+	            updatefighttoserver('gameplaywin');
+	            
+	            $('.bokdrakevatar img').fadeOut(4000);
+	            $('.bokdrakecore').hide()
+	        }
+	        if (wehaveawinner == 2) {
+	            //Bokdraken vann            
+	            endtext += "<h1>NEEEEJ!!</h1><p>Bokdraken &aring;t upp din bibblomon!<br></p><p>...men var inte ledsen den kommer ut igen!.. om n&aring;gra dagar! </p>";
+	            endtext += "<h1 style='padding-top:1rem; padding-bottom:1rem;'>Vinnaren &auml;r " + fighter.bokdrakenamn + "!</h1>";
+	            updatefighttoserver('gameplaylose');
+	            $('.bokemonavatar img').fadeOut(4000);
+	            $('.bokemonscore').hide();
+	            
+	        }
+	        endtext += "<button>OK</button>";
+	        
+	        $('.fightArenaMesseage').html(endtext);
+	        $('.fightArena').hide();
+	        clearInterval(global.intervalID);
+	    } else {
+	        $('.fightArena').fadeOut('slow', function () {
+	            $('.fightArenaMesseage').html(fighttext);
+	            $(this).html(fightScore)
+	        }).fadeIn("slow");
+	    }
+	         
+	}
+
+	var vinnorloose = function (drakpoints, bokemonpoints) {
+	    var ret = 3;
+	    if (drakpoints <= 0) {
+	        fighter.bokdrake = 0;
+	        ret = 1;
+	    };
+	    if (bokemonpoints <= 0) {
+	        fighter.bokemon = 0;
+	        ret = 2;
+	    };
+
+	    return ret;
+	};
+
+	var updatefighttoserver = function (winorlose) {
+
+	    var x = fighter.currentUserid;
+	    var y = fighter.bokemonID;
+
+	    api.bokemonServerCRUDHandler(winorlose, fighter.currentUserid, fighter.bokemonID, function () { return true; });
+	    return true;
+	}
 
 /***/ }
 /******/ ]);
