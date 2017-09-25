@@ -17,8 +17,9 @@ Partial Class DesktopModules_barnensbiblService_bokemonApi_bokemonService
     'kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemonService.aspx?devkey=monster&cmdtyp=usrmon&userid=105
     'Lägg till bokemonster till användaren
     'kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemonService.aspx?devkey=monster&cmdtyp=addmon&userid=105&monid=3
-
     'localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemonService.aspx?devkey=monster&cmdtyp=gameplaywin&userid=105&monid=3&callback=test
+    'get list of highscore. satt default till 5 stycken men går att öka vid behov
+    'localdev.kivdev.se/DesktopModules/barnensbiblService/bokemonApi/bokemonService.aspx?devkey=monster&cmdtyp=Highscore&userid=1
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
 
         Dim devkey As Object = Request.QueryString("devkey")
@@ -77,6 +78,9 @@ Partial Class DesktopModules_barnensbiblService_bokemonApi_bokemonService
 
                 Case "gameplaylose"
                     retstr = createBokemonJson(obj.MonsterGameplay(_userid, _monsterid, "lose"))
+
+                Case "Highscore"
+                    retstr = createBokemonHighscoreJson(obj.getHighscorelist())
 
             End Select
         Else
@@ -166,6 +170,41 @@ Partial Class DesktopModules_barnensbiblService_bokemonApi_bokemonService
         End If
 
         sb.AppendFormat("""status"" : ""{0}"" ", obj.Status)
+        sb.Append("}") '{1-2}
+
+        Return sb.ToString
+
+    End Function
+    Public Function createBokemonHighscoreJson(ByVal obj As List(Of bokemonHighscoreInfo)) As String
+        Dim status As Integer = 1
+
+        Dim sb As New StringBuilder
+
+        Dim i As Integer = 0
+        sb.Append("{") '{1-1}        
+        sb.Append("""barnensbibliotek"" : {") '{2-1}
+        sb.Append("""bokmonsterhighscorelist"" : ")
+        If obj.Count <= 0 Then
+            sb.Append("{}},") '{3-1}
+        Else
+            For Each itm In obj
+                If i = 0 Then
+                    sb.Append("[{") '{3-1}
+                Else
+                    sb.Append(", {")
+                End If
+                Dim platsnr As Integer = i + 1
+                sb.AppendFormat("""plats"" : ""{0}"", ", platsnr)
+                sb.AppendFormat("""username"" : ""{0}"", ", itm.Bokemonusername)
+                sb.AppendFormat("""score"" : ""{0}"" ", itm.Bokemonuserscore)
+
+                sb.Append("}") '{3-2}
+                i += 1
+            Next
+            sb.Append("]},") '{2-2}
+        End If
+
+        sb.AppendFormat("""status"" : ""{0}"" ", "funkar fint")
         sb.Append("}") '{1-2}
 
         Return sb.ToString

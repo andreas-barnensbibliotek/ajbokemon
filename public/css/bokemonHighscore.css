@@ -1,0 +1,129 @@
+﻿
+.bokemonhighscorecontainer {
+    font-family: 'Lato', sans-serif;
+    color: #000;
+    max-width: 300px;
+}
+
+.highscore_header {
+    padding: 0.4rem;
+    max-width: 300px;
+    background: #000;
+    overflow: hidden;
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+}
+
+.highscore_header img {
+    width: 100%;
+}
+
+.highscore_header h1 {
+    font-size: 2rem !important;
+    color: #fff;
+    margin: 0px;
+}
+
+.highscore_header h2 {
+    font-size: 1rem !important;
+    color: #fff;
+    margin: 0px;
+}
+
+.highscore_header h3 {
+    font-size: 1rem !important;
+    color: #fff;
+    margin-left: 5px;
+    margin: 0px;
+}
+
+.highscore_header a {
+    float: right;
+    color: #fff;
+}
+
+.highscore_header a:hover {
+    color: #fcb040;
+}
+
+.highscore_itm_infocont {
+    float: left;
+    font-size: 0.6rem;
+}
+
+.highscore_itm_infocont h1 {
+    font-size: 1.3rem !important;
+    margin-left: 0px !important;
+}
+
+.highscore_itm_infocont h2 {
+    font-size: 0.95rem !important;
+    margin-left: 0px !important;
+}
+
+.highscore_itm_imgcont {
+    overflow: hidden;
+    float: left;
+    margin-right: 0.5rem;
+    width: 70px;
+}
+
+.highscore_clear {
+    clear: both;
+}
+
+.highscore_list li:hover {
+    background-color: #eee;
+}
+
+.highscore_list {
+    border: 2px solid #000;
+     background-color: #fff;
+}
+
+.highscore_list h2 {
+    padding-bottom: 0px;
+    margin: 0px;
+    color: darkorange;
+}
+
+.highscore_list table {
+    width: 100%;
+    max-width: 300px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.highscore_list td {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.highscore_list tr.line {
+    background-color: #efefef;
+}
+
+.firstplace {
+    font-size:.9rem;
+    font-weight: bold ;
+    color: green;
+}
+
+.highscore_footer {
+    font-size: 0.8rem;
+    padding: 0.4rem;
+    margin-bottom: 1px;
+    max-width: 300px;
+    background: #000;
+    overflow: hidden;
+    color: #fff;
+    border-radius: 0 0 10px 10px;
+}
+
+.highscore_footer a {
+    float: right;
+    font-size: 0.7rem;
+    color: #ddd;
+    margin-right: 1rem;
+}
