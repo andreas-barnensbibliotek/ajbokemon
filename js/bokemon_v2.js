@@ -59,7 +59,7 @@
 	   
 	    //_userid = 7017;
 	    var chkuser = function (uid) {
-	        var ret = false;
+	        var ret = true; // anv�nd false om bara konton nedan skall anv�ndas
 
 	        if (uid == "364") {
 	            ret = true;
@@ -236,7 +236,7 @@
 	var weights = [0.17, 0.17, 0.17, 0.11, 0.11, 0.08, 0.05, 0.05, 0.03, 0.03, 0.02, 0.01]; // probabilities
 	var results = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // values to return
 
-	var drakweights = [0.21, 0.21, 0.20, 0.16, 0.10, 0.07, 0.03, 0.02 ]; // probabilities
+	var drakweights = [0.21, 0.03, 0.20, 0.16, 0.10, 0.07, 0.17, 0.06 ]; // probabilities
 	var drakresults = [1, 2, 3, 4, 5, 6, 7, 8]; // values to return
 
 	var monordrakweights = [0.66, 0.34]; // probabilities
@@ -244,6 +244,12 @@
 
 	var FightStoryweights = [0.5, 0.5]; // probabilities
 	var FightStoryresults = ["eld", "forstor"]; // values to return
+
+	var Megaloss = [0.9, 0.1]; // probabilities
+	var Megalossresults = [1, 2]; // values to return
+
+	var bytriktning = [0.5, 0.5]; // probabilities
+	var bytriktningresults = [1, 2]; // values to return
 
 	module.exports = {
 	    getRandompockemon : function () {
@@ -257,6 +263,12 @@
 	    },
 	    getFightStory: function () {
 	        return sanoliktrandom(FightStoryweights, FightStoryresults);
+	    },
+	    getMegaloss: function () {
+	        return sanoliktrandom(Megaloss, Megalossresults);
+	    },
+	    getNyriktning: function () {
+	        return sanoliktrandom(bytriktning, bytriktningresults);
 	    },
 	    isbokemontime : function (int_sannolikhet) {
 	        //var rnd1 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
@@ -392,7 +404,7 @@
 	                        var proc = Math.floor(Math.random() * 10);
 	                        var procstartval = "1.";
 	                        var increasebpoint = procstartval + proc.toString();
-
+	                        appsettings.drakemon.draklev[valdbokemonID] = rndHandler.getRandomBokdrake();
 	                        appsettings.drakemon.drakscore[valdbokemonID] *= parseFloat(increasebpoint).toFixed(1);
 	                    };
 
@@ -403,7 +415,7 @@
 	                        htmlblock += "</a>";
 	                        htmlblock += "<span class='bokemonscore' rel=" + appsettings.drakemon.drakscore[valdbokemonID] + "></span>";
 	                        htmlblock += "<a href='' class='Bokemonifo' style='display:none;' >";
-	                        htmlblock += "<h2>" + appsettings.drakemon.draknamn[valdbokemonID] + "</h2>";
+	                        htmlblock += "<h2>" + appsettings.drakemon.draknamn[valdbokemonID] +  "</h2>";
 	                        htmlblock += "</a>";
 	                        htmlblock += "<div class='bokemoninfoblock' style='display:none;'>";
 	                        htmlblock += "<p>" + appsettings.drakemon.drakinfo[valdbokemonID] + "</p>";
@@ -12499,7 +12511,7 @@
 	        htmlblock += "<button class='btnjagaNEJ'>Nej</button></td></tr>";
 	        htmlblock += "<tr><td colspan='2' class='drakimg'><img src='" + appsettings.drakemon.draksrc[valdbokdrakeID] + "_animation_300.gif'>";
 	        htmlblock += "</td></tr>";
-	        htmlblock += "<tr><td colspan='2' class='draknamn'><h2>" + appsettings.drakemon.draknamn[valdbokdrakeID] + "</h2>";
+	        htmlblock += "<tr><td colspan='2' class='draknamn'><h2>" + appsettings.drakemon.draknamn[valdbokdrakeID] + " Level " + appsettings.drakemon.draklev[valdbokdrakeID] + "</h2>";
 	        htmlblock += "</td></tr>";
 	        htmlblock += "<tr><th colspan='2'>Beskrivning</th></tr>";
 	        htmlblock += "<tr><td colspan='2' class='drakinfo'><p>" + appsettings.drakemon.drakinfo[valdbokdrakeID] + "</p></td></tr>";
@@ -12525,7 +12537,7 @@
 	                htmlblock += "<p>V&auml;lj den bibblomon som du vill anv&auml;nda f&ouml;r att ska skr&auml;mma bort bokdraken</p>";
 	               
 	                htmlblock += "<div class='battelmodeblock'><span class='battlelabel'>Battlemode</span>";
-	                htmlblock += "<div class='onoffswitch'><input type='checkbox' name='onoffswitch' class='onoffswitch-checkbox' id='myonoffswitch' checked>";
+	                htmlblock += "<div class='onoffswitch'><input type='checkbox' name='onoffswitch' class='onoffswitch-checkbox' id='myonoffswitch' >";
 	                htmlblock += "<label class='onoffswitch-label' for='myonoffswitch'><span class='onoffswitch-inner'></span><span class='onoffswitch-switch'></span>";
 	                htmlblock += "</label></div></div>";
 	                htmlblock += "</td></tr>";
@@ -12816,12 +12828,13 @@
 
 	var $ = __webpack_require__(5);
 	var appsettings = __webpack_require__(1);
+	var rndHandler = __webpack_require__(2);
 	var api = __webpack_require__(4);
 	var objfighttext = __webpack_require__(9);
 	var _once = false;
 	/* Settings */
 	var user_input = { 
-	    ubound:1000,
+	    ubound:450,
 	    lbound:250
 	};
 
@@ -12834,9 +12847,10 @@
 	var fighter = {
 	    bokemon: 0,
 	    bokdrake: 0,
-	    bokdrakenamn:"",
+	    bokdrakenamn: "",
+	    bokdrakelevel:0,
 	    bokemonID: 0,
-	    bokemonnamn:"",
+	    bokemonnamn: "",    
 	    currentUserid:0,
 	    currentfighter:""
 	}
@@ -12846,9 +12860,9 @@
 	    jqueryFightGameplay: function (drakindex, bokemonindex,fightStory) {
 	        //init
 	        fighter.bokdrake = appsettings.drakemon.drakscore[drakindex];
-	        fighter.bokdrakenamn = appsettings.drakemon.draknamn[drakindex];
+	        fighter.bokdrakenamn = appsettings.drakemon.draknamn[drakindex];        
 	        fighter.bokemon = appsettings.bokemon.score[bokemonindex];
-	        fighter.bokemonnamn = appsettings.bokemon.namn[bokemonindex];
+	        fighter.bokemonnamn = appsettings.bokemon.namn[bokemonindex];       
 	        fighter.bokemonID = appsettings.bokemon.monid[bokemonindex];
 	        fighter.currentUserid = appsettings.currentUserid;
 	        fighter.currentfighter = "bokdrake";
@@ -12872,6 +12886,7 @@
 	        fighter.bokdrake = appsettings.drakemon.drakscore[drakindex];
 	        fighter.bokdrakenamn = appsettings.drakemon.draknamn[drakindex];
 	        fighter.bokdrakeimgsrc = appsettings.drakemon.draksrc[drakindex];
+	        fighter.bokdrakelevel = appsettings.drakemon.draklev[drakindex];
 	        fighter.bokemon = appsettings.bokemon.score[bokemonindex];
 	        fighter.bokemonnamn = appsettings.bokemon.namn[bokemonindex];
 	        fighter.bokemonID = appsettings.bokemon.monid[bokemonindex];
@@ -12879,25 +12894,32 @@
 	        fighter.currentfighter = "bibblomon";
 	        global.fightStory = fightStory;
 
-	        makeDiv(getHP());
-
+	        makeDiv(getHP(), fighter.bokdrakelevel);
 
 	    //global.intervalID = window.setInterval(function(){showDamage(getHP())},6000);
 	    }
 	};
 
-	 
-
 	/* Subfunctions */
 	var difference = user_input.ubound+1 - user_input.lbound;
-	function getHP(){
-	    return (Math.floor(Math.random()*difference)+user_input.lbound);
+	function getHP() {
+	    var rethp = 0;
+	    var megalosstime = rndHandler.getMegaloss();
+
+	    if (megalosstime == 2) { //bibblomons visas ca 33% av gångerna
+	        rethp = 1500;
+	    } else {
+	        rethp =(Math.floor(Math.random() * difference) + user_input.lbound);
+	    }
+	    console.log("megalosstime: " + megalosstime + " hp=" + rethp);
+	    return rethp;
 	}
 
 
 	function showDamage(hp){
 	    var fighttext = "";
 	    var fightScore = "";
+	    var fighterriktning = rndHandler.getNyriktning();
 
 	    if (fighter.currentfighter == "bokdrake") {
 	        fighttext = "<h1>" + objfighttext.getrandommsg(global.fightStory, "bibblemon") + "</h1>";
@@ -12906,15 +12928,26 @@
 
 	        fighter.bokdrake = fighter.bokdrake - parseInt(hp);
 	        var bokdrakepoint = parseInt(fighter.bokdrake).toFixed(0);
+
 	        $('.bokdrakecore').hide().html(bokdrakepoint + "p").fadeIn(4000);
-	        fighter.currentfighter= "bibblomon"; //byt fighter nästa
+	        if (fighterriktning == 2) { //bibblomons visas ca 33% av gångerna
+	            fighter.currentfighter = "bokdrake"; //byt fighter nästa
+	        } else {
+	            fighter.currentfighter = "bibblomon"; //byt fighter nästa
+	        };
+
 	    } else {
 	        fighttext = "<h1>" + objfighttext.getrandommsg(global.fightStory, "bokdrake") + "</h1>";
 	        fightScore = "<h2>"+fighter.bokemonnamn+" f&ouml;rlorar<br> " + hp + "p</h2>"
 	        //fighttext = "<h1>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker.</h1><h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
-	        fighter.bokemon = fighter.bokemon - parseInt(hp);        
+	        fighter.bokemon = fighter.bokemon - parseInt(hp);
+
 	        $('.bokemonscore').hide().html(fighter.bokemon +"p").fadeIn(4000);
-	        fighter.currentfighter = "bokdrake";
+	        if (fighterriktning == 2) { //bibblomons visas ca 33% av gångerna
+	            fighter.currentfighter = "bibblomon"; //byt fighter nästa
+	        } else {
+	            fighter.currentfighter = "bokdrake"; //byt fighter nästa
+	        };
 	    }
 
 	    
@@ -12958,30 +12991,31 @@
 	function showDamagecombatmode(hp) {
 	    var fighttext = "";
 	    var fightScore = "";
-	   
+	    var fighterriktning = rndHandler.getNyriktning();
 	  
 	    if (fighter.currentfighter == "bokdrake") {
 	        //fighttext = "<h1>" + objfighttext.getrandommsg(global.fightStory, "bibblemon") + "</h1>";
 	        //fighttext += "<h1>Bibblemon tar snabbt vatten f&ouml;r att sl&auml;cka elden.</h1><h2>Bokdraken f&ouml;rlorar<br> " + hp + "p</h2>"
 	        //fightScore = "<h2>" + fighter.bokdrakenamn + " f&ouml;rlorar<br> " + hp + "p</h2>"
 
-	        fighter.bokdrake = fighter.bokdrake - parseInt(hp);
-	        
+	        fighter.bokdrake = fighter.bokdrake - parseInt(hp);        
 	        $('.bokdrakecore').hide().html(parseInt(fighter.bokdrake.toFixed(0)) + "p").fadeIn(100);
+	               
 	        fighter.currentfighter = "bibblomon"; //byt fighter nästa
+	       
 	    } else {
 	        //fighttext = "<h1>" + objfighttext.getrandommsg(global.fightStory, "bokdrake") + "</h1>";
 	        //fightScore = "<h2>" + fighter.bokemonnamn + " f&ouml;rlorar<br> " + hp + "p</h2>"
 	        //fighttext = "<h1>Bokdraken hinner l&auml;gga p&aring; fler b&ouml;cker.</h1><h2> bibbemonen f&ouml;rlorar<br> " + hp + "p</h2>"
 	        fighter.bokemon = fighter.bokemon - parseInt(hp);
-	       $('.bokemonscore').hide().html(fighter.bokemon + "p").fadeIn(100);
-	        fighter.currentfighter = "bokdrake";
-	    }
+	       $('.bokemonscore').hide().html(fighter.bokemon + "p").fadeIn(100);       
+	       fighter.currentfighter = "bokdrake"; //byt fighter nästa
+	   }
 
 	    WinnerOrLooser(function () {
 	        console.log("WinnerOrLooser körs");
 	        $(".combatdrake").remove();
-	        makeDiv(getHP());
+	        makeDiv(getHP(),fighter.bokdrakelevel);
 	    });
 	}
 
@@ -13026,7 +13060,7 @@
 	    }
 	}
 
-	var makeDiv = function (hp) {
+	var makeDiv = function (hp, draklev) {
 	  
 	    var divsize = 40;
 	    //var divsize = ((Math.random() * 10) + 0).toFixed();
@@ -13039,6 +13073,36 @@
 
 	    var posx = (Math.random() * ($('#bokemonfightContainer').width() - divsize)).toFixed();
 	    var posy = (Math.random() * ($('#bokemonfightContainer').height() - divsize)).toFixed();
+	    var showdelay = 700;
+	    switch (draklev) {
+	        case 1:
+	            showdelay = 700;
+	            break;
+	        case 2:
+	            showdelay = 600;
+	            break;
+	        case 3:
+	            showdelay = 550;
+	            break;
+	        case 4:
+	            showdelay = 500;
+	            break;
+	        case 5:
+	            showdelay = 475;
+	            break;
+	        case 6:
+	            showdelay = 450;
+	            break;
+	        case 7:
+	            showdelay = 425;
+	            break;
+	        case 8:
+	            showdelay = 350;
+	            break;
+	        default:           
+	            showdelay = 700;
+	            break;
+	    }
 
 	    $newdiv.css({
 	        'position': 'absolute',
@@ -13047,7 +13111,7 @@
 	        'display': 'none'
 	    }).appendTo('#bokemonfightContainer').fadeIn(150).attr("rel", hp).html(
 	    '<img src="' + fighter.bokdrakeimgsrc + '.png" style="width:width;"/>'
-	    ).delay(700).fadeOut(150, function () {
+	    ).delay(showdelay).fadeOut(150, function () {
 	       
 	        fighter.currentfighter = "bibblomon";
 	        //alert("här");

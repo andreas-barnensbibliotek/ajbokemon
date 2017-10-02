@@ -17,17 +17,22 @@ module.exports = {
         $('body').on('click', '.btnjagaNEJ', function () {
             return true;
         });
+
+       
+       
+
+
         //välj bokemon till fighten
         $('body').on('click', '.valdfightbokemon', function () {
             valtnr = $(this).attr('rel');
             console.log("drakar: " + appsettings.drakemon.draknamn);
             console.log("bokemon: " + appsettings.bokemon.namn);
-
+            var combatmode = $('.onoffswitch-checkbox').is(':checked');
             var bokemonid = getbokemonindexfromid(valtnr);
             //var valdbokemon = appsettings.bokemon.namn[bokemonid];
             var valdbokdrake = $('#bokdrakeitm').attr('rel');
 
-            bokemonfightstep3_drakfight(valdbokdrake, bokemonid);
+            bokemonfightstep3_drakfight(valdbokdrake, bokemonid, combatmode);
             //alert(valdbokemon);
             return false;
         });
@@ -46,7 +51,7 @@ var bokemonfightstep2_valjlist = function (userid) {
     
 }
 
-var bokemonfightstep3_drakfight = function (drakindex, bokemonindex) {
+var bokemonfightstep3_drakfight = function (drakindex, bokemonindex, combatmode) {
     var shoosefightstory = rndFightStory.getFightStory();
 
     var valdlistaHtml = fighthandler.drakfightArena(drakindex, bokemonindex, shoosefightstory, function (htmlblock) {
@@ -60,7 +65,14 @@ var bokemonfightstep3_drakfight = function (drakindex, bokemonindex) {
             });
            
             $('.fightArena').html("<h1>Fighten har b&ouml;rjat!!!</h1>");
-            fightgameplay.jqueryFightGameplay(drakindex, bokemonindex, shoosefightstory);
+            if (combatmode) {
+                fightgameplay.jqueryFightGameplay(drakindex, bokemonindex, shoosefightstory);
+            } else {
+                fightgameplay.jqueryFightCombatGameplay(drakindex, bokemonindex, shoosefightstory);
+            }
+            //
+           
+            
         });
 
         return false;

@@ -66,18 +66,18 @@ module.exports = {
                         var proc = Math.floor(Math.random() * 10);
                         var procstartval = "1.";
                         var increasebpoint = procstartval + proc.toString();
-
+                        appsettings.drakemon.draklev[valdbokemonID] = rndHandler.getRandomBokdrake();
                         appsettings.drakemon.drakscore[valdbokemonID] *= parseFloat(increasebpoint).toFixed(1);
                     };
 
                     if (typeof (appsettings.drakemon.drakmonid[valdbokemonID]) != "undefined") {
                         var htmlblock = "<div id='bokdrakeitm' class='bokdrake' rel='" + appsettings.drakemon.drakmonid[valdbokemonID] + "'>";
                         htmlblock += "<span class='bokemonjailed'><a href='' class='takeBokemon' >";
-                        htmlblock += "<img src='" + appsettings.drakemon.draksrc[valdbokemonID] + "_bg.png' alt='" + appsettings.drakemon.draknamn[valdbokemonID] + " Level: " + appsettings.drakemon.draklev[valdbokemonID] + "' />";
+                        htmlblock += "<img src='" + appsettings.drakemon.draksrc[valdbokemonID] + ".png' alt='" + appsettings.drakemon.draknamn[valdbokemonID] + " Level: " + appsettings.drakemon.draklev[valdbokemonID] + "' />";
                         htmlblock += "</a>";
                         htmlblock += "<span class='bokemonscore' rel=" + appsettings.drakemon.drakscore[valdbokemonID] + "></span>";
                         htmlblock += "<a href='' class='Bokemonifo' style='display:none;' >";
-                        htmlblock += "<h2>" + appsettings.drakemon.draknamn[valdbokemonID] + "</h2>";
+                        htmlblock += "<h2>" + appsettings.drakemon.draknamn[valdbokemonID] +  "</h2>";
                         htmlblock += "</a>";
                         htmlblock += "<div class='bokemoninfoblock' style='display:none;'>";
                         htmlblock += "<p>" + appsettings.drakemon.drakinfo[valdbokemonID] + "</p>";

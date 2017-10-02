@@ -903,3 +903,57 @@ body.vex-open {
     background-color:#fff;
     font-size: 100%;
 }
+.combatdrake img:hover {  
+    border-radius: 50%;
+    border:3px solid #DAA520;
+}
+
+.onoffswitch {
+    position: relative; width: 59px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #333; border-radius: 0px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 18px; padding: 0; padding-right: 1rem; line-height: 18px;
+    font-size: 12px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "Nej";
+    padding-left: 10px;
+    background-color: #000000; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "Ja";
+    padding-right: 10px;
+    background-color: #999; color: #000;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 16px; margin: 1px;
+    background: #080808;
+    position: absolute; top: 0; bottom: 0;
+    right: 37px;
+    border: 2px solid #E3E3E3; border-radius: 0px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+.battelmodeblock {
+  font-size: .6rem;
+  float:right;
+}

@@ -4,7 +4,7 @@
 var weights = [0.17, 0.17, 0.17, 0.11, 0.11, 0.08, 0.05, 0.05, 0.03, 0.03, 0.02, 0.01]; // probabilities
 var results = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // values to return
 
-var drakweights = [0.21, 0.21, 0.20, 0.16, 0.10, 0.07, 0.03, 0.02 ]; // probabilities
+var drakweights = [0.21, 0.03, 0.20, 0.16, 0.10, 0.07, 0.17, 0.06 ]; // probabilities
 var drakresults = [1, 2, 3, 4, 5, 6, 7, 8]; // values to return
 
 var monordrakweights = [0.66, 0.34]; // probabilities
@@ -12,6 +12,12 @@ var monordrakresults = [1, 2]; // values to return
 
 var FightStoryweights = [0.5, 0.5]; // probabilities
 var FightStoryresults = ["eld", "forstor"]; // values to return
+
+var Megaloss = [0.9, 0.1]; // probabilities
+var Megalossresults = [1, 2]; // values to return
+
+var bytriktning = [0.8, 0.2]; // probabilities
+var bytriktningresults = [1, 2]; // values to return
 
 module.exports = {
     getRandompockemon : function () {
@@ -26,6 +32,12 @@ module.exports = {
     getFightStory: function () {
         return sanoliktrandom(FightStoryweights, FightStoryresults);
     },
+    getMegaloss: function () {
+        return sanoliktrandom(Megaloss, Megalossresults);
+    },
+    getNyriktning: function () {
+        return sanoliktrandom(bytriktning, bytriktningresults);
+    },
     isbokemontime : function (int_sannolikhet) {
         //var rnd1 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
         //var rnd2 = Math.floor(Math.random() * 4) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 20 /100
@@ -33,6 +45,10 @@ module.exports = {
         //debug values
         var rnd1 = Math.floor(Math.random() * int_sannolikhet) + 1 // sätt här hur ofta bokemons ska är int_sannolikhet =4 är det cirka 25 /100
         var rnd2 = Math.floor(Math.random() * int_sannolikhet) + 1 // sätt här hur ofta bokemons ska visas 4 = cirka 25 /100
+        //debug values
+        //rnd1 = 1;
+        //rnd2 = 1;
+
 
         if (rnd1 == rnd2) {
             return true;

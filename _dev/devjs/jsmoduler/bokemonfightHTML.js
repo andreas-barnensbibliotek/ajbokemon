@@ -15,15 +15,15 @@ module.exports = {
         htmlblock += "<button class='btnjagaNEJ'>Nej</button></td></tr>";
         htmlblock += "<tr><td colspan='2' class='drakimg'><img src='" + appsettings.drakemon.draksrc[valdbokdrakeID] + "_animation_300.gif'>";
         htmlblock += "</td></tr>";
-        htmlblock += "<tr><td colspan='2' class='draknamn'><h2>" + appsettings.drakemon.draknamn[valdbokdrakeID] + "</h2>";
+        htmlblock += "<tr><td colspan='2' class='draknamn'><h2>" + appsettings.drakemon.draknamn[valdbokdrakeID] + " Level " + appsettings.drakemon.draklev[valdbokdrakeID] + "</h2>";
         htmlblock += "</td></tr>";
         htmlblock += "<tr><th colspan='2'>Beskrivning</th></tr>";
         htmlblock += "<tr><td colspan='2' class='drakinfo'><p>" + appsettings.drakemon.drakinfo[valdbokdrakeID] + "</p></td></tr>";
         htmlblock += "<tr><th colspan='2'>Egenskaper</th></tr>";
-        htmlblock += "<tr><td>Point</td><td><span class='bokdrakecore'>" + Math.round(appsettings.drakemon.drakscore[valdbokdrakeID]) + "</span>p</td></tr>";
+        htmlblock += "<tr><td>Point</td><td><span class='bokdrakecore'>" + parseInt(appsettings.drakemon.drakscore[valdbokdrakeID]).toFixed(0) + "</span>p</td></tr>";
         htmlblock += "<tr><td>Eldbonus</td><td><span class='bokdrakecore'>120</span>p</td></tr>";
         htmlblock += "</table></div></div>";
-
+        
         return htmlblock;
     },
     drakfightBokemonVal: function (callTyp, usrid, callback) {
@@ -39,6 +39,11 @@ module.exports = {
                 htmlblock += "<table><tr class='listheader'><td colspan='3'>";
                 htmlblock += "<h1>V&auml;lj Bibblomon</h1>";
                 htmlblock += "<p>V&auml;lj den bibblomon som du vill anv&auml;nda f&ouml;r att ska skr&auml;mma bort bokdraken</p>";
+               
+                htmlblock += "<div class='battelmodeblock'><span class='battlelabel'>Battlemode</span>";
+                htmlblock += "<div class='onoffswitch'><input type='checkbox' name='onoffswitch' class='onoffswitch-checkbox' id='myonoffswitch' >";
+                htmlblock += "<label class='onoffswitch-label' for='myonoffswitch'><span class='onoffswitch-inner'></span><span class='onoffswitch-switch'></span>";
+                htmlblock += "</label></div></div>";
                 htmlblock += "</td></tr>";
 
                 var i = 1;
@@ -91,11 +96,11 @@ module.exports = {
         htmlblock += "<tr  class='fightArenablock arena2'><td class='tblcol1 bokemonavatar'><img src='" + appsettings.bokemon.src[bokemonindex] + "_bg.png'></td>";
         htmlblock += "<td class='tblcol2'></td><td class='tblcol3 bokdrakevatar'><img src='" + appsettings.drakemon.draksrc[drakindex] + ".png'></td></tr>";
         htmlblock += "<tr class='fightArenablock arena3'><td class='tblcol1'><span class='bokemonscore'>" + appsettings.bokemon.score[bokemonindex] + "p</span></td>";
-        htmlblock += "<td class='tblcol2'></td><td class='tblcol3'><span class='bokdrakecore'>" + appsettings.drakemon.drakscore[drakindex] + "p</span></td>";
+        htmlblock += "<td class='tblcol2'></td><td class='tblcol3'><span class='bokdrakecore'>" + parseInt(appsettings.drakemon.drakscore[drakindex]).toFixed(0) + "p</span></td>";
         htmlblock += "</tr></table></div>";
 
         callback(htmlblock);
-
+        //callback(debug"debug")
         //$('body').append(htmlblock);
     }
 };

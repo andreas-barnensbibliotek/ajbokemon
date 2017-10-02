@@ -50,7 +50,7 @@ var pickRandomProperty = function(obj) {
 
 var textlista = {
     eld: {
-        start: "Bokdraken h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket.",
+        start: "Bokdraken",// h&aring;ller p&aring; att elda b&ouml;cker i ett h&ouml;rn p&aring; biblioteket.",
         fightbibblemon: {
             0: "Bibblomon tar en hink med vatten och h&auml;ller p&aring; elden.",
             1: "Bibblomom sprutar vatten med en brandslang.",

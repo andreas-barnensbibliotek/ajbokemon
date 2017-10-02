@@ -13,7 +13,7 @@ $(function () {
    
     //_userid = 7017;
     var chkuser = function (uid) {
-        var ret = false;
+        var ret = true; // använd false om bara konton nedan skall användas
 
         if (uid == "364") {
             ret = true;
@@ -70,7 +70,7 @@ $(function () {
 
             // ska det visas bokemon eller bokdrakar och hur ofta skall dom visas
             if (chkuser(_userid)) {
-                //if (rndHandler.isbokemontime(2)) { //kolla om drake eller monster ska visas ca var annan sida.
+                //if (rndHandler.isbokemontime(2)) { //kolla om drake eller monster ska visas ca varannan sida.
                 var montyp = rndHandler.BokemonOrBokdrake();
                 console.log("typ: "+montyp);
                 if (montyp == 2) { //bibblomons visas ca 33% av gångerna
@@ -84,20 +84,50 @@ $(function () {
             }
         } // kör på denna kod när vi är klara med beta och går live!!!-------------------------------
         //renderhtml.showbokemon(_userid);
-            
-        
-
+         
+       
         // END init 
     }
 
-    $('.startar').on('click', function () {
-       
-    });
+
 
     //$("#modal").iziModal({
     //    openFullscreen: true
     //    });
 
-        init();
+    //function makeDiv() {
+    //    var divsize = ((Math.random() * 100) + 50).toFixed();
+    //    var color = '#' + Math.round(0xffffff * Math.random()).toString(16);
+    //    $newdiv = $('<div/>').css({
+    //        'width': divsize + 'px',
+    //        'height': divsize + 'px',
+    //        'background-color': color
+    //    }).addClass("nytest");
+
+    //    var posx = (Math.random() * ($(document).width() - divsize)).toFixed();
+    //    var posy = (Math.random() * ($(document).height() - divsize)).toFixed();
+
+    //    $newdiv.css({
+    //        'position': 'absolute',
+    //        'left': posx + 'px',
+    //        'top': posy + 'px',
+    //        'display': 'none'
+    //    }).appendTo('body').fadeIn(1000).delay(10000).fadeOut(200, function () {
+    //        $(this).remove();
+    //        makeDiv();
+    //    });
+    //};
+    //$('body').on('click', '.nytest', function () {    
+    //    $(this).stop();
+    //    return true;
+
+    //});
+    //makeDiv();
+
+    init();
+
+
+
+
     
 });
